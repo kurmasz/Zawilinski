@@ -9,3 +9,7 @@ tags
 #*
 .rsync-filter
 .idea
+*.iml
+/dist
+/schemaJavaSource
+/out
