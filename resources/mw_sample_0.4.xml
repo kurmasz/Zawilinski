@@ -1,0 +1,60 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="en">
+  <siteinfo>
+    <sitename>Wiktionary</sitename>
+    <base>http://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
+    <generator>MediaWiki 1.16alpha-wmf</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2">Media</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Sample page 1</title>
+    <id>6</id>
+    <revision>
+      <id>11</id>
+      <timestamp>2009-08-10T22:00:17Z</timestamp>
+      <contributor>
+        <username>Ivan Štambuk</username>
+        <id>42855</id>
+      </contributor>
+      <comment>/* For more information */ remove non-existing page</comment>
+      <text xml:space="preserve"> Content for rev 1 </text>
+   </revision>
+    <revision>
+      <id>12</id>
+      <timestamp>2009-08-10T22:00:17Z</timestamp>
+      <contributor>
+        <username>Zachary Kurmas</username>
+        <id>42856</id>
+      </contributor>
+      <comment>/* For more information */ remove non-existing page</comment>
+      <text xml:space="preserve"> Content for rev 2 </text>
+   </revision>
+  </page>
+  <page>
+    <title>Sample page 2</title>
+    <id>6</id>
+    <revision>
+      <id>21</id>
+      <timestamp>2009-08-10T22:00:17Z</timestamp>
+      <contributor>
+        <username>Ivan Štambuk</username>
+        <id>42855</id>
+      </contributor>
+      <comment>/* For more information */ remove non-existing page</comment>
+      <text xml:space="preserve"> Content for rev 1 of page 2</text>
+   </revision>
+    <revision>
+      <id>22</id>
+      <timestamp>2009-08-10T22:00:17Z</timestamp>
+      <contributor>
+        <username>Zachary Kurmas</username>
+        <id>42856</id>
+      </contributor>
+      <comment>/* For more information */ remove non-existing page</comment>
+      <text xml:space="preserve"> Content for rev 2 of page 2</text>
+   </revision>
+  </page>
+</mediawiki>
+

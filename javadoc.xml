@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+<target name="javadoc">
+<javadoc access="protected" author="true" classpath="lib/ammentos_1.3.7.jar:../KurmasUtil/bundled_packages/jopt-simple-3.2-rc1.jar:/Users/kurmasz/Library/Java/Extensions/bzip2.jar:/Users/kurmasz/Library/Java/Extensions/jaxb-api.jar:/Users/kurmasz/Library/Java/Extensions/commons-math-2.0.jar:../KurmasUtil/build:/Users/kurmasz/Library/Java/Extensions/stax-api-1.0.1.jar:/Users/kurmasz/Documents/LocalResearch/LanguageWiki/Wikitionary/jwktl/je-3.3.82/lib/je-3.3.82.jar:lib/mysql-connector-java-5.0.jar:/Users/kurmasz/Documents/LocalResearch/LanguageWiki/Wikitionary/jwktl/lib/jwktl-0.13.jar:/Users/kurmasz/Documents/LocalResearch/LanguageWiki/Wikitionary/jwktl/lib/ant.jar:/Users/kurmasz/DownloadedSoftware/junit4.3.1/junit-4.3.1.jar:/Users/kurmasz/Library/Java/Extensions/jaxb-impl.jar:/Applications/eclipse/plugins/org.junit4_4.3.1/junit.jar:/Users/kurmasz/Library/Java/Extensions/stax-1.2.0.jar:/Users/kurmasz/Library/Java/Extensions/jsr173_1.0_api.jar:../KurmasUtil/test_build" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="edu.gvsu.cis.kurmasz.zawilinski.mw,edu.gvsu.cis.kurmasz.zawilinski" source="1.5" sourcepath="src" splitindex="true" use="true" version="true"/>
+</target>
+</project>

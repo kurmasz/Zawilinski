@@ -1,0 +1,1 @@
+~/DownloadedSoftware/jaxb-ri-20091104/bin/xjc.sh -d ../src -p edu.gvsu.cis.kurmasz.lw.test.mw export-0.4.xsd

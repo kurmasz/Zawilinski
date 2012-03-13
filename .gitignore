@@ -1,0 +1,11 @@
+.DS_Store
+*.swp
+tags
+*.class
+*.log
+*.aux
+*.dvi
+*~
+#*
+.rsync-filter
+.idea

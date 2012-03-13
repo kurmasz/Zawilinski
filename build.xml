@@ -1,0 +1,176 @@
+<project name="LanguageWiki" basedir="." default="all">
+
+   <!-- Setup ================================================== -->
+   <property file="build.properties"/>
+   <property file="build.properties.local"/>
+
+   <taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+      <classpath>
+         <fileset dir="jaxb" includes="*.jar"/>
+      </classpath>
+   </taskdef>
+
+
+   <!-- version info -->
+   <property name="zawilinski_ver" value="2.0.0"/>
+
+   <!-- build info -->
+   <property name="src" location="src"/>
+   <property name="build" location="out/antProduction"/>
+   <property name="test_build" location="out/antTest"/>
+   <property name="schemaJavaSource" location="schemaJavaSource"/>
+   <property name="schemaClassFiles" location="${build}"/>
+   <!-- <property name="test_src" location="junit_tests" /> -->
+   <!--  <property name="testList" value="**/*Test.java" />-->
+
+   <path id="compile.classpath">
+      <fileset dir="bundled_packages">
+         <include name="**/*.jar"/>
+      </fileset>
+   </path>
+
+   <path id="test.classpath">
+      <path refid="compile.classpath"/>
+      <pathelement location="${build}"/>
+      <pathelement location="${test_build}"/>
+   </path>
+
+   <path id="javadoc.classpath">
+      <path refid="compile.classpath"/>
+   </path>
+
+   <!-- distribution info -->
+   <property name="dist" location="dist"/>
+   <property name="javadocs" value="${dist}/doc"/>
+   <property name="jarName" value="zawilinski"/>
+
+   <target name="makedirs" description="Make any necessary directories">
+      <mkdir dir="${build}"/>
+      <mkdir dir="${dist}"/>
+      <mkdir dir="${test_build}"/>
+      <mkdir dir="${schemaJavaSource}"/>
+      <mkdir dir="${schemaClassFiles}"/>
+   </target>
+
+   <!-- jaxbCompile ================================================== -->
+   <target name="jaxb" description="Compile schema for Jaxb" depends="makedirs">
+      <xjc schema="schemas/export-0.5.xsd" destdir="${schemaJavaSource}"
+           package="edu.gvsu.kurmasz.zawilinski.mw.current">
+         <produces dir="${schemaJavaSource}/edu/gvsu/kurmasz/zawilinski/mw/current"/>
+      </xjc>
+
+      <!--
+      <xjc schema="schemas/export-0.5.xsd" destdir="${schemaJavaSource}"
+           package="edu.gvsu.kurmasz.zawilinski.mw.v0_5">
+         <produces dir="${schemaJavaSource}/edu/gvsu/kurmasz/zawilinski/mw/v0_5"/>
+      </xjc>
+      <xjc schema="schemas/export-0.4.xsd" destdir="${schemaJavaSource}"
+           package="edu.gvsu.kurmasz.zawilinski.mw.v0_4">
+         <produces dir="${schemaJavaSource}/edu/gvsu/kurmasz/zawilinski/mw/v0_4"/>
+      </xjc>
+      <xjc schema="schemas/export-0.3.xsd" destdir="${schemaJavaSource}"
+           package="edu.gvsu.kurmasz.zawilinski.mw.v0_3">
+         <produces dir="${schemaJavaSource}/edu/gvsu/kurmasz/zawilinski/mw/v0_3"/>
+      </xjc>
+      -->
+   </target>
+
+
+   <!-- Compile ================================================== -->
+   <target name="compileSchemaClasses" description="compile source" depends="makedirs, jaxb">
+      <javac srcdir="${schemaJavaSource}" destdir="${schemaClassFiles}" debug="on"
+             includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+      </javac>
+   </target>
+
+   <target name="compileSource" description="compile source" depends="makedirs, compileSchemaClasses">
+      <javac srcdir="${src}" destdir="${build}" classpathref="compile.classpath" debug="on" includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+         <include name="edu/gvsu/cis/kurmasz/zawilinski/**"/>
+      </javac>
+   </target>
+
+   <target name="compile" description="compile" depends="compileSchemaClasses, compileSource"/>
+
+
+   <!-- Test stuff ================================================== -->
+   <target name="build_test" depends="compile"/>
+
+   <target name="run_test" depends="build_test"/>
+
+   <target name="test" depends="build_test, run_test"/>
+
+
+   <!-- javadoc =============================================== -->
+   <target name="javadoc" description="Javadoc documentation.">
+      <javadoc classpathref="javadoc.classpath" destdir="${javadocs}" access="protected"
+               packagenames="edu.gvsu.kurmasz.zawilinski.*" excludepackagenames="edu.gvsu.cis.*">
+         <!-- <packageset dir="${schemaJavaSource}"/> -->
+         <packageset dir="src" defaultexcludes="yes">
+            <include name="edu/gvsu/**"/>
+            <exclude name="edu/gvsu/cis/**"/>
+         </packageset>
+         <packageset dir="${schemaJavaSource}" defaultexcludes="yes"/>
+         <link href="http://download.oracle.com/javase/6/docs/api/"/>
+      </javadoc>
+   </target>
+
+
+   <!-- dist ================================================== -->
+
+   <!--- macro to build a jar file with or without source. -->
+   <macrodef name="buildDist">
+      <attribute name="src" default="NOT SET"/>
+      <element name="addSrc" optional="yes"/>
+      <sequential>
+         <propertyfile file="${build}/edu/gvsu/cis/kurmasz/zawilinski/builddate.properties">
+            <entry key="builddate" value="now" type="date" pattern="yyyy.MM.dd HH.mm.ss"/>
+         </propertyfile>
+         <jar destfile="${dist}/${jarName}-${zawilinski_ver}@{src}.jar">
+            <manifest>
+               <attribute name="Built-By" value="Zachary Kurmas"/>
+               <attribute name="Main-Class" value="edu.gvsu.kurmasz.zawilinski.FilterWiktionaryByLanguage"/>
+            </manifest>
+            <fileset dir="${dist}" includes="doc/**"/>
+            <zipgroupfileset dir="bundled_packages" includes="**/*.jar"/>
+            <fileset dir="${build}"/>
+            <addSrc/>
+            <!--- This element adds the source -->
+         </jar>
+      </sequential>
+   </macrodef>
+
+   <target name="dist_class" description="Jar file containing class files only."
+           depends="compile,run_test,javadoc">
+      <buildDist src=""/>
+      <!-- Don't include any source code -->
+   </target>
+
+
+   <target name="dist_src" description="Jar file containing releasable zawilisnki class and source."
+           depends="compile,run_test,javadoc">
+      <buildDist src="-src">  <!-- jar file name ends with src -->
+         <addSrc> <!-- add the following filesets to the .jar file -->
+            <fileset dir="${src}"/>
+         </addSrc>
+      </buildDist>
+   </target>
+
+   <target name="dist" description="Distribution 'public' kurmasUtil packages" depends="dist_class, dist_src"/>
+
+   <!-- clean ================================================== -->
+   <target name="clean" description="Delete class files and docs dir.">
+      <delete>
+         <fileset dir="${build}/" includes="**/*.class"/>
+         <fileset dir="${src}/" includes="**/*.class"/>
+         <fileset dir="${dist}/" includes="**"/>
+         <fileset dir="${schemaJavaSource}" includes="**"/>
+         <!-- there shouldn't be any .class files here, but it happens -->
+         <!-- <fileset dir="${test_build}/" includes="**/*.class" /> -->
+      </delete>
+   </target>
+
+   <!-- all ================================================== -->
+   <target name="all" depends="dist"/>
+</project>
