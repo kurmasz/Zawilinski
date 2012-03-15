@@ -104,40 +104,35 @@ public class LanguagePrefilter extends TextPrefilter {
    }
 
    private void searchForLanguageStart_withPartial(char[] ch, int start, int length) throws SAXException {
+      // headerLoc will keep track of which character in the language header we expect to see next.
+      int headerLoc = partialLoc;
+
+      // Walk through the data and attempt to add to the partial loc.
+      for (int dataLoc = start; dataLoc < start + length; dataLoc++) {
 
 
+         if (ch[dataLoc] == languageChars[headerLoc]) {
+            partialLoc++;
+         } else {
+            // This indicates that the data does not match the header.
+            // Since we have no match, we clear the partial and continue searching as normal.
+            partialLoc = NO_PARTIAL;
+            searchForLanguageStart_noPartial(ch, dataLoc, length - (dataLoc - start));
+            return;
+         }
+         headerLoc++;
+
+         // if headerLoc reaches the end of the header string, then we have found a match.
+         if (headerLoc == languageChars.length) {
+            partialLoc = NO_PARTIAL;
+            foundLanguage = true;
+            searchForLanguageEnd(ch, dataLoc + 1, length - (dataLoc - start) - 1);
+            return;
+         }
+      }
    }
 
-   private void searchForLanguageStart(char[] ch, int start, int length) throws SAXException {
-
-      // If there is an existing partial, then check and see if we can add to it
-      if (partialLoc != NO_PARTIAL) {
-         int headerLoc = partialLoc;
-
-         // Walk through the data and attempt to add to the partial loc.
-         for (int dataLoc = start; dataLoc < start + length; dataLoc++) {
-            if (ch[dataLoc] == languageChars[headerLoc]) {
-               partialLoc++;
-            } else {
-               // This indicates that the data does not match the header.
-               // Since we have no match, we clear the partial and continue searching as normal.
-               partialLoc = NO_PARTIAL;
-               searchForLanguageStart(ch, dataLoc, length - (dataLoc - start));
-               return;
-            }
-            headerLoc++;
-
-            // if headerLoc reaches the end of the header string, then we have found a match.
-            if (headerLoc == languageChars.length) {
-               partialLoc = NO_PARTIAL;
-               foundLanguage = true;
-               searchForLanguageEnd(ch, dataLoc+1, length - (dataLoc - start)-1);
-               return;
-            }
-         }
-         return;
-      }
-
+   private void searchForLanguageStart_noPartial(char[] ch, int start, int length) throws SAXException {
 
       int end = start + length - 1;
       int header_start = findTargetLanguageHeader(ch, start, length, languageChars);
@@ -166,6 +161,17 @@ public class LanguagePrefilter extends TextPrefilter {
          System.out.println("Match for " + Arrays.toString(ch));
          searchForLanguageEnd(ch, header_start + languageChars.length, end - header_start - languageChars.length +
                1);
+      }
+
+   }
+
+   private void searchForLanguageStart(char[] ch, int start, int length) throws SAXException {
+
+      // If there is an existing partial, then check and see if we can add to it
+      if (partialLoc != NO_PARTIAL) {
+         searchForLanguageStart_withPartial(ch, start, length);
+      } else {
+         searchForLanguageStart_noPartial(ch, start, length);
       }
    }
 
