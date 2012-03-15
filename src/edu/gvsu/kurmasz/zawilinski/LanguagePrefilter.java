@@ -3,6 +3,7 @@ package edu.gvsu.kurmasz.zawilinski;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import sun.swing.SwingUtilities2;
 
 import java.util.Arrays;
 
@@ -28,7 +29,6 @@ public class LanguagePrefilter extends TextPrefilter {
    // of this potential problem when fixing other bugs or adding functionality
 
    // package level to support testing.
-   static final int BUFFER_SIZE = 8192;
 
    private static final char EQUALS = '=';
    private static final String NEWLINE = "\n";
@@ -36,10 +36,11 @@ public class LanguagePrefilter extends TextPrefilter {
    private static final int NOT_FOUND = -1;
    private static final int SINGLE_EQUAL = -2;
 
-   private StringBuffer buffer;
+   private enum SectionStage {PRE, IN, POST}
 
-   private boolean foundLanguage = false;
-   private boolean done = false;
+
+
+   private SectionStage sectionStage;
 
    private String language;
 
@@ -68,18 +69,15 @@ public class LanguagePrefilter extends TextPrefilter {
       language_search_string.getChars(0, language_search_string.length(),
             languageChars, 0);
 
-      // make a buffer
-      buffer = new StringBuffer(BUFFER_SIZE);
+
    }
 
    @Override
    protected void handleStartTextElement(String uri, String localName,
                                          String name, Attributes attrs) throws SAXException {
-      foundLanguage = false;
-      done = false;
 
-      // make sure the buffer is empty. See note above.
-      //buffer.delete(0, buffer.length());
+      sectionStage = SectionStage.PRE;
+
    }
 
    @Override
@@ -93,20 +91,26 @@ public class LanguagePrefilter extends TextPrefilter {
    protected void handleTextElementCharacters(char[] ch, int start, int length)
          throws SAXException {
 
-      /*
-         * if (getCurrentTitle().equals("mineta")) { System.out.printf(
-         * "%d %d ->" + new String(ch, start, length) + "<-", start, length); }
-         */
-
-      // If we've already completely processed the language, just return
-      if (done) {
-         return;
-      } else if (!foundLanguage) {
-         searchForLanguageStart(ch, start, length);
-      } else {
-         // (V1) Verify failures if start or length change
-         searchForLanguageEnd(ch, start, length);
+      switch (sectionStage) {
+         case POST:
+            return;
+         case PRE:
+            searchForLanguageStart(ch, start, length);
+            return;
+         case IN:
+            // (V1) Verify failures if start or length change
+            searchForLanguageEnd(ch, start, length);
+            return;
       }
+   }
+
+   private void searchForHeader(char[] ch, int start, int length) {
+
+      for (int i = start; i < start + length; i++) {
+
+
+      }
+
    }
 
    private void searchForLanguageStart_withPartial(char[] ch, int start, int length) throws SAXException {
@@ -134,7 +138,7 @@ public class LanguagePrefilter extends TextPrefilter {
          // if partialLoc reaches the end of the header string, then we have found a match.
          if (partialLoc == languageChars.length) {
             partialLoc = NO_PARTIAL;
-            foundLanguage = true;
+            sectionStage = SectionStage.IN;
             searchForLanguageEnd(ch, dataLoc + 1, length - (dataLoc - start) - 1);
             return;
          }
@@ -165,7 +169,7 @@ public class LanguagePrefilter extends TextPrefilter {
 
       // In this case we have found a complete match.
       else {
-         foundLanguage = true;
+         sectionStage = SectionStage.IN;
          System.out.println("Match for " + Arrays.toString(ch));
          searchForLanguageEnd(ch, header_start + languageChars.length, end_plus_1 - header_start - languageChars.length);
       }
@@ -186,112 +190,6 @@ public class LanguagePrefilter extends TextPrefilter {
       System.out.println("Sending " + new String(ch, start, length));
       sendCharacters(ch, start, length);
    }
-
-
-   // Look through the buffer for text that can be shipped on.
-   // returns true if everything has been processed that can be processed.
-   private boolean process2() throws SAXException {
-
-      // Look for headings.
-      int headding_start = findDoubleEquals2(0);
-
-      // If no headings, then ship everything but any trailing equals signs.
-      if (headding_start == -1) {
-         shipLine();
-         return true;
-      }
-
-      // If there is a heading, check for an end:
-      int headding_end = findDoubleEquals2(headding_start);
-
-      // If there's no end,
-      if (headding_end == -1) {
-
-         // First, see if this is a false heading (i.e., a newline before the
-         // next ==)
-         if (buffer.indexOf(NEWLINE, headding_start) > -1) {
-            // it is, so we "ship" the rest of the line
-            shipLine();
-            return true;
-         }
-
-         // if it is an unterminated header, then keep it in the buffer
-         return true;
-      } // if no heading end
-
-      String heading = buffer.substring(headding_start, headding_end - 2);
-
-      if (heading.contains(NEWLINE)) {
-         // If there is a newline in the heading, it isn't a true heading.
-         // Ship everything up to the next ==
-         shipLine(headding_end - 2);
-
-         // return false, because there may be text after the trailing ==
-         // that can be processed right now.
-         return false;
-      }
-
-      if (heading.equals(language)) {
-         foundLanguage = true;
-         // System.out.println("Found Polish: " + getCurrentTitle());
-         // ship the language string
-         sendCharacters(languageChars, 0, languageChars.length);
-
-         // Flush the buffer
-         buffer.delete(0, headding_end);
-         // may be able to process more data after the end of the header.
-         return false;
-      }
-
-      // If this is some other heading *AND* We're currently processing the
-      // desired language, then we're done with this text field.
-      else if (foundLanguage) {
-         // System.out.println("Done " + heading);
-         foundLanguage = false;
-         buffer.delete(0, buffer.length());
-         done = true;
-         // Nothing left to process
-         return true;
-      }
-
-      // This is a tag *before* we get to the desired language. Print it out
-      // as "regular" text.
-      else {
-         shipLine(headding_end);
-         buffer.delete(0, headding_end);
-         return false;
-
-      }
-
-   }
-
-   private void shipLine(int length) throws SAXException {
-      if (foundLanguage) {
-         char[] my_chars = new char[length];
-         buffer.getChars(0, length, my_chars, 0);
-         sendCharacters(my_chars, 0, length);
-      }
-      buffer.delete(0, length);
-   }
-
-   private void shipLine() throws SAXException {
-      int last_equals = getLastEquals();
-
-      // if last_equals < 0, then the buffer contains equals only. We need to
-      // keep it around until we get more data.
-      if (last_equals >= 0) {
-         shipLine(last_equals + 1);
-      }
-   }
-
-   private int getLastEquals() {
-      int i = buffer.length() - 1;
-      while (i >= 0 && buffer.charAt(i) == EQUALS) {
-         i--;
-      }
-      return i;
-   }
-
 
    /*
     * Return the index of the beginning of the string {@code header} within {@code ch}.
@@ -347,19 +245,6 @@ public class LanguagePrefilter extends TextPrefilter {
       return NOT_FOUND;
    }
 
-   // Returns the first place *after* two equals signs.
-   private int findDoubleEquals2(int start) {
-      int place = buffer.indexOf("==", start);
-      while (place != -1) {
-         // Check for "only";
-         if ((place == 0 || buffer.charAt(place - 1) != EQUALS)
-               && (place < buffer.length() - 2)
-               && buffer.charAt(place + 2) != EQUALS) {
-            return place + 2;
-         }
-         place = buffer.indexOf("==", place + 2);
-      }
-      return -1;
-   }
+
 
 } // end LanguagePrefilter
