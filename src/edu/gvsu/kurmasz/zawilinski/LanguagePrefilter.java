@@ -22,35 +22,13 @@ import java.util.Arrays;
 // (C) 2010 Zachary Kurmas
 // Created February 7, 2010
 public class LanguagePrefilter extends TextPrefilter {
-   // Notes:
-   // (1) I found an interesting bug where "==" from the previous text got left
-   // in the buffer. I'm not sure how this happened; however, clearing the
-   // buffer when starting a new page will certainly fix the problem. Be aware
-   // of this potential problem when fixing other bugs or adding functionality
-
-   // package level to support testing.
-
-   private static final char EQUALS = '=';
-   private static final String NEWLINE = "\n";
-   private static final int NO_PARTIAL = -1;
-   private static final int NOT_FOUND = -1;
-   private static final int SINGLE_EQUAL = -2;
 
    private enum SectionStage {PRE, IN, POST}
 
-
-
    private SectionStage sectionStage;
-
+   private HeaderSearch hs;
    private String language;
 
-   private char[] languageChars;
-
-   private int partialLoc = NO_PARTIAL;
-
-   static String makeLanguageSearchString(String language) {
-      return EQUALS + (EQUALS + language + EQUALS + EQUALS);
-   }
 
    /**
     * Constructor.
@@ -58,18 +36,7 @@ public class LanguagePrefilter extends TextPrefilter {
     * @param language language to search for
     */
    public LanguagePrefilter(String language) {
-
       this.language = language;
-
-      // Build the string that indicates the start of the content for the language in question
-      String language_search_string = makeLanguageSearchString(language);
-
-      // put that string in a char[]
-      languageChars = new char[language_search_string.length()];
-      language_search_string.getChars(0, language_search_string.length(),
-            languageChars, 0);
-
-
    }
 
    @Override
@@ -77,14 +44,40 @@ public class LanguagePrefilter extends TextPrefilter {
                                          String name, Attributes attrs) throws SAXException {
 
       sectionStage = SectionStage.PRE;
+      hs = new HeaderSearch();
 
    }
 
    @Override
    protected void handleEndTextElement(String uri, String localName,
                                        String name) throws SAXException {
-      // foundLanguage = false;
-      //done = false;
+     // TODO:  Flush the last of the text if there is no following language section
+   }
+
+   private void handlePreStage(char[] ch, int start, int length) throws SAXException {
+      HeaderSearch.Result result = hs.process(ch, start, length);
+      // if result is null, then there is no complete header, and therefore,
+      // nothing to pass through.  If result is not null, but the header is not equal to language
+      // then we found the section header for a different language.
+      if (result != null && result.header.equals(language)) {
+         sectionStage = SectionStage.IN;
+         // Now we need a new HeaderSearch to find the end of the language.
+         hs = new HeaderSearch();
+         handleInStage(ch, result.next, length - start + result.next);
+      }
+   }
+
+   private void handleInStage(char[] ch, int start, int length) throws SAXException {
+      HeaderSearch.Result result = hs.process(ch, start, length);
+
+      // We have found the start of another section
+      if (result != null) {
+         sectionStage = SectionStage.POST;
+         hs = null; // to free space
+         length -= (result.next - start);
+         start = result.next;
+      }
+      sendCharacters(ch, start, length);
    }
 
    @Override
@@ -95,156 +88,11 @@ public class LanguagePrefilter extends TextPrefilter {
          case POST:
             return;
          case PRE:
-            searchForLanguageStart(ch, start, length);
+            handlePreStage(ch, start, length);
             return;
          case IN:
-            // (V1) Verify failures if start or length change
-            searchForLanguageEnd(ch, start, length);
+            handleInStage(ch, start, length);
             return;
       }
    }
-
-   private void searchForHeader(char[] ch, int start, int length) {
-
-      for (int i = start; i < start + length; i++) {
-
-
-      }
-
-   }
-
-   private void searchForLanguageStart_withPartial(char[] ch, int start, int length) throws SAXException {
-      // partialLoc marks our place in the language header. In particular, it indicates which character we should
-      // find next.
-
-      // Walk through the data and attempt to add to the partial loc.
-      for (int dataLoc = start; dataLoc < start + length; dataLoc++) {
-
-
-         if (ch[dataLoc] == languageChars[partialLoc]) {
-            // If the next character in the data is the character we expect to see in
-            // the language header, then we still have a partial match.  Increment
-            // partialLoc and continue.
-            partialLoc++;
-         } else {
-            // This indicates that the data does not match the expected language header character
-            // Since we have no match, we clear the partial and continue searching as normal
-            // from the current position.
-            partialLoc = NO_PARTIAL;
-            searchForLanguageStart_noPartial(ch, dataLoc, length - (dataLoc - start));
-            return;
-         }
-
-         // if partialLoc reaches the end of the header string, then we have found a match.
-         if (partialLoc == languageChars.length) {
-            partialLoc = NO_PARTIAL;
-            sectionStage = SectionStage.IN;
-            searchForLanguageEnd(ch, dataLoc + 1, length - (dataLoc - start) - 1);
-            return;
-         }
-      }
-   }
-
-   private void searchForLanguageStart_noPartial(char[] ch, int start, int length) throws SAXException {
-
-      // end_plus_1 is the index of the first character outside the range to be examined.
-      // the end character is start + length -1.  However, the variable "end" wasn't very useful,
-      // because we had to add "1" to it every time we used it.
-      int end_plus_1 = start + length;
-      int header_start = findTargetLanguageHeader(ch, start, length, languageChars);
-
-      // If the language header is not found, then we return without sending any characters along
-      if (header_start == NOT_FOUND) {
-         System.out.println("No header for " + Arrays.toString(ch));
-         return;
-      }
-
-      // If the header_start is close to the end of the buffer, then we have found
-      // a partial match.
-      else if (header_start > end_plus_1 - languageChars.length) {
-         System.out.println("Partial for " + Arrays.toString(ch));
-         partialLoc = end_plus_1 - header_start;
-         System.out.println("PL = " + partialLoc);
-      }
-
-      // In this case we have found a complete match.
-      else {
-         sectionStage = SectionStage.IN;
-         System.out.println("Match for " + Arrays.toString(ch));
-         searchForLanguageEnd(ch, header_start + languageChars.length, end_plus_1 - header_start - languageChars.length);
-      }
-
-   }
-
-   private void searchForLanguageStart(char[] ch, int start, int length) throws SAXException {
-
-      // If there is an existing partial, then check and see if we can add to it
-      if (partialLoc != NO_PARTIAL) {
-         searchForLanguageStart_withPartial(ch, start, length);
-      } else {
-         searchForLanguageStart_noPartial(ch, start, length);
-      }
-   }
-
-   private void searchForLanguageEnd(char[] ch, int start, int length) throws SAXException {
-      System.out.println("Sending " + new String(ch, start, length));
-      sendCharacters(ch, start, length);
-   }
-
-   /*
-    * Return the index of the beginning of the string {@code header} within {@code ch}.
-    * Will also return an index if there is a partial match at the end of the subset of ch between {@code start} and
-    * {@code start + length -1}
-   */
-   // package private for testability
-   static int findTargetLanguageHeader(char[] ch, int start, int length, char[] header) {
-      //System.out.println("Searching for " + Arrays.toString(header));
-
-      // Search for a complete match
-      int end = start + length - 1;
-      //System.out.println("Last:  " + (end - header.length));
-      for (int i = start; i <= end; i++) {
-         boolean found = true;
-         //System.out.println();
-         for (int j = 0; j < header.length && i + j <= end; j++) {
-            // System.out.print(ch[i + j]);
-            if (ch[i + j] != header[j]) {
-               found = false;
-               break;
-            }
-         } // end for j
-
-         if (found) {
-            return i;
-         }
-      }
-
-      return NOT_FOUND;
-   }
-
-
-   /**
-    * Find the starting index of a "==" sequence.
-    *
-    * @param ch    the chararacter array to search
-    * @param start the starting index
-    * @param end   the last index
-    * @return the starting index of the == sequence, NOT_FOUND if there are no == sequences,
-    *         or SINGLE_EQUAL if no other == sequences found and the last character is =.
-    */
-   int findDoubleEquals(char[] ch, int start, int end) {
-      for (int i = start; i < end; i++) {
-         if (ch[i] == EQUALS && ch[i + 1] == EQUALS) {
-            return i;
-         }
-      }
-
-      if (ch[end] == EQUALS) {
-         return SINGLE_EQUAL;
-      }
-      return NOT_FOUND;
-   }
-
-
-
 } // end LanguagePrefilter
