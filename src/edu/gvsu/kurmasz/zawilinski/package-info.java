@@ -1,5 +1,6 @@
 /**
  *
+ *
  * <code>Zawilinski</code> is a Java library designed specifically to simplify the extraction of
  * data from Wiktionary entries;  more generally, it simplifies the process of loading
  * and filtering MediaWiki XML dumps so that the resulting document object tree is of

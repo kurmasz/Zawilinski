@@ -124,7 +124,7 @@
       <attribute name="src" default="NOT SET"/>
       <element name="addSrc" optional="yes"/>
       <sequential>
-         <propertyfile file="${build}/edu/gvsu/cis/kurmasz/zawilinski/builddate.properties">
+         <propertyfile file="${build}/edu/gvsu/kurmasz/zawilinski/builddate.properties">
             <entry key="builddate" value="now" type="date" pattern="yyyy.MM.dd HH.mm.ss"/>
          </propertyfile>
          <jar destfile="${dist}/${jarName}-${zawilinski_ver}@{src}.jar">
@@ -148,7 +148,7 @@
    </target>
 
 
-   <target name="dist_src" description="Jar file containing releasable zawilisnki class and source."
+   <target name="dist_src" description="Jar file containing releasable Zawilisnki class and source."
            depends="compile,run_test,javadoc">
       <buildDist src="-src">  <!-- jar file name ends with src -->
          <addSrc> <!-- add the following filesets to the .jar file -->
@@ -157,7 +157,11 @@
       </buildDist>
    </target>
 
-   <target name="dist" description="Distribution 'public' kurmasUtil packages" depends="dist_class, dist_src"/>
+   <target name="dist" description="Distribution 'public' kurmasUtil packages" depends="dist_class, dist_src">
+      <copy todir="${dist}">
+         <fileset dir="doc-files"/>
+      </copy>
+   </target>
 
    <!-- clean ================================================== -->
    <target name="clean" description="Delete class files and docs dir.">
