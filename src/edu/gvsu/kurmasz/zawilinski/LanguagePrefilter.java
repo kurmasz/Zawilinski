@@ -10,6 +10,12 @@ import java.util.Arrays;
  * A pre-filter that only allows text through related to the specified
  * language.
  *
+ *
+ * <p>If a language contains an '=' (I don't know why it would), then the filter may fail to detect some headers.
+ * For example, given an "language" abc=def, the filter may fail to detect the start of the language section if the
+ * article data looks like this "...words words ==abc==abc=def==Words words words..."
+ * </p>
+ *
  * @author Zachary Kurmas
  */
 // (C) 2010 Zachary Kurmas
@@ -104,26 +110,29 @@ public class LanguagePrefilter extends TextPrefilter {
    }
 
    private void searchForLanguageStart_withPartial(char[] ch, int start, int length) throws SAXException {
-      // headerLoc will keep track of which character in the language header we expect to see next.
-      int headerLoc = partialLoc;
+      // partialLoc marks our place in the language header. In particular, it indicates which character we should
+      // find next.
 
       // Walk through the data and attempt to add to the partial loc.
       for (int dataLoc = start; dataLoc < start + length; dataLoc++) {
 
 
-         if (ch[dataLoc] == languageChars[headerLoc]) {
+         if (ch[dataLoc] == languageChars[partialLoc]) {
+            // If the next character in the data is the character we expect to see in
+            // the language header, then we still have a partial match.  Increment
+            // partialLoc and continue.
             partialLoc++;
          } else {
-            // This indicates that the data does not match the header.
-            // Since we have no match, we clear the partial and continue searching as normal.
+            // This indicates that the data does not match the expected language header character
+            // Since we have no match, we clear the partial and continue searching as normal
+            // from the current position.
             partialLoc = NO_PARTIAL;
             searchForLanguageStart_noPartial(ch, dataLoc, length - (dataLoc - start));
             return;
          }
-         headerLoc++;
 
-         // if headerLoc reaches the end of the header string, then we have found a match.
-         if (headerLoc == languageChars.length) {
+         // if partialLoc reaches the end of the header string, then we have found a match.
+         if (partialLoc == languageChars.length) {
             partialLoc = NO_PARTIAL;
             foundLanguage = true;
             searchForLanguageEnd(ch, dataLoc + 1, length - (dataLoc - start) - 1);
@@ -134,7 +143,10 @@ public class LanguagePrefilter extends TextPrefilter {
 
    private void searchForLanguageStart_noPartial(char[] ch, int start, int length) throws SAXException {
 
-      int end = start + length - 1;
+      // end_plus_1 is the index of the first character outside the range to be examined.
+      // the end character is start + length -1.  However, the variable "end" wasn't very useful,
+      // because we had to add "1" to it every time we used it.
+      int end_plus_1 = start + length;
       int header_start = findTargetLanguageHeader(ch, start, length, languageChars);
 
       // If the language header is not found, then we return without sending any characters along
@@ -145,13 +157,9 @@ public class LanguagePrefilter extends TextPrefilter {
 
       // If the header_start is close to the end of the buffer, then we have found
       // a partial match.
-
-      // Note:  "+ 1" is correct.  However, +0 will also work.  The match will be
-      // incorrectly marked as a partial; but, the next call to searchForLanguageStart
-      // will then recognize the match and send the line.
-      else if (header_start > end - languageChars.length + 1) {
+      else if (header_start > end_plus_1 - languageChars.length) {
          System.out.println("Partial for " + Arrays.toString(ch));
-         partialLoc = end - header_start + 1;
+         partialLoc = end_plus_1 - header_start;
          System.out.println("PL = " + partialLoc);
       }
 
@@ -159,8 +167,7 @@ public class LanguagePrefilter extends TextPrefilter {
       else {
          foundLanguage = true;
          System.out.println("Match for " + Arrays.toString(ch));
-         searchForLanguageEnd(ch, header_start + languageChars.length, end - header_start - languageChars.length +
-               1);
+         searchForLanguageEnd(ch, header_start + languageChars.length, end_plus_1 - header_start - languageChars.length);
       }
 
    }
