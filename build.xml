@@ -12,7 +12,7 @@
 
 
    <!-- version info -->
-   <property name="zawilinski_ver" value="2.0.0"/>
+   <property name="zawilinski_ver" value="1.0.0"/>
 
    <!-- build info -->
    <property name="src" location="src"/>
@@ -20,8 +20,9 @@
    <property name="test_build" location="out/antTest"/>
    <property name="schemaJavaSource" location="schemaJavaSource"/>
    <property name="schemaClassFiles" location="${build}"/>
-   <!-- <property name="test_src" location="junit_tests" /> -->
-   <!--  <property name="testList" value="**/*Test.java" />-->
+   <property name="test_src" location="test"/>
+   <property name="test_lib" location="test_lib"/>
+   <property name="test_list" value="**/*Test.java"/>
 
    <path id="compile.classpath">
       <fileset dir="bundled_packages">
@@ -33,6 +34,9 @@
       <path refid="compile.classpath"/>
       <pathelement location="${build}"/>
       <pathelement location="${test_build}"/>
+      <fileset dir="${test_lib}">
+         <include name="**/*.jar"/>
+      </fileset>
    </path>
 
    <path id="javadoc.classpath">
@@ -87,29 +91,49 @@
    <target name="compileSource" description="compile source" depends="makedirs, compileSchemaClasses">
       <javac srcdir="${src}" destdir="${build}" classpathref="compile.classpath" debug="on" includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
-         <include name="edu/gvsu/cis/kurmasz/zawilinski/**"/>
       </javac>
    </target>
 
-   <target name="compile" description="compile" depends="compileSchemaClasses, compileSource"/>
+   <target name="compileTest" description="compile test" depends="makedirs, compileSource">
+      <javac srcdir="${test_src}" destdir="${test_build}" classpathref="test.classpath" debug="on"
+             includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+      </javac>
+   </target>
+
+
+   <target name="compile" description="compile" depends="compileSchemaClasses, compileSource, compileTest"/>
 
 
    <!-- Test stuff ================================================== -->
-   <target name="build_test" depends="compile"/>
+   <target name="build_test" depends="compileTest"/>
 
-   <target name="run_test" depends="build_test"/>
+   <target name="test" depends="build_test">
+      <junit fork="yes" haltonfailure="yes">
+         <assertions enableSystemAssertions="true"/>
+         <classpath refid="test.classpath"/>
 
-   <target name="test" depends="build_test, run_test"/>
+         <!-- This is necessary for Java 7 on windows only -->
+         <!-- Hopefully there will come a time when it is no longer necessary -->
+         <!-- <jvmarg value="-XX:-UseSplitVerifier"/> -->
+
+         <batchtest fork="yes">
+            <fileset dir="${test_src}">
+               <include name="${test_list}"/>
+            </fileset>
+         </batchtest>
+         <formatter type="plain" usefile="false"/>
+
+      </junit>
+   </target>
 
 
    <!-- javadoc =============================================== -->
    <target name="javadoc" description="Javadoc documentation.">
       <javadoc classpathref="javadoc.classpath" destdir="${javadocs}" access="protected"
-               packagenames="edu.gvsu.kurmasz.zawilinski.*" excludepackagenames="edu.gvsu.cis.*">
-         <!-- <packageset dir="${schemaJavaSource}"/> -->
+               packagenames="edu.gvsu.kurmasz.zawilinski.*">
          <packageset dir="src" defaultexcludes="yes">
             <include name="edu/gvsu/**"/>
-            <exclude name="edu/gvsu/cis/**"/>
          </packageset>
          <packageset dir="${schemaJavaSource}" defaultexcludes="yes"/>
          <link href="http://download.oracle.com/javase/6/docs/api/"/>
@@ -142,14 +166,14 @@
    </macrodef>
 
    <target name="dist_class" description="Jar file containing class files only."
-           depends="compile,run_test,javadoc">
+           depends="compile,test,javadoc">
       <buildDist src=""/>
       <!-- Don't include any source code -->
    </target>
 
 
    <target name="dist_src" description="Jar file containing releasable Zawilisnki class and source."
-           depends="compile,run_test,javadoc">
+           depends="compile,test,javadoc">
       <buildDist src="-src">  <!-- jar file name ends with src -->
          <addSrc> <!-- add the following filesets to the .jar file -->
             <fileset dir="${src}"/>
