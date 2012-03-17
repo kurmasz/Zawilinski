@@ -51,19 +51,31 @@ public class LanguagePrefilter extends TextPrefilter {
    @Override
    protected void handleEndTextElement(String uri, String localName,
                                        String name) throws SAXException {
-     // TODO:  Flush the last of the text if there is no following language section
+      // TODO:  Flush the last of the text if there is no following language section
    }
 
    private void handlePreStage(char[] ch, int start, int length) throws SAXException {
       HeaderSearch.Result result = hs.process(ch, start, length);
       // if result is null, then there is no complete header, and therefore,
-      // nothing to pass through.  If result is not null, but the header is not equal to language
+      // nothing to pass through.
+      //
+      if (result == null) {
+         return;
+      }
+      // If result is not null, but the header is not equal to language
       // then we found the section header for a different language.
-      if (result != null && result.header.equals(language)) {
+
+      // if the header is the language we are filtering for, then
+      // switch stages
+      if (result.header.equals(language)) {
          sectionStage = SectionStage.IN;
          // Now we need a new HeaderSearch to find the end of the language.
          hs = new HeaderSearch();
-         handleInStage(ch, result.next, length - start + result.next);
+         handleInStage(ch, result.next, length - (result.next - start));
+      } else {
+         // if we have found a different header, then re-set the search
+         hs = new HeaderSearch();
+         handlePreStage(ch, result.next, length - (result.next - start));
       }
    }
 
@@ -74,8 +86,7 @@ public class LanguagePrefilter extends TextPrefilter {
       if (result != null) {
          sectionStage = SectionStage.POST;
          hs = null; // to free space
-         length -= (result.next - start);
-         start = result.next;
+         length = (result.next - start);
       }
       sendCharacters(ch, start, length);
    }
