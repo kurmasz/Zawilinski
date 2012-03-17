@@ -12,7 +12,7 @@
 
 
    <!-- version info -->
-   <property name="zawilinski_ver" value="2.0.0"/>
+   <property name="zawilinski_ver" value="1.0.0"/>
 
    <!-- build info -->
    <property name="src" location="src"/>
@@ -87,7 +87,6 @@
    <target name="compileSource" description="compile source" depends="makedirs, compileSchemaClasses">
       <javac srcdir="${src}" destdir="${build}" classpathref="compile.classpath" debug="on" includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
-         <include name="edu/gvsu/cis/kurmasz/zawilinski/**"/>
       </javac>
    </target>
 

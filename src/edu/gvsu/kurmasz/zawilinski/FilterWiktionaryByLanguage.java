@@ -142,14 +142,18 @@ public class FilterWiktionaryByLanguage {
          options.inputFile = leftovers.get(1);
       }
 
-      Log postFilterLog = null;
+      Log postFilterLog;
       if (options.logFile != null) {
          postFilterLog = Log.makeLogOrQuit(options.logFile, options.logLevel);
+      } else {
+         postFilterLog = new Log();
       }
 
-      Log textSizeLog = null;
+      Log textSizeLog;
       if (options.textSizeLog != null) {
          textSizeLog = Log.makeLogOrQuit(options.textSizeLog, TextSizePrefilter.TRUNCATIONS);
+      } else {
+         textSizeLog = new Log();
       }
 
 

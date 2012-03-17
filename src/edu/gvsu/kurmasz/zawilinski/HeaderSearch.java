@@ -105,7 +105,8 @@ public class HeaderSearch {
       if (isClose(ch)) {
          foundInStage++;
       } else if (foundInStage < MIN_HEADER_LEVEL) {
-         throw new IllegalArgumentException("This case hasn't been handled yet");
+         setStage(Stage.IN);
+         processIn(ch);
       } else if (foundInStage == DESIRED_HEADER_LEVEL && openSize == DESIRED_HEADER_LEVEL) {
          setStage(Stage.POST);
       } else { // foundInStage != DESIRED_HEADER_LEVEL or openSize != DESIRED_HEADER_LEVEL
