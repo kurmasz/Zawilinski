@@ -37,12 +37,19 @@ public class FilterWiktionaryByLanguage {
       public String inputFile = "-";
       public String language = null;
 
-      /*@JoswaOption
-        public Boolean keepAllRevisions = false;
-
-        @JoswaOption()
-        public Boolean keepAllPages = false;
+      /* Keeping all revisions lets you analyze things like (1) when the data for the language under study was entered relative
+         to when the initial entry was created, or (2) whether the data for the language in quesion was entered and
+         removed.
       */
+      //@JoswaOption
+      //public Boolean keepAllRevisions = false;
+
+      /*
+         Keeping all pages allows you to see which pages *don't* have data for the language under study.
+       */
+      //@JoswaOption()
+      //public Boolean keepAllPages = false;
+
 
       @JoswaOption(shortName = 'h', usage = "display this help message")
       public boolean help = false;
@@ -76,8 +83,7 @@ public class FilterWiktionaryByLanguage {
     */
    // (C) 2010 Zachary Kurmas
    // Created February 12, 2010
-   private static class PostFilterByLanguage implements
-         PostFilteredMediaWikiLoader.PostFilter {
+   private static class PostFilterByLanguage implements PostFilter {
       // The string that indicates the start of a language section in
       // Wiktionary.
       // This string typically looks like this ==Polish== (with the "==")
@@ -105,7 +111,8 @@ public class FilterWiktionaryByLanguage {
          // only if the LanguagePrefilter SAX filter has been applied (which
          // assures that each <text>segment begins with the requested
          // language header.
-         return Util.getText(revision).startsWith(languageString);
+         //return Util.getText(revision).startsWith(languageString);
+         return Util.getTextSize(revision) > 0;
       }
    }
 
@@ -181,7 +188,7 @@ public class FilterWiktionaryByLanguage {
 
       try {
          JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.loadFilteredPages(InputHelper
-               .openFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf);
+               .openFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
          try {
             writer.write(root, options.outputFile);
          } catch (FileNotFoundException fnf) {

@@ -1,0 +1,84 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd"
+           version="0.5" xml:lang="en">
+   <siteinfo>
+      <sitename>Wiktionary</sitename>
+      <base>http://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
+      <generator>MediaWiki 1.16alpha-wmf</generator>
+      <case>case-sensitive</case>
+      <namespaces>
+         <namespace key="-2">Media</namespace>
+         <namespace key="37">MadeUpValue</namespace>
+      </namespaces>
+   </siteinfo>
+   <page>
+      <title>Word 1</title>
+      <id>6</id>
+      <revision>
+         <id>11</id>
+         <timestamp>2009-08-10T22:00:17Z</timestamp>
+         <contributor>
+            <username>Ivan Štambuk</username>
+            <id>42855</id>
+         </contributor>
+         <comment>/* For more information */ remove non-existing page</comment>
+         <text xml:space="preserve">
+            This is the beginning content
+            ==English==
+            This is the english content
+            A second line of english content.
+            ==Polish==
+            This is the Polish content
+            A second line of Polish content
+            ==Spanish==
+            This is the Spanish content
+            And, now the last line.
+         </text>
+      </revision>
+      <revision>
+         <id>12</id>
+         <timestamp>2010-06-14T14:11:17Z</timestamp>
+         <contributor>
+            <username>Zachary Kurmas</username>
+            <id>42856</id>
+         </contributor>
+         <comment>/* For more information */ remove non-existing page</comment>
+         <text xml:space="preserve">Content for rev 2 (pickles)</text>
+      </revision>
+   </page>
+   <page>
+      <title>Sample page 2</title>
+      <id>61</id>
+      <revision>
+         <id>21</id>
+         <timestamp>2009-08-10T05:21:17Z</timestamp>
+         <contributor>
+            <username>Ivan Štambuk</username>
+            <id>42855</id>
+         </contributor>
+         <comment>Another comment</comment>
+         <text xml:space="preserve">Content for rev 1 of page 2 (blueberries)</text>
+      </revision>
+      <revision>
+         <id>22</id>
+         <timestamp>2009-08-10T22:00:17Z</timestamp>
+         <contributor>
+            <username>Zachary Kurmas</username>
+            <id>42856</id>
+         </contributor>
+         <comment>/* For more information */ remove non-existing page</comment>
+         <text xml:space="preserve">Content for rev 2 of page 2</text>
+      </revision>
+      <revision>
+         <id>36</id>
+         <timestamp>2009-08-10T22:00:17Z</timestamp>
+         <contributor>
+            <username>Bugs Bunny</username>
+            <id>42857</id>
+         </contributor>
+         <comment>What's up, Doc?</comment>
+         <text xml:space="preserve">Content for rev 3 of page 2 (carrots)</text>
+      </revision>
+   </page>
+</mediawiki>
+

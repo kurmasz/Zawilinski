@@ -1,7 +1,9 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 /**
- * Helper class to search through multiple groups of characters for a MediaWiki header (e.g., ==Polish==).
+ * Helper class to search through multiple groups of characters for a MediaWiki header (e.g.,
+ * ==Polish==). Note that this class cannot handle an intermediate '=' in the header.  For example,
+ * it won't recognize "==this=that==" as a header.
  *
  * This class has to handle two main challenges:
  * <ol>
@@ -15,8 +17,11 @@ package edu.gvsu.kurmasz.zawilinski;
 // Created  3/15/12 at 12:26 PM
 // (C) Zachary Kurmas 2012
 
-public class HeaderSearch {
+class HeaderSearch {
 
+   /**
+    * The result of the current processing step
+    */
    public static class Result {
       public String header;
       public int next;
@@ -36,18 +41,20 @@ public class HeaderSearch {
    private int openSize;
 
 
-   // For now, we don't see these values changing.  At some point, we may want to make these regular instance variables.
-   // If you do make these regular instance variables, then make sure you add the appropriate tests, because all the tests
-   // assume these values are constant.
+   // For now, we don't anticipate these values changing.  At some point,
+   // we may want to make these regular instance variables. If you do make
+   // these regular instance variables, then make sure you add the appropriate
+   // tests, because all the tests assume these values are constant.
+
    private static final int MIN_HEADER_LEVEL = 2;
    private static final int DESIRED_HEADER_LEVEL = 2;
    private static final char HEADER_CHAR = '=';
 
-   protected boolean isOpen(char c) {
+   private boolean isOpen(char c) {
       return c == HEADER_CHAR;
    }
 
-   protected boolean isClose(char c) {
+   private boolean isClose(char c) {
       return c == HEADER_CHAR;
    }
 
@@ -55,7 +62,7 @@ public class HeaderSearch {
       return c == '\n';
    }
 
-   protected boolean isHeader(char c) {
+   private boolean isHeader(char c) {
       return !isOpen(c) && !isClose(c) && !isNewline(c);
    }
 
@@ -105,6 +112,9 @@ public class HeaderSearch {
       if (isClose(ch)) {
          foundInStage++;
       } else if (foundInStage < MIN_HEADER_LEVEL) {
+         for (int i = 0; i < foundInStage; i++) {
+            buffer.append(HEADER_CHAR);
+         }
          setStage(Stage.IN);
          processIn(ch);
       } else if (foundInStage == DESIRED_HEADER_LEVEL && openSize == DESIRED_HEADER_LEVEL) {

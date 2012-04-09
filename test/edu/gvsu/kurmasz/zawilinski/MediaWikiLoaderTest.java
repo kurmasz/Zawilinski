@@ -45,7 +45,7 @@ public class MediaWikiLoaderTest {
    // verify that the test resources are configured correctly.
    @Test
    public void openResource() throws Throwable {
-      InputStream is = this.getClass().getResourceAsStream("/test1.txt");
+      InputStream is = this.getClass().getResourceAsStream("/testLanguageFilter.xml");
       Assert.assertNotNull("Oops", is);
    }
 
@@ -186,6 +186,7 @@ public class MediaWikiLoaderTest {
       PowerMockito.doReturn(unmarshaller).when(MediaWikiLoader.class);
       MediaWikiLoader.createUnmarshaller();
 
+      @SuppressWarnings("unchecked")
       JAXBElement<MediaWikiType> expected = mock(JAXBElement.class);
       PowerMockito.doReturn(expected).when(MediaWikiLoader.class);
       MediaWikiLoader.load(source, log, unmarshaller);
@@ -231,6 +232,7 @@ public class MediaWikiLoaderTest {
       whenNew(InputSource.class).withArguments(inputStream).thenReturn(inputSource);
       whenNew(SAXSource.class).withArguments(inputSource).thenReturn(saxSource);
 
+      @SuppressWarnings("unchecked")
       JAXBElement<MediaWikiType> expected = mock(JAXBElement.class);
       PowerMockito.doReturn(expected).when(MediaWikiLoader.class);
       MediaWikiLoader.load(saxSource, log);
@@ -256,7 +258,6 @@ public class MediaWikiLoaderTest {
       whenNew(InputSource.class).withArguments(inputStream).thenReturn(inputSource);
       whenNew(SAXSource.class).withArguments(inputSource).thenReturn(saxSource);
 
-      JAXBElement<MediaWikiType> expected = mock(JAXBElement.class);
       PowerMockito.doThrow(new JAXBException("Oops")).when(MediaWikiLoader.class);
       MediaWikiLoader.load(saxSource, log);
 

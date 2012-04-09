@@ -13,39 +13,67 @@ public class HeaderSearchTest {
 
    //////////////////////////////////////////////////////////////////////////////
    //
-   // Tests that explain subtlties of the algorithm
+   // Tests that explain subtleties of the algorithm
    //
    //////////////////////////////////////////////////////////////////////////////
 
-
-   // I think it would be nice to allow headers to contain an = sign, but that
-   // code will take some work to write correctly.  So, for now, we punt.
-   @Test(expected = IllegalArgumentException.class)
-   public void recoversFromUnbalanced2_1() throws Throwable {
-      verify_process(hs, "Words ==123=ghi jkl==mno== p", 6, "mno", 26 + 6);
-   }
-
-   // Headers are expected to have an open and a close.  Thus, an unclosed header
-   // can cause problems, as shown here.
-   // However, newlines terminate a header, so this problem shouldn't appear often in practice.
+   // Newlines close a header, so ==correct" is correctly seen as the beginning of a header.
    @Test
-   public void unclosed3hidesLevel2HeaderIfNoNewline() throws Throwable {
-      verify_process(hs, "Words ===123 words for unclosed header==mno== content", 4);
+   public void newlineClosesHeader() throws Throwable {
+      verify_process(hs, "==Unclosed header\n content ==correct header== content2", "correct header", 45);
    }
 
-   // The newline closes the otherwise unclosed level 3 header
+   // Headers are assumed to have an open and a close.  Thus, an unclosed header
+   // without an intervening newline can generate counter-intuitive results.
+   // Fortunately, most headers are on lines to themselves, so this situation should be rare.
    @Test
-   public void recoversFromUnclosed3_withNewline() throws Throwable {
-      verify_process(hs, "Words ===123 words for unclosed header\nThen newline ==mno== content", 6, "mno", 59 + 6);
+   public void unclosedHeaderCanHideHeaderOnSameLine() throws Throwable {
+      verify_process(hs, "Words ===Intended L3 header Intended content ==Intended L2 header== Intended L2 content\n " +
+            "Content line 2\n==Next L2 Header== Content", "Next L2 Header", 122);
    }
-
 
    @Test
-   public void recoversFromUnbalanced3() throws Throwable {
-      verify_process(hs, "Words ===Tier 3== This is the content ==This is the header==.", 4, "This is the header",
-            60 + 4);
+   public void unclosedHeaderCanHideHeaderOnSameLine2() throws Throwable {
+      verify_process(hs, "Words ===Intended L3 header Intended content ==Intended L2 header== Intended L2 content " +
+            "Content line 2==Next L2 Header== Content", " Intended L2 content Content line 2", 104);
    }
 
+   // Headers, even headers of different levels are treated as a unit --- even if unbalanced.
+   // Thus, the algorithm doesn't begin looking for a new header until after "===ub header==" is closed.
+   // This is why the correct header to be found is "true header"
+   @Test
+   public void unbalancedHeadersTreatedAsUnit() throws Throwable {
+      verify_process(hs, "Words ===ub header== content of ub header ==true header==Content 2", "true header", 57);
+   }
+
+
+   // Because unbalanced headers are treated as a unit, a string of several '=' inside a header can cause
+   // counter-intuitive results.
+   @Test
+   public void headersTreatedAsAUnit2() throws Throwable {
+      verify_process(hs, "==Illegal<===>header== Intended content ==Intended l2 header== Intended content",
+            " Intended content ", 42);
+   }
+
+   // A header won't be processed until *after* it sees a non-header character.
+   // In This example, the header isn't recognized as closed at the end of the first
+   // batch of characters, because the algorithm is waiting to make sure the
+   // first character of the next batch isn't a "=".
+   @Test
+   public void requireNonHeaderChar() throws Throwable {
+      verify_process(hs, "==Not Recognized Yet==");
+      verify_process(hs, "Now it will be", "Not Recognized Yet", 0);
+   }
+
+   //////////////////////////////////////////////////////////////////////////////
+   //
+   // main test code
+   //
+   //////////////////////////////////////////////////////////////////////////////
+
+   private static final String CHALLENGE_HEADER_CONTENT = "This header has it all:  Punctuation, spaces, letters, " +
+         "and numbers: [1 2] 3 = 4 | 4 = 5, 7. <8(9)10= 11= {12} Wow!:;\"?\" '/' -__.Whew!";
+   private static final String CHALLENGE_HEADER = "==" + CHALLENGE_HEADER_CONTENT + "==";
 
    private HeaderSearch hs;
 
@@ -54,31 +82,70 @@ public class HeaderSearchTest {
       hs = new HeaderSearch();
    }
 
-   private static void verify_process(HeaderSearch headerSearch, String s, int start, String expectedHeader,
+   // This "_impl" version of verify_process allows to easily call this method from any child classes
+   protected void verify_process_impl(HeaderSearch headerSearch, String s, String expectedHeader,
                                       int expectedPlace) {
-      char[] myChars = new char[(s.length() + start) * 2];
-
-      for (int i = 0; i < start; i++) {
-         myChars[i] = '*';
-      }
-      System.arraycopy(s.toCharArray(), 0, myChars, start, s.length());
-      for (int i = start + s.length(); i < myChars.length; i++) {
-         myChars[i] = '-';
-      }
-      HeaderSearch.Result result = headerSearch.process(myChars, start, s.length());
+      HeaderSearch.Result result = headerSearch.process(s.toCharArray(), 0, s.length());
       if (expectedHeader == null) {
-         assertNull("expecting search to return null", result);
+         assertNull("expecting search to return null for \"" + s + "\".", result);
       } else {
-         assertNotNull("process should have returned a non-null result", result);
+         assertNotNull("process should have returned a non-null result for \"" + s + "\".", result);
          assertEquals(expectedHeader, result.header);
          assertEquals(expectedPlace, result.next);
       }
    }
 
-
-   private static void verify_process(HeaderSearch headerSearch, String s, int start) {
-      verify_process(headerSearch, s, start, null, 0);
+   protected void verify_process(HeaderSearch headerSearch, String s, String expectedHeader,
+                                 int expectedPlace) {
+      verify_process_impl(headerSearch, s, expectedHeader, expectedPlace);
    }
+
+   protected void verify_process(HeaderSearch headerSearch, String s) {
+      verify_process_impl(headerSearch, s, null, 0);
+   }
+
+   protected void verify_process_chunks(HeaderSearch headerSearch, String s, String expectedHeader,
+                                        int expectedPlace, int[] chunks) {
+
+      int chunkSum = 0;
+      int index = 0;
+      while (chunkSum < s.length()) {
+         int chunkSize = chunks[index];
+         index++;
+         index %= chunks.length;
+         if (chunkSum + chunkSize > s.length()) {
+            chunkSize = s.length() - chunkSum;
+         }
+
+         String piece = s.substring(chunkSum, chunkSum + chunkSize);
+        // System.out.println("Piece: " + piece);
+         if (expectedHeader != null && chunkSum <= expectedPlace && expectedPlace < chunkSum + chunkSize) {
+            verify_process_impl(headerSearch, piece, expectedHeader, expectedPlace - chunkSum);
+            // Once we find a result, the headerSearch must be re-set
+            break;
+         } else {
+            verify_process_impl(headerSearch, piece, null, 0);
+         }
+         chunkSum += chunkSize;
+      }
+   }
+
+
+   // Key features
+   // * Header can be any characters except for '=' new line
+   // * Header can contain *single* '='
+   // * Newlines terminate a header
+   // * header must begin with exactly two ==
+   // * Header may be split among several lines
+   // * Headers are assumed to be closed
+   // * Headers can be "unbalanced"  (i.e., == can close ===)
+
+   // Cases to verify:
+   // * Only return matches for level 2 headers
+   // * single '=' don't mess things up
+   // * unclosed headers don't cause problems
+   // * unbalanced headers don't cause problems.
+   // * line breaks don't cause problems
 
    /////////////////////////////////////////////////////////////////////////////////////
    //
@@ -87,82 +154,63 @@ public class HeaderSearchTest {
    /////////////////////////////////////////////////////////////////////////////////////
 
    //
-   // Front of first line
+   // Header found at front of first line
    //
 
    @Test
-   public void findsHeaderAtFrontOfFirstLine_ShortOffset() throws Throwable {
-      verify_process(hs, "==Polish==Then some words", 3, "Polish", 10 + 3);
+   public void findsHeaderAtFrontOfFirstLine() throws Throwable {
+      verify_process(hs, "==Polish==Then some words", "Polish", 10);
    }
-
-   @Test
-   public void findsHeaderAtFrontOfFirstLineZeroOffset() throws Throwable {
-      verify_process(hs, "==Polish==Then some words", 0, "Polish", 10 + 0);
-   }
-
-   @Test
-   public void findsHeaderAtFrontOfFirstLine_LOngOffset() throws Throwable {
-      verify_process(hs, "==Polish==Then some words", 133, "Polish", 10 + 133);
-   }
-
 
    @Test
    public void findsHeaderAtFrontOfFirstLineWithFollowingNewline() throws Throwable {
-      verify_process(hs, "==Polish==\nThen some words", 5, "Polish", 10 + 5);
+      verify_process(hs, "==Polish==\nThen some words", "Polish", 10);
    }
 
    @Test
-   public void findsHeaderWithSpaceAtFrontOfFirstLine() throws Throwable {
-      verify_process(hs, "==Lady is a Tramp==Then some words", 53, "Lady is a Tramp", 19 + 53);
+   public void findsHeaderAtFrontOfFirstLine2() throws Throwable {
+      verify_process(hs, CHALLENGE_HEADER + "Then some words", CHALLENGE_HEADER_CONTENT, CHALLENGE_HEADER.length());
    }
 
    //
    // Middle of first line
    //
 
-   @Test
-   public void findsHeaderAtMiddleOfFirstLine_ShortOffset() throws Throwable {
-      verify_process(hs, "Over the River and Through the Woods==Polish==Then some words", 1, "Polish", 46 + 1);
-   }
 
    @Test
-   public void findsHeaderAtMiddleOfFirstLineZeroOffset() throws Throwable {
-      verify_process(hs, "Some words==Polish==Then some words", 0, "Polish", 20 + 0);
-   }
-
-   @Test
-   public void findsHeaderAtMiddleOfFirstLine_LongOffset() throws Throwable {
-      verify_process(hs, "Goodie Wowzer!==Polish==Then some words", 133, "Polish", 24 + 133);
+   public void findsHeaderAtMiddleOfFirstLine() throws Throwable {
+      verify_process(hs, "Over the River and Through the Woods==Polish==Then some words", "Polish", 46);
    }
 
    @Test
    public void findsHeaderAtMiddleOfFirstLineWithFollowingNewline() throws Throwable {
-      verify_process(hs, "Georgia and Arizona==Polish==\nThen some words", 93, "Polish", 29 + 93);
+      verify_process(hs, "Georgia and Arizona==Polish==\nThen some words", "Polish", 29);
    }
 
    @Test
-   public void findsHeaderWithSpaceAtMiddleOfFirstLine() throws Throwable {
-      verify_process(hs, "xxy==Lady is a Tramp==Then some words", 11, "Lady is a Tramp", 22 + 11);
+   public void findsHeaderAtMiddleOfFirstLine2() throws Throwable {
+      verify_process(hs, "start of line " + CHALLENGE_HEADER + "After header.",
+            CHALLENGE_HEADER_CONTENT, 14 + CHALLENGE_HEADER.length());
    }
 
    @Test
    public void findsHeaderAtMiddleOfNewLineWithLeadingNewlines1() throws Throwable {
-      verify_process(hs, "\n==Lady is a Tramp==Then some words", 4, "Lady is a Tramp", 20 + 4);
+      verify_process(hs, "\n==Lady is a Tramp==Then some words", "Lady is a Tramp", 20);
    }
 
    @Test
    public void findsHeaderAtMiddleOfNewLineWithLeadingNewlines3() throws Throwable {
-      verify_process(hs, "\nA cool song==Lady is a Tramp==Then some words", 11, "Lady is a Tramp", 31 + 11);
+      verify_process(hs, "\nA cool song==Lady is a Tramp==Then some words", "Lady is a Tramp", 31);
    }
 
    @Test
    public void findsHeaderAtMiddleOfNewLineWithLeadingNewlines2() throws Throwable {
-      verify_process(hs, "\nA\n\ncool  \nsong==Lady is a Tramp==Then some words", 154, "Lady is a Tramp", 34 + 154);
+      verify_process(hs, "\nA\n\ncool  \nsong==Lady is a Tramp==Then some words", "Lady is a Tramp", 34);
    }
 
    @Test
    public void findsHeaderAtMiddleOfNewLineWithLeadingNewlines4() throws Throwable {
-      verify_process(hs, "\nBa ba black sheep\n==Lady is a Tramp==Then some words", 11, "Lady is a Tramp", 38 + 11);
+      verify_process(hs, "\nBa ba black sheep\n==Lady is a Tramp==Then some words", "Lady is a Tramp", 38);
    }
 
    //
@@ -170,24 +218,33 @@ public class HeaderSearchTest {
    //
    @Test
    public void findsHeaderNearEndOfFirstLine() throws Throwable {
-      verify_process(hs, "Sunshine on my shoulders==H at E==x", 14, "H at E", 34 + 14);
+      verify_process(hs, "Sunshine on my shoulders==H at E==x", "H at E", 34);
    }
 
    @Test
    public void findsHeaderNearEndOfFirstLineWithNewline() throws Throwable {
-      verify_process(hs, "Sunshine on my shoulders==H at E==\n", 1, "H at E", 34 + 1);
+      verify_process(hs, "Sunshine on my shoulders==H at E==\n", "H at E", 34);
    }
 
    @Test
    public void findsHeaderAlmostOnLineByItself() throws Throwable {
-      verify_process(hs, "==abcdefg==x", 1, "abcdefg", 11 + 1);
+      verify_process(hs, "==abcdefg==x", "abcdefg", 11);
    }
 
    @Test
    public void findsHeaderAlmostOnLineByItself2() throws Throwable {
-      verify_process(hs, "==abcd efg==\n", 15, "abcd efg", 12 + 15);
+      verify_process(hs, "==abcd efg==\n", "abcd efg", 12);
    }
 
+   @Test
+   public void findsHeaderAlmostOnLineByItself3() throws Throwable {
+      verify_process(hs, CHALLENGE_HEADER + "\n", CHALLENGE_HEADER_CONTENT, CHALLENGE_HEADER.length());
+   }
+
+   @Test
+   public void findsFirstHeader() throws Throwable {
+      verify_process(hs, "abc def ==ghi== jlk mno ==pqr== stu ==vwyxz== 12345", "ghi", 15);
+   }
 
    //
    // Lack of header on first line recognized
@@ -195,65 +252,316 @@ public class HeaderSearchTest {
 
    @Test
    public void emptyLineNotAProblem() throws Throwable {
-      verify_process(hs, "", 14);
+      verify_process(hs, "");
    }
 
    @Test
    public void newlineOnlyNotAProblem() throws Throwable {
-      verify_process(hs, "\n", 14);
+      verify_process(hs, "\n");
    }
-
 
    @Test
    public void noHeaderOnFirstLine() throws Throwable {
       verify_process(hs, "Fourscore and seven years ago, our forefathers brought forth on this continent a new " +
-            "nation", 33);
+            "nation");
    }
 
    @Test
    public void wrongLevelHeaderOnFirstline_l1() throws Throwable {
-      verify_process(hs, "Fourscore and seven =years ago= our fathers...", 33);
+      verify_process(hs, "Fourscore and seven =years ago= our fathers...");
    }
 
    @Test
    public void wrongLevelHeaderOnFirstline_l3() throws Throwable {
-      verify_process(hs, "Fourscore and seven ===years ago=== our fathers...", 33);
-   }
-
-   @Test
-   public void newlineInterruptionRecognized() throws Throwable {
-      verify_process(hs, "abc ==def\nghi== jlkmn", 1);
-   }
-
-   @Test
-   public void unbalancedRecognized1() throws Throwable {
-      verify_process(hs, "abc ==def\nghi=== jlkmn", 1);
-   }
-
-   @Test
-   public void unbalancedRecognized2() throws Throwable {
-      verify_process(hs, "abc ==def\nghi= jlkmn", 1);
-   }
-
-   @Test
-   public void unbalancedRecognized3() throws Throwable {
-      verify_process(hs, "abc ===def\nghi== jlkmn", 1);
-   }
-
-   @Test
-   public void unbalancedRecognized4() throws Throwable {
-      verify_process(hs, "abc =def\nghi== jlkmn", 1);
+      verify_process(hs, "Fourscore and seven ===years ago=== our fathers...");
    }
 
    @Test
    public void unclosedLevel2() throws Throwable {
-      verify_process(hs, "abc ==def and now we add content even though we forgot to close the header", 1);
+      verify_process(hs, "abc ==def and now we add content even though we forgot to close the header");
+   }
+
+   @Test
+   public void unclosedLevel3() throws Throwable {
+      verify_process(hs, "abc ===def and now we add content even though we forgot to close the header");
+   }
+
+   @Test
+   public void newlineInterruptionRecognized_notFound() throws Throwable {
+      verify_process(hs, "abc ==def\nghi== jlkmn");
+   }
+
+   @Test
+   public void unbalancedRecognized_2_3_notFound() throws Throwable {
+      verify_process(hs, "abc ==defnghi=== jlkmn");
+   }
+
+   @Test
+   public void unbalancedRecognized_3_2_notFound() throws Throwable {
+      verify_process(hs, "abc ===defnghi== jlkmn");
    }
 
 
    //
-   // Header outside visible range not seen
+   // Header found beyond non-headers *i.e., things that look like headers, but aren't).
    //
+
+   @Test
+   public void recoverFromNewlineInterruptionL2() throws Throwable {
+      verify_process(hs, "abc ==def\nghi==jlkmn==op", "jlkmn", 22);
+   }
+
+   @Test
+   public void recoverFromNewlineInterruptionL3() throws Throwable {
+      verify_process(hs, "Words ===123 words for unclosed header\n==mno== content", "mno", 46);
+   }
+
+   @Test
+   public void recoverFromUnbalanced_2_3() throws Throwable {
+      verify_process(hs, "abc ==defnghi=== jlkmn ==then found== more stuff", "then found", 37);
+   }
+
+   @Test
+   public void recoverFromUnbalanced_3_2() throws Throwable {
+      // Note:  Lower level headings must be closed before considering the next heading.
+      // The ===defnghi== is treaded as a completed heading.    This is why the correct
+      // answer is ==then found== not "== jlkmn =="
+      verify_process(hs, "abc ===defnghi== jlkmn ==then found== more stuff", "then found", 37);
+   }
+
+   @Test
+   public void recoverFromLevel1() throws Throwable {
+      verify_process(hs, "a =bcd= efg ==hijk== lmnop", "hijk", 20);
+   }
+
+   @Test
+   public void recoverFromLevel3() throws Throwable {
+      verify_process(hs, "a ===bcd=== efg ==hijk== lmnop", "hijk", 24);
+   }
+
+   @Test
+   public void level1DoesntCountForOpen() throws Throwable {
+      verify_process(hs, "a b = cde ==fghi== jkl", "fghi", 18);
+   }
+
+
+   /////////////////////////////////////////////////////////////////////////////////////
+   //
+   // Second line tests
+   //
+   /////////////////////////////////////////////////////////////////////////////////////
+
+   //
+   // Header contained in second line
+   //
+   @Test
+   public void headerFoundAtStartOfSecondLine() throws Throwable {
+      verify_process(hs, "This is the first line with no header");
+      verify_process(hs, "==Found it== Now we can continue", "Found it", 12);
+   }
+
+   @Test
+   public void headerFoundInMiddleOfSecondLine() throws Throwable {
+      verify_process(hs, "This is the first line with no header");
+      verify_process(hs, "and a leading part 2 ==Found it== Now we can continue", "Found it", 33);
+   }
+
+   @Test
+   public void headerFoundInMiddleOfSecondLineWithNewlines() throws Throwable {
+      verify_process(hs, "This is the first line with no header");
+      verify_process(hs, "and a\n leading part\n 2\n==Found it== Now we can continue", "Found it", 35);
+   }
+
+   @Test
+   public void challengeHeaderFoundInMiddleOfSecondLineWithNewlines() throws Throwable {
+      verify_process(hs, "This is the first line with no header");
+      verify_process(hs, "and a\n leading part\n 2\n" + CHALLENGE_HEADER + "Now we can continue", CHALLENGE_HEADER_CONTENT,
+            23 + CHALLENGE_HEADER.length());
+   }
+
+   @Test
+   public void headerFoundNearEndOfSecondLine() throws Throwable {
+      verify_process(hs, "This is the first line with no header");
+      verify_process(hs, "and a leading part 2 ==Found it== ", "Found it", 33);
+   }
+
+   //
+   //   Header crosses from first to second.
+   //
+
+   @Test
+   public void headerAtVeryEndOfFirst() throws Throwable {
+      verify_process(hs, "Fatalnie!==Polish==");
+      verify_process(hs, "Aargh!", "Polish", 0);
+   }
+
+   @Test
+   public void headerAtVeryEndOfFirst2() throws Throwable {
+      verify_process(hs, "Fatalnie!==Polish==");
+      verify_process(hs, "\nAargh!", "Polish", 0);
+   }
+
+   @Test
+   public void headerAtVeryEndOfFirst3() throws Throwable {
+      verify_process(hs, "Fatalnie!==Polish==");
+      verify_process(hs, " Aargh!", "Polish", 0);
+   }
+
+   @Test
+   public void headerIsEntireFirstLine() throws Throwable {
+      verify_process(hs, "==Polish==");
+      verify_process(hs, " Aargh!", "Polish", 0);
+   }
+
+   @Test
+   public void headerIsEntireFirstLineWithSpace() throws Throwable {
+      verify_process(hs, CHALLENGE_HEADER);
+      verify_process(hs, " Aargh!", CHALLENGE_HEADER_CONTENT, 0);
+   }
+
+   @Test
+   public void oneEqualOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n=");
+      verify_process(hs, "=Polish== Stuff", "Polish", 9);
+   }
+
+   @Test
+   public void twoEqualOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n==");
+      verify_process(hs, "Polish== Stuff", "Polish", 8);
+   }
+
+   @Test
+   public void oneLetterOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n==P");
+      verify_process(hs, "olish== Stuff", "Polish", 7);
+   }
+
+   @Test
+   public void halfLettersOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n==Poli");
+      verify_process(hs, "sh== Stuff", "Polish", 4);
+   }
+
+   @Test
+   public void mostLettersOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n==Polis");
+      verify_process(hs, "h== Stuff", "Polish", 3);
+   }
+
+   @Test
+   public void allLettersOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n==Polish");
+      verify_process(hs, "== Stuff", "Polish", 2);
+   }
+
+   @Test
+   public void oneCloseOnFirstLine() throws Throwable {
+      verify_process(hs, "Words\n==Polish=");
+      verify_process(hs, "= Stuff", "Polish", 1);
+   }
+
+   //
+   // Aborted headers on first line recover on second
+   //
+
+   @Test
+   public void unclosedLevelOne() throws Throwable {
+      verify_process(hs, "Words word = more words");
+      verify_process(hs, "==Header==\n", "Header", 10);
+   }
+
+   @Test
+   public void unclosedLevelTwoBrokenByNewline() throws Throwable {
+      verify_process(hs, "Words\n==Oops Forgot to close\n");
+      verify_process(hs, "==Header==\n", "Header", 10);
+   }
+
+   @Test
+   public void unclosedLevelTwoBrokenByNewline2() throws Throwable {
+      verify_process(hs, "Words\n==Oops Forgot to close");
+      verify_process(hs, "\n==Header==\n", "Header", 11);
+   }
+
+   @Test
+   public void unclosedLevelThreeBrokenByNewline() throws Throwable {
+      verify_process(hs, "Words===Oops Forgot to close\n");
+      verify_process(hs, "==Header==\n", "Header", 10);
+   }
+
+   @Test
+   public void unclosedLevelThreeBrokenByNewline2() throws Throwable {
+      verify_process(hs, "Words===Oops Forgot to close");
+      verify_process(hs, "\n==Header==\n", "Header", 11);
+   }
+
+
+   @Test
+   public void unbalancedOnLine1() throws Throwable {
+      verify_process(hs, "Words\n==Oops Closed Incorrectly=== more stuff");
+      verify_process(hs, "==Header==\n", "Header", 10);
+   }
+
+   @Test
+   public void unbalancedOnLine1and2() throws Throwable {
+      verify_process(hs, "Words\n==Oops Closed ");
+      verify_process(hs, "Incorrectly=== more stuff==Header==\n", "Header", 35);
+   }
+
+
+   /////////////////////////////////////////////////////////////////////////////////////
+   //
+   // Multiple line tests
+   //
+   /////////////////////////////////////////////////////////////////////////////////////
+
+   @Test
+   public void headerInThirdLine() throws Throwable {
+      verify_process(hs, "Line 1");
+      verify_process(hs, "Line 2");
+      verify_process(hs, "Line 3 contains ==The Header== and some content", "The Header", 30);
+   }
+
+   @Test
+   public void headerSplit() throws Throwable {
+      verify_process(hs, "Nothing to see here");
+      verify_process(hs, "===Nor here===");
+      verify_process(hs, "Nope");
+      verify_process(hs, "But... ==T");
+      verify_process(hs, "his is");
+      verify_process(hs, " a ");
+      verify_process(hs, "Header==");
+      verify_process(hs, "With data", "This is a Header", 0);
+   }
+
+   @Test
+   public void oneLetterPerLine() throws Throwable {
+      String h = "==Alaska==";
+      for (int i = 0; i < h.length(); i++) {
+         verify_process(hs, h.substring(i, i + 1));
+      }
+      verify_process(hs, ".", "Alaska", 0);
+   }
+
+   @Test
+   public void newlineInterruptedMultipleLine() throws Throwable {
+      verify_process(hs, "Nothing to see here");
+      verify_process(hs, "===Nor here===");
+      verify_process(hs, "Nope");
+      verify_process(hs, "But... ==T");
+      verify_process(hs, "his is\nnot");
+      verify_process(hs, " a ");
+      verify_process(hs, "Header==");
+      verify_process(hs, "This is=");
+      verify_process(hs, "=.", "This is", 1);
+   }
+
+   /////////////////////////////////////////////////////////////////////////////////////
+   //
+   // data outside start, length not considered
+   //
+   /////////////////////////////////////////////////////////////////////////////////////
+
    @Test
    public void headerBeforeStartNotSeen() throws Throwable {
       String s = "word==Polish== More words ==Spanish== Spanish stuff";
@@ -262,6 +570,17 @@ public class HeaderSearchTest {
       assertEquals("Spanish", result.header);
       assertEquals(37, result.next);
    }
+
+   @Test
+   public void headerBeforeStartNotSeen2() throws Throwable {
+      // Notice that the value of start is right before the end of the ==Polish== tag
+      String s = "word==Polish== More words ==Spanish== Spanish stuff";
+      HeaderSearch.Result result = hs.process(s.toCharArray(), 12, s.length() - 12);
+      assertNotNull("result should not be null", result);
+      assertEquals(" More words ", result.header);
+      assertEquals(28, result.next);
+   }
+
 
    @Test
    public void headerThatSpltsStartSeenProperly() throws Throwable {
@@ -280,169 +599,6 @@ public class HeaderSearchTest {
    }
 
    //
-   // Handles aborted searches
-   //
-
-   @Test
-   public void looksPastSingleEquals() throws Throwable {
-      verify_process(hs, "Words = other words ==abc def==ghi ", 14, "abc def", 31 + 14);
-   }
-
-   @Test
-   public void newlineTerminatesSearch() throws Throwable {
-      verify_process(hs, "Words==abc\ndef==ghi jkl==mno", 4, "ghi jkl", 25 + 4);
-   }
-
-   @Test
-   public void recoversFromUnbalanced_2_3() throws Throwable {
-      verify_process(hs, "Words ==123===ghi jkl==mno== p", 144, "mno", 28 + 144);
-   }
-
-
-   @Test
-   public void recoversFromUnclosed3_withNewline2() throws Throwable {
-      verify_process(hs, "Words ===123 words for unclosed header\n==mno== content", 6, "mno", 46 + 6);
-   }
-
-   /////////////////////////////////////////////////////////////////////////////////////
-   //
-   // Second line tests
-   //
-   /////////////////////////////////////////////////////////////////////////////////////
-
-   //
-   // Header contained in second line
-   //
-   @Test
-   public void headerFoundAtStartOfSecondLine() throws Throwable {
-      verify_process(hs, "This is the first line with no header", 33);
-      verify_process(hs, "==Found it== Now we can continue", 19, "Found it", 12 + 19);
-   }
-
-   @Test
-   public void headerFoundInMiddleOfSecondLine() throws Throwable {
-      verify_process(hs, "This is the first line with no header", 33);
-      verify_process(hs, "and a leading part 2 ==Found it== Now we can continue", 0, "Found it", 33 + 0);
-   }
-
-   @Test
-   public void headerFoundInMiddleOfSecondLineWithNewlines() throws Throwable {
-      verify_process(hs, "This is the first line with no header", 33);
-      verify_process(hs, "and a\n leading part\n 2\n==Found it== Now we can continue", 0, "Found it", 35 + 0);
-   }
-
-   @Test
-   public void headerFoundNearEndOfSecondLine() throws Throwable {
-      verify_process(hs, "This is the first line with no header", 33);
-      verify_process(hs, "and a leading part 2 ==Found it== ", 5, "Found it", 33 + 5);
-   }
-
-   //
-   //   Header crosses from first to second.
-   //
-
-   @Test
-   public void headerAtVeryEndOfFirst() throws Throwable {
-      verify_process(hs, "Fatalnie!==Polish==", 113);
-      verify_process(hs, "Aargh!", 12, "Polish", 0 + 12);
-   }
-
-   @Test
-   public void headerAtVeryEndOfFirst2() throws Throwable {
-      verify_process(hs, "Fatalnie!==Polish==", 113);
-      verify_process(hs, "\nAargh!", 12, "Polish", 0 + 12);
-   }
-
-   @Test
-   public void headerAtVeryEndOfFirst3() throws Throwable {
-      verify_process(hs, "Fatalnie!==Polish==", 113);
-      verify_process(hs, " Aargh!", 3, "Polish", 0 + 3);
-   }
-
-   @Test
-   public void headerIsEntireFirstLine() throws Throwable {
-      verify_process(hs, "==Polish==", 113);
-      verify_process(hs, " Aargh!", 3, "Polish", 0 + 3);
-   }
-
-   @Test
-   public void headerIsEntireFirstLineWithSpace() throws Throwable {
-      verify_process(hs, "==Pol ish==", 113);
-      verify_process(hs, " Aargh!", 3, "Pol ish", 0 + 3);
-   }
-
-   @Test
-   public void oneEqualOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n=", 12);
-      verify_process(hs, "=Polish== Stuff", 12, "Polish", 9 + 12);
-   }
-
-   @Test
-   public void twoEqualOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n==", 12);
-      verify_process(hs, "Polish== Stuff", 12, "Polish", 8 + 12);
-   }
-
-   @Test
-   public void oneLetterOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n==P", 12);
-      verify_process(hs, "olish== Stuff", 12, "Polish", 7 + 12);
-   }
-
-   @Test
-   public void halfLettersOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n==Poli", 12);
-      verify_process(hs, "sh== Stuff", 12, "Polish", 4 + 12);
-   }
-
-   @Test
-   public void mostLettersOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n==Polis", 12);
-      verify_process(hs, "h== Stuff", 12, "Polish", 3 + 12);
-   }
-
-   @Test
-   public void allLettersOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n==Polish", 12);
-      verify_process(hs, "== Stuff", 12, "Polish", 2 + 12);
-   }
-
-   @Test
-   public void oneCloseOnFirstLine() throws Throwable {
-      verify_process(hs, "Words\n==Polish=", 12);
-      verify_process(hs, "= Stuff", 123, "Polish", 1 + 123);
-   }
-
-   //
-   // Aborted headers on first line recover on second
-   //
-   @Test
-   public void unclosedLevelTwoBrokenByNewline() throws Throwable {
-      verify_process(hs, "Words\n==Oops Forgot to close\n", 12);
-      verify_process(hs, "==Header==\n", 12, "Header", 10 + 12);
-   }
-
-   @Test
-   public void unclosedLevelThree() throws Throwable {
-      verify_process(hs, "Words===Oops Forgot to close\n", 12);
-      verify_process(hs, "==Header==\n", 12, "Header", 10 + 12);
-   }
-
-   @Test
-   public void unclosedLevelThreeBrokenByNewline() throws Throwable {
-      verify_process(hs, "Words\n===Oops Forgot to close\n", 12);
-      verify_process(hs, "==Header==\n", 12, "Header", 10 + 12);
-   }
-
-   @Test
-   public void unbalancedOnLine1() throws Throwable {
-      verify_process(hs, "Words\n==Oops Closed Incorrectly=== more stuff", 12);
-      verify_process(hs, "==Header==\n", 12, "Header", 10 + 12);
-
-   }
-
-
-   //
    // Characters at end of first line ignored when flowing to second
    //
    @Test
@@ -452,56 +608,9 @@ public class HeaderSearchTest {
       HeaderSearch.Result result = hs.process(s.toCharArray(), 0, 19);
       assertNull("should be null", result);
 
-      verify_process(hs, "York== and keep going", 15, "NewYork", 15 + 6);
+      verify_process(hs, "York== and keep going", "NewYork", 6);
    }
 
-
-   /////////////////////////////////////////////////////////////////////////////////////
-   //
-   // Multiple line tests
-   //
-   /////////////////////////////////////////////////////////////////////////////////////
-
-   @Test
-   public void headerInThirdLine() throws Throwable {
-      verify_process(hs, "Line 1", 3);
-      verify_process(hs, "Line 2", 14);
-      verify_process(hs, "Line 3 contains ==The Header== and come content", 0, "The Header", 30);
-   }
-
-   @Test
-   public void headerSplit() throws Throwable {
-      verify_process(hs, "Nothing to see here", 34);
-      verify_process(hs, "===Nor here===", 24);
-      verify_process(hs, "Nope", 24);
-      verify_process(hs, "But... ==T", 24);
-      verify_process(hs, "his is", 24);
-      verify_process(hs, " a ", 24);
-      verify_process(hs, "Header==", 24);
-      verify_process(hs, "With data", 1, "This is a Header", 1);
-   }
-
-   @Test
-   public void oneLetterPerLine() throws Throwable {
-      String h = "==Alaska==";
-      for (int i = 0; i < h.length(); i++) {
-         verify_process(hs, h.substring(i, i + 1), i);
-      }
-      verify_process(hs, ".", 3, "Alaska", 3);
-   }
-
-   @Test
-   public void newlineInterruptedMultipleLine() throws Throwable {
-      verify_process(hs, "Nothing to see here", 34);
-      verify_process(hs, "===Nor here===", 24);
-      verify_process(hs, "Nope", 24);
-      verify_process(hs, "But... ==T", 24);
-      verify_process(hs, "his is\nnot", 24);
-      verify_process(hs, " a ", 24);
-      verify_process(hs, "Header==", 24);
-      verify_process(hs, "This is=", 1);
-      verify_process(hs, "=.", 10, "This is", 11);
-   }
 }
 
 

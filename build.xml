@@ -16,8 +16,10 @@
 
    <!-- build info -->
    <property name="src" location="src"/>
+   <property name="test" location="test"/>
    <property name="build" location="out/antProduction"/>
    <property name="test_build" location="out/antTest"/>
+   <property name="test_list" value="**/*Test.class"/>
    <property name="schemaJavaSource" location="schemaJavaSource"/>
    <property name="schemaClassFiles" location="${build}"/>
    <!-- <property name="test_src" location="junit_tests" /> -->
@@ -33,6 +35,9 @@
       <path refid="compile.classpath"/>
       <pathelement location="${build}"/>
       <pathelement location="${test_build}"/>
+      <fileset dir="test_lib">
+         <include name="**/*.jar"/>
+      </fileset>
    </path>
 
    <path id="javadoc.classpath">
@@ -94,12 +99,29 @@
 
 
    <!-- Test stuff ================================================== -->
-   <target name="build_test" depends="compile"/>
+   <target name="compileTest" depends="compile">
+      <javac srcdir="${test}" destdir="${build}" classpathref="test.classpath" debug="on" includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+      </javac>
+   </target>
 
-   <target name="run_test" depends="build_test"/>
+   <target name="test" depends="compileTest">
+       <junit fork="yes" haltonfailure="yes">
+         <assertions enableSystemAssertions="true"/>
 
-   <target name="test" depends="build_test, run_test"/>
+         <!-- This is necessary for Java 7 on windows only -->
+         <!-- Hopefully there will come a time when it is no longer necessary -->
+         <jvmarg value="-XX:-UseSplitVerifier"/>
 
+         <batchtest fork="yes">
+            <fileset dir="${build}">
+               <include name="${test_list}"/>
+            </fileset>
+         </batchtest>
+         <formatter type="plain" usefile="false"/>
+         <classpath refid="test.classpath"/>
+      </junit>
+   </target>
 
    <!-- javadoc =============================================== -->
    <target name="javadoc" description="Javadoc documentation.">
@@ -141,14 +163,14 @@
    </macrodef>
 
    <target name="dist_class" description="Jar file containing class files only."
-           depends="compile,run_test,javadoc">
+           depends="compile,test,javadoc">
       <buildDist src=""/>
       <!-- Don't include any source code -->
    </target>
 
 
    <target name="dist_src" description="Jar file containing releasable Zawilisnki class and source."
-           depends="compile,run_test,javadoc">
+           depends="compile,test,javadoc">
       <buildDist src="-src">  <!-- jar file name ends with src -->
          <addSrc> <!-- add the following filesets to the .jar file -->
             <fileset dir="${src}"/>

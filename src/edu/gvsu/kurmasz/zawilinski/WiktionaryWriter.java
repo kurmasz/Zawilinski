@@ -5,12 +5,10 @@ import edu.gvsu.kurmasz.zawilinski.MediaWikiLoader.XMLConfigurationException;
 
 import javax.xml.bind.*;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.io.Writer;
 
 /**
- * Writes an XML object tree  out to XML
+ * Writes an XML object tree as an XML file.
  *
  * @author Zachary Kurmas
  */
@@ -31,7 +29,7 @@ public class WiktionaryWriter {
       // Setup JAXB objects
       //
       try {
-         JAXBContext jaxbContext = JAXBContext.newInstance();
+         JAXBContext jaxbContext = JAXBContext.newInstance(MediaWikiLoader.CONTEXT_PATH);
          marshaller = jaxbContext.createMarshaller();
 
          // make pretty
@@ -46,7 +44,7 @@ public class WiktionaryWriter {
 
 
    /**
-    * Set whether the resulting xml file should be formatted nicely (with
+    * Specify whether the resulting XML file should be formatted nicely (with
     * whitespace and tabs).
     *
     * @param value {@code true} for nice formatting {@code false} otherwise.
@@ -55,8 +53,7 @@ public class WiktionaryWriter {
     */
    public void setFormattedOutput(boolean value) {
       try {
-         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
-               Boolean.valueOf(value));
+         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,  value);
       } catch (PropertyException e) {
          throw new XMLConfigurationException(
                "Error setting formatting on JAXB context: ", e);
