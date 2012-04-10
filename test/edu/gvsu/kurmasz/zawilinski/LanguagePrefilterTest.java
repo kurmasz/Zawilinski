@@ -785,6 +785,23 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
             "rest the capital==New Mexico==", pf.sent());
    }
 
+   @Test
+   public void handlesShortHeaders() throws Throwable {
+      TestableLanguagePrefilter pf = new TestableLanguagePrefilter("b");
+
+      startText(pf);
+      sendCharacters(pf, "One Two Three");
+      sendCharacters(pf, "==a==");
+      sendCharacters(pf, "Four, Five Six");
+      sendCharacters(pf, "==b==");
+      sendCharacters(pf, "Seven Eight");
+      sendCharacters(pf, "==c==");
+      sendCharacters(pf, "Other data");
+
+      endText(pf);
+      assertEquals("==b==Seven Eight==c==", pf.sent());
+   }
+
    //
    //  header open only once
    //

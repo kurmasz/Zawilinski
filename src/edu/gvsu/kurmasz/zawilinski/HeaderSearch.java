@@ -1,14 +1,14 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 /**
- * Helper class to search through multiple groups of characters for a MediaWiki headerContent (e.g.,
- * ==Polish==). Note that this class cannot handle an intermediate '=' in the headerContent.  For example,
- * it won't recognize "==this=that==" as a headerContent.
+ * Helper class to search through multiple groups of characters for a MediaWiki header (e.g.,
+ * ==Polish==).
  *
  * This class has to handle two main challenges:
  * <ol>
- * <li>The headerContent may be broken across several groups of characters</li>
- * <li>The data is "dirty".  We can't assume that the headerContent markers (e.g., "===") will be closed and balanced.</li>
+ * <li>The header may be broken across several groups of characters.</li>
+ * <li>The data is "dirty".  We can't assume that the headers will be closed and balanced. (For example,
+ * we have to expect unclosed headers or unbalanced headers like ==This===.)</li>
  * </ol>
  *
  * @author Zachary Kurmas
@@ -112,7 +112,7 @@ class HeaderSearch {
       if (isOpen(ch)) {
          foundInStage++;
       } else if (foundInStage >= MIN_HEADER_LEVEL) {
-         // Make sure we start each headerContent section with a clean buffer
+         // Make sure we start each header section with a clean buffer
          if (buffer.length() > 0) {
             buffer = new StringBuffer();
          }
@@ -127,7 +127,7 @@ class HeaderSearch {
 
    private void processIn(char ch) {
       if (isHeader(ch)) {
-         foundInStage++;
+         //foundInStage++;  At present, we don't care how many characters are in the header content.
          buffer.append(ch);
       } else if (isClose(ch)) {
          setStage(Stage.CLOSE);

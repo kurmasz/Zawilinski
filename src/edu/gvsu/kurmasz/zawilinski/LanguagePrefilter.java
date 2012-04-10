@@ -5,14 +5,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 /**
- * A pre-filter that only allows text through related to the specified
- * language.
- *
- *
- * <p>If a language contains an '=' (I don't know why it would), then the filter may fail to detect some headers.
- * For example, given an "language" abc=def, the filter may fail to detect the start of the language section if the
- * article data looks like this "...words words ==abc==abc=def==Words words words..."
- * </p>
+ * A pre-filter that only allows text through if it in the section for the specified language.
  *
  * @author Zachary Kurmas
  */
@@ -72,7 +65,7 @@ public class LanguagePrefilter extends TextPrefilter {
          hs = new HeaderSearch();
          handleInStage(ch, result.next, length - (result.next - start));
       } else {
-         // if we have found a different headerContent, then re-set the search
+         // if we have found a different header, then re-set the search
          hs = new HeaderSearch();
          handlePreStage(ch, result.next, length - (result.next - start));
       }
