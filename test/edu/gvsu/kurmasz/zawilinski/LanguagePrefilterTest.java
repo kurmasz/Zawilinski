@@ -1,9 +1,17 @@
 package edu.gvsu.kurmasz.zawilinski;
 
+import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Matchers;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
+import java.io.InputStream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -88,13 +96,6 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    public TestableLanguagePrefilter makeSpy() {
       return spy(make());
    }
-
-   @Ignore
-   @Test
-   public void reChecksearchLanguageEndParams() throws Throwable {
-      fail("reverify that changing parms to searchForLanguageEnd produces at least one fail.");
-   }
-
 
    //
    //  Drops all data when no header visible
@@ -893,4 +894,53 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
       assertEquals(LANGUAGE_HEADER + "One, Two, buckle my shoe.==Stop Here==" +
             LANGUAGE_HEADER + "Three, Four, shut the door.", pf.sent());
    }
+
+   //
+   // Complete test
+   //
+   @Test
+   public void completeTest() throws Throwable {
+      InputStream input = this.getClass().getResourceAsStream("/testLanguageFilter.xml");
+      Assert.assertNotNull("input", input);
+
+      Log log = new Log();
+      LanguagePrefilter lpf = new LanguagePrefilter("Polish");
+
+
+      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(input, log, lpf);
+      MediaWikiType root = observed.getValue();
+
+      String[][] expected = {
+
+            // Word 1
+            {
+                  "==Polish==\nThis is the Polish content\nA second line of Polish content\n==Spanish==",
+                  "==Polish==This is the r2 Polish content\nA second line of Polish content (from rev 2)" +
+                        "\n==Spanish==",
+            },
+
+            // Word 2
+            {
+                  "==Polish==\nWord 2 polish content\n",
+                  "==Polish==\nWord 2 polish content (mod)==Spanish==",
+                  "==Polish==\nWord 2 polish content (mod 2)",
+                  ""
+            },
+            // Word 3
+            {
+                  "",
+                  "",
+                  "",
+            },
+            // Word 4
+            {
+                  "",
+                  "",
+                  ""
+            }
+
+      };
+      SampleContentCheck.verifyMWSampleContentTextSqueeze(root, expected);
+   }
+
 }

@@ -31,8 +31,7 @@ public class PageFilterListenerTest {
       }
 
       public boolean keepPage(PageType page) {
-         boolean answer= itemsToKeep.contains(page);
-         System.out.println("Keeping?  " + answer);
+         boolean answer = itemsToKeep.contains(page);
          return answer;
       }
 

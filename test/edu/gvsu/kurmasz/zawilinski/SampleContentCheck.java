@@ -5,8 +5,11 @@ import edu.gvsu.kurmasz.zawilinski.mw.current.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Zachary Kurmas
@@ -26,7 +29,7 @@ public class SampleContentCheck {
       verifyMWSampleContentOther(doc);
    }
 
-    public static void verifyMWSampleContent_8fore(MediaWikiType doc) {
+   public static void verifyMWSampleContent_8fore(MediaWikiType doc) {
       String[][] expected = {
             {"Cont8nt for r8v 1", "Cont8nt for r8v 2 (pickl8s)"},
             {"Cont8nt for r8v 1 of pag8 2 (blu8b8rri8s)", "Cont8nt for r8v 2 of pag8 2",
@@ -54,6 +57,22 @@ public class SampleContentCheck {
          for (Object rawRev : page.getRevisionOrUploadOrLogitem()) {
             RevisionType rev = (RevisionType) (rawRev);
             String observed = rev.getText().getValue();
+            assertEquals("Checking page " + pageNum + " revision " + revNum,
+                  expected[pageNum][revNum], observed);
+            revNum++;
+         }
+         pageNum++;
+      }
+   }
+
+   public static void verifyMWSampleContentTextSqueeze(MediaWikiType doc, String[][] expected) {
+      int pageNum = 0;
+      for (PageType page : doc.getPage()) {
+         int revNum = 0;
+         for (Object rawRev : page.getRevisionOrUploadOrLogitem()) {
+            RevisionType rev = (RevisionType) (rawRev);
+            //System.out.println("=>" + rev.getText().getValue() + "<==");
+            String observed = rev.getText().getValue().replaceAll("\n\\s*", "\n");
             assertEquals("Checking page " + pageNum + " revision " + revNum,
                   expected[pageNum][revNum], observed);
             revNum++;
