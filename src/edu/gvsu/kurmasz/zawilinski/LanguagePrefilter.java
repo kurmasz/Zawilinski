@@ -3,9 +3,6 @@ package edu.gvsu.kurmasz.zawilinski;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import sun.swing.SwingUtilities2;
-
-import java.util.Arrays;
 
 /**
  * A pre-filter that only allows text through related to the specified
@@ -51,29 +48,31 @@ public class LanguagePrefilter extends TextPrefilter {
    @Override
    protected void handleEndTextElement(String uri, String localName,
                                        String name) throws SAXException {
-      // TODO:  Flush the last of the text if there is no following language section
+      // Nothing to do
    }
 
    private void handlePreStage(char[] ch, int start, int length) throws SAXException {
       HeaderSearch.Result result = hs.process(ch, start, length);
-      // if result is null, then there is no complete header, and therefore,
+      // if result is null, then there is no complete headerContent, and therefore,
       // nothing to pass through.
       //
       if (result == null) {
          return;
       }
-      // If result is not null, but the header is not equal to language
-      // then we found the section header for a different language.
+      // If result is not null, but the headerContent is not equal to language
+      // then we found the section headerContent for a different language.
 
-      // if the header is the language we are filtering for, then
+      // if the headerContent is the language we are filtering for, then
       // switch stages
-      if (result.header.equals(language)) {
+      if (result.headerContent.equals(language)) {
          sectionStage = SectionStage.IN;
+         String fullHeader = result.fullHeader();
+         sendCharacters(fullHeader.toCharArray(), 0, fullHeader.length());
          // Now we need a new HeaderSearch to find the end of the language.
          hs = new HeaderSearch();
          handleInStage(ch, result.next, length - (result.next - start));
       } else {
-         // if we have found a different header, then re-set the search
+         // if we have found a different headerContent, then re-set the search
          hs = new HeaderSearch();
          handlePreStage(ch, result.next, length - (result.next - start));
       }

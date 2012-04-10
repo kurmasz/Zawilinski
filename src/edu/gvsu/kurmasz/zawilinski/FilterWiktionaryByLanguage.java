@@ -110,7 +110,7 @@ public class FilterWiktionaryByLanguage {
          // IMPORTANT! Notice the "startsWith" This filter works properly
          // only if the LanguagePrefilter SAX filter has been applied (which
          // assures that each <text>segment begins with the requested
-         // language header.
+         // language headerContent.
          //return Util.getText(revision).startsWith(languageString);
          return Util.getTextSize(revision) > 0;
       }

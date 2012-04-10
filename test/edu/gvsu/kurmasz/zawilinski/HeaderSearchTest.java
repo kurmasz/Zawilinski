@@ -71,6 +71,12 @@ public class HeaderSearchTest {
    //
    //////////////////////////////////////////////////////////////////////////////
 
+   @Test
+   public void resultContainsCorrectFullHeader() throws Throwable {
+      HeaderSearch.Result result = new HeaderSearch.Result("TheString", 15);
+      assertEquals("==TheString==", result.fullHeader());
+   }
+
    private static final String CHALLENGE_HEADER_CONTENT = "This header has it all:  Punctuation, spaces, letters, " +
          "and numbers: [1 2] 3 = 4 | 4 = 5, 7. <8(9)10= 11= {12} Wow!:;\"?\" '/' -__.Whew!";
    private static final String CHALLENGE_HEADER = "==" + CHALLENGE_HEADER_CONTENT + "==";
@@ -90,7 +96,7 @@ public class HeaderSearchTest {
          assertNull("expecting search to return null for \"" + s + "\".", result);
       } else {
          assertNotNull("process should have returned a non-null result for \"" + s + "\".", result);
-         assertEquals(expectedHeader, result.header);
+         assertEquals(expectedHeader, result.headerContent);
          assertEquals(expectedPlace, result.next);
       }
    }
@@ -118,7 +124,7 @@ public class HeaderSearchTest {
          }
 
          String piece = s.substring(chunkSum, chunkSum + chunkSize);
-        // System.out.println("Piece: " + piece);
+         // System.out.println("Piece: " + piece);
          if (expectedHeader != null && chunkSum <= expectedPlace && expectedPlace < chunkSum + chunkSize) {
             verify_process_impl(headerSearch, piece, expectedHeader, expectedPlace - chunkSum);
             // Once we find a result, the headerSearch must be re-set
@@ -567,7 +573,7 @@ public class HeaderSearchTest {
       String s = "word==Polish== More words ==Spanish== Spanish stuff";
       HeaderSearch.Result result = hs.process(s.toCharArray(), 14, s.length() - 14);
       assertNotNull("result should not be null", result);
-      assertEquals("Spanish", result.header);
+      assertEquals("Spanish", result.headerContent);
       assertEquals(37, result.next);
    }
 
@@ -577,7 +583,7 @@ public class HeaderSearchTest {
       String s = "word==Polish== More words ==Spanish== Spanish stuff";
       HeaderSearch.Result result = hs.process(s.toCharArray(), 12, s.length() - 12);
       assertNotNull("result should not be null", result);
-      assertEquals(" More words ", result.header);
+      assertEquals(" More words ", result.headerContent);
       assertEquals(28, result.next);
    }
 
@@ -587,7 +593,7 @@ public class HeaderSearchTest {
       String s = "word==Polish== More words ==Spanish== Spanish stuff";
       HeaderSearch.Result result = hs.process(s.toCharArray(), 9, s.length() - 9);
       assertNotNull("result should not be null", result);
-      assertEquals(" More words ", result.header);
+      assertEquals(" More words ", result.headerContent);
       assertEquals(28, result.next);
    }
 

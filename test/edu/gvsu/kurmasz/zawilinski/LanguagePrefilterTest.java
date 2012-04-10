@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.mockito.Matchers;
 import org.xml.sax.SAXException;
 
-import java.util.Random;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
@@ -60,13 +58,18 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    }
 
 
-   private static final String LANGUAGE = "Polish";
+   private static final String LANGUAGE = "My Favorite Language=really";
+   private static final String LANGUAGE_HEADER = "==" + LANGUAGE + "==";
+   private static final String LH_P1 = LANGUAGE_HEADER.substring(0, 5);
+   private static final String LH_P2 = LANGUAGE_HEADER.substring(5, 8);
+   private static final String LH_P3 = LANGUAGE_HEADER.substring(8);
 
+   /*
    private static final char[] CHARS = "\n .,abcdefghijklmnopqrstuvwxyz-?<>".toCharArray();
 
    private static char[] makeRandomString(int length) {
       // The use of the seed 0 and a new Random object is needed for repeatability
-      Random rand = new Random(0);
+      java.util.Random rand = new java.util.Random(0);
 
       char[] answer = new char[length];
 
@@ -77,7 +80,7 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    }
 
    private static char[] LONG_ARRAY = makeRandomString(8192);
-
+   */
    public TestableLanguagePrefilter make() {
       return new TestableLanguagePrefilter(LANGUAGE);
    }
@@ -88,35 +91,17 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
 
    @Ignore
    @Test
-   public void Something() throws Throwable {
-      fail("Make sure Language begins with non '=' so ===Polish=== is not accepted.");
-   }
-
-   @Ignore
-   @Test
-   public void V1() throws Throwable {
-      fail("implement test (V1)");
-   }
-
-   @Ignore
-   @Test
-   public void V2() throws Throwable {
-      fail("implement test (V2)");
-   }
-
-   @Ignore
-   @Test
    public void reChecksearchLanguageEndParams() throws Throwable {
       fail("reverify that changing parms to searchForLanguageEnd produces at least one fail.");
    }
 
 
    //
-   //   handle TextElementCharacters
+   //  Drops all data when no header visible
    //
 
    @Test
-   public void dropsShortDataIfLanguageNotPresent() throws Throwable {
+   public void dropsEverythingIfLanguageNotPresent() throws Throwable {
       LanguagePrefilter pf = makeSpy();
 
       startText(pf);
@@ -125,639 +110,770 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
       verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
    }
 
+
    @Test
-   public void dropsShortDataIfLanguageNotPresent_pad() throws Throwable {
+   public void dropsEverythingIfLanguageNotPresent_multipleLines() throws Throwable {
       LanguagePrefilter pf = makeSpy();
 
       startText(pf);
-      sendCharacters(pf, "abc", 5);
-      endText(pf);
-      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
-   }
-
-
-   @Test
-   public void dropsMediumDataIfLanguageNotPresent() throws Throwable {
-      LanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefghijk012343498397");
-      endText(pf);
-      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
-   }
-
-   @Test
-   public void dropsMediumDataIfLanguageNotPresent_pad() throws Throwable {
-      LanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefghijk012343498397", 7);
+      sendCharacters(pf, "Four score and seven years ago");
+      sendCharacters(pf, "Our fathers brought forth on this continent a new nation,");
+      sendCharacters(pf, "conceived in liberty, and dedicated to the proposition that all men are created equal.\n");
+      sendCharacters(pf, "Now we are engaged in a great civil war, testing whether that nation,\nor any nation...");
+      sendCharacters(pf, "==NOT" + LANGUAGE + "== so conceived and so dedicated, can long endure.");
+      sendCharacters(pf, "We are met on a great battle-field of that war. ==Another irrelevant headerContent== We have");
+      sendCharacters(pf, "Come to dedicate a portion of that field, as a final resting place for those who ");
+      sendCharacters(pf, "Here gave their lives ===" + LANGUAGE + "=== (notice wrong level) that that nation might live.");
+      sendCharacters(pf, "It is altogether fitting and proper =Polish= that we should do this.\n");
+      sendCharacters(pf, "==" + LANGUAGE + "===");
+      sendCharacters(pf, "(Unbalanced) But, in a larger sense");
+      sendCharacters(pf, "===" + LANGUAGE + "==\n");
+      sendCharacters(pf, "(Unbalanced again) we can not dedicate, we can not consecrate, " +
+            "we can not hallow this ground...");
       endText(pf);
       verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
    }
 
    @Test
-   public void dropsLongDataIfLanguageNotPresent() throws Throwable {
+   public void ignoresHeaderBeforeStart() throws Throwable {
       LanguagePrefilter pf = makeSpy();
-
       startText(pf);
-      sendCharacters(pf, new String(LONG_ARRAY));
+      sendCharacters(pf, "Four score and seven years ago");
+      String s = LANGUAGE_HEADER + "Our fathers brought forth on this continent a new nation,";
+      sendCharacters(pf, s, LANGUAGE_HEADER.length(), s.length() - LANGUAGE_HEADER.length());
+      endText(pf);
+      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
+   }
+
+   @Test
+   public void ignoresHeaderAfterLength() throws Throwable {
+      LanguagePrefilter pf = makeSpy();
+      startText(pf);
+      sendCharacters(pf, "Four score and seven years ago");
+      String s = "Our fathers brought forth on this continent a new nation," + LANGUAGE_HEADER;
+      sendCharacters(pf, s, 0, s.length() - LANGUAGE_HEADER.length());
+      sendCharacters(pf, "conceived in liberty, and dedicated to the proposition that all men are created equal.\n");
       endText(pf);
       verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
    }
 
 
    @Test
-   public void dropsMixedDataIfLanguageNotPresent() throws Throwable {
+   public void dropsPartialHeader() throws Throwable {
       LanguagePrefilter pf = makeSpy();
-
       startText(pf);
-      sendCharacters(pf, "abcdefg");
-      sendCharacters(pf, "h");
-      sendCharacters(pf, "ijk0093", 12);
-      sendCharacters(pf, "l", 3);
-      sendCharacters(pf, "l", 15);
-      sendCharacters(pf, new String(LONG_ARRAY));
-
-      sendCharacters(pf, "==NotPolish==", 8);
-      sendCharacters(pf, "03===Polish===p", 243);
-      sendCharacters(pf, new String(LONG_ARRAY), 1);
-      sendCharacters(pf, "03=Polish==p", 243);
-      sendCharacters(pf, new String(LONG_ARRAY), 112);
-      sendCharacters(pf, new String(LONG_ARRAY, LONG_ARRAY.length / 2, LONG_ARRAY.length / 4));
-      sendCharacters(pf, new String(LONG_ARRAY, 100, 100));
+      sendCharacters(pf, "Four score and seven years ago");
+      String s = "Our fathers brought forth on this continent a new nation," + LH_P1;
       endText(pf);
       verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
    }
 
-   // At the moment, HeaderSearch throws an exception if an = appears inside a header.
-   // a Single = is not a header marker, so it should be allowed.  We just haven't had time
-   // to add that feature to HeaderSearch
-   @Test(expected = IllegalArgumentException.class)
-   public void dropsDataIfEndOfLanguageHeaderMising() throws Throwable {
-      LanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefg");
-      sendCharacters(pf, "==Polish=", 29);
-      sendCharacters(pf, "This should not be sent", 2);
-      endText(pf);
-      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
-   }
-
-   @Test
-   public void dropsDataIfBeginningOfLanguageHeaderMising() throws Throwable {
-      LanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefg");
-      sendCharacters(pf, "=Polish==", 2);
-      sendCharacters(pf, new String(LONG_ARRAY), 112);
-      endText(pf);
-      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
-   }
+   //
+   //  Passes data after header
+   //
 
 
    @Test
    public void passesDataForLanguage_StartOfText_noNewLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "==Polish==Keep Line 1\nKeep Line 2");
+      sendCharacters(pf, LANGUAGE_HEADER + "Keep Line 1\nKeep Line 2");
       sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
-   @Test
-   public void passesDataForLanguage_StartOfText_noNewLine_pad() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "==Polish==6eep Line 1\n7eep Line 2", 5);
-      sendCharacters(pf, "8eep Line 3", 17);
-      sendCharacters(pf, "which is longer than the rest", 3);
-      endText(pf);
-      assertEquals("6eep Line 1\n7eep Line 28eep Line 3which is longer than the rest", pf.sent());
-   }
 
    @Test
    public void passesDataForLanguage_StartOfText_newLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "==Polish==\nKeep Line 1\nKeep Line 2", 12);
-      sendCharacters(pf, "Keep Line 3", 19);
-      sendCharacters(pf, "which is longer than the rest", 103);
+      sendCharacters(pf, LANGUAGE_HEADER + "\nKeep Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("\nKeep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nKeep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
    @Test
    public void passesDataForLanguage_StartOfText_alone() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "==Polish==");
+      sendCharacters(pf, LANGUAGE_HEADER);
       sendCharacters(pf, "First line to keep\nKeep Line 2");
       sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("First line to keep\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
    }
-
-   @Test
-   public void passesDataForLanguage_StartOfText_alone_pad1() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "==Polish==", 1);
-      sendCharacters(pf, "First line to keep\nKeep Line 2", 3);
-      sendCharacters(pf, "Keep Line 3", 223);
-      sendCharacters(pf, "which is longer than the rest", 17);
-      endText(pf);
-      assertEquals("First line to keep\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-   @Test
-   public void passesDataForLanguage_StartOfText_alone_pad2() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "==Polish==", 16);
-      sendCharacters(pf, "First line to keep\nKeep Line 2", 3);
-      sendCharacters(pf, "Keep Line 3", 223);
-      sendCharacters(pf, "which is longer than the rest", 17);
-      endText(pf);
-      assertEquals("First line to keep\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
 
    @Test
    public void passesDataForLanguage_StartOfText_shortSplitCombined() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "==Pol");
-      sendCharacters(pf, "is");
-      sendCharacters(pf, "h==1st line to keep\nKeep Line 2");
+      sendCharacters(pf, LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "1st line to keep\nKeep Line 2");
       sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("1st line to keep\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "1st line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
    }
-
-   @Test
-   public void passesDataForLanguage_StartOfText_shortSplitCombined_pad() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "==Pol", 87);
-      sendCharacters(pf, "is", 6);
-      sendCharacters(pf, "h==1st line to keep\nKeep Line 2", 19);
-      sendCharacters(pf, "Keep Line 3", 22);
-      sendCharacters(pf, "which is longer than the rest", 41);
-      endText(pf);
-      assertEquals("1st line to keep\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
 
    @Test
    public void passesDataForLanguage_StartOfText_shortSplitAlone() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "==Pol", 5);
-      sendCharacters(pf, "is", 17);
-      sendCharacters(pf, "h==", 19);
-      sendCharacters(pf, "Keep Line 1\nKeep Line 2", 26);
-      sendCharacters(pf, "Keep Line 3", 41);
-      sendCharacters(pf, "which is longer than the rest", 227);
+      sendCharacters(pf, LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3);
+      sendCharacters(pf, "1st line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "1st line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
    }
 
-   @Test
-   public void passesDataForLanguage_StartOfText_longSplitCombined() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "==Poli", 8);
-      sendCharacters(pf, "sh==Line 1 for keeping\nKeep Line 2", 17);
-      sendCharacters(pf, "Keep Line 3", 32);
-      sendCharacters(pf, "which is longer than the rest", 13);
-      endText(pf);
-      assertEquals("Line 1 for keeping\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
 
    @Test
-   public void passesDataForLanguage_StartOfLine_noNewline() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void passesDataForLanguage_StartOfSegment_noNewline() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
       sendCharacters(pf, "abcdefg");
-      sendCharacters(pf, "hijklmnop", 8);
-      sendCharacters(pf, "==Polish==Keep Line 1\nKeep Line 2", 12);
-      sendCharacters(pf, "Keep Line 3", 13);
-      sendCharacters(pf, "which is longer than the rest", 19);
-      endText(pf);
-      assertEquals("Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-   @Test
-   public void passesDataForLanguage_StartOfLine_newline() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefg", 9);
       sendCharacters(pf, "hijklmnop");
-      sendCharacters(pf, "==Polish==\nKeep Line 1\nKeep Line 2");
-      sendCharacters(pf, "Keep Line 3", 13);
+      sendCharacters(pf, LANGUAGE_HEADER + "Keep Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("\nKeep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
    @Test
-   public void passesDataForLanguage_StartOfLine_alone() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void passesDataForLanguage_StartOfSegment_newline() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 31);
+      sendCharacters(pf, "abcdefg");
       sendCharacters(pf, "hijklmnop");
-      sendCharacters(pf, "==Polish==", 89);
+      sendCharacters(pf, LANGUAGE_HEADER + "\nKeep Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nKeep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+   }
+
+   @Test
+   public void passesDataForLanguage_StartOfSegment_alone() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
       sendCharacters(pf, "My Line 1\nKeep Line 2");
-      sendCharacters(pf, "Keep Line 3", 22);
+      sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("My Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "My Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
    @Test
-   public void passesDataForLanguage_StartOfLine_shortSplitCombined() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 5);
-      sendCharacters(pf, "==Pol", 5);
-      sendCharacters(pf, "is", 1);
-      sendCharacters(pf, "h==Lovely Line 1\nKeep Line 2", 8);
-      sendCharacters(pf, "Keep Line 3", 212);
-      sendCharacters(pf, "which is longer than the rest", 4);
-      endText(pf);
-      assertEquals("Lovely Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-
-   @Test
-   public void passesDataForLanguage_StartOfLine_longSplitCombined() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void passesDataForLanguage_StartOfSegment_shortSplitCombined() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
       sendCharacters(pf, "abcdefg");
       sendCharacters(pf, "hijklmnop");
-      sendCharacters(pf, "==Polis", 223);
-      sendCharacters(pf, "h==Da Line 1\nKeep Line 2", 332);
-      sendCharacters(pf, "Keep Line 3", 7);
+      sendCharacters(pf, LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "Lovely Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Da Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Lovely Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
 
    @Test
-   public void passesDataForLanguage_StartOfLine_splitAlone() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void passesDataForLanguage_StartOfSegment_splitAlone() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
       sendCharacters(pf, "abcdefg");
       sendCharacters(pf, "hijklmnop");
-      sendCharacters(pf, "==Pol");
-      sendCharacters(pf, "is", 119);
-      sendCharacters(pf, "h==");
+      sendCharacters(pf, LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3);
       sendCharacters(pf, "Dreamy Line 1\nKeep Line 2");
       sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Dreamy Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Dreamy Line 1\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
    }
 
 
    @Test
    public void passesDataForLanguage_MiddleOfLine_noNewline() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 4);
-      sendCharacters(pf, "hijklmnop==Polish==Keep Line 1\nKeep Line 2", 4);
-      sendCharacters(pf, "Keep Line 3", 4);
-      sendCharacters(pf, "which is longer than the rest", 4);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop" + LANGUAGE_HEADER + "Keep Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Keep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
    @Test
    public void passesDataForLanguage_MiddleOfLine_newline() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop\n==Polish==\nKeep Line 1\nKeep Line 2", 34);
-      sendCharacters(pf, "Keep Line 3", 31);
-      sendCharacters(pf, "which is longer than the rest", 4);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop\n" + LANGUAGE_HEADER + "\nKeep Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("\nKeep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nKeep Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
-
-   @Test
-   public void passesDataForLanguage_nearEndOfLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "qrstuvw==Polish==x", 8);
-      sendCharacters(pf, "Line uno\nKeep Line 2", 5);
-      sendCharacters(pf, "Keep Line 3", 3);
-      sendCharacters(pf, "which is longer than the rest", 21);
-      endText(pf);
-      assertEquals("xLine uno\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-   @Test
-   public void passesDataForLanguage_nearEndOfLine_split() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "qrstuvw==Poli");
-      sendCharacters(pf, "sh==x", 8);
-      sendCharacters(pf, "Line uno\nKeep Line 2", 5);
-      sendCharacters(pf, "Keep Line 3", 3);
-      sendCharacters(pf, "which is longer than the rest", 21);
-      endText(pf);
-      assertEquals("xLine uno\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
 
    @Test
    public void passesDataForLanguage_EndOfLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 1);
-      sendCharacters(pf, "hijklmnop", 7);
-      sendCharacters(pf, "qrstuvw==Polish==", 8);
-      sendCharacters(pf, "Line uno\nKeep Line 2", 5);
-      sendCharacters(pf, "Keep Line 3", 3);
-      sendCharacters(pf, "which is longer than the rest", 21);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "qrstuvw" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Line uno\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Line uno\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Line uno\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
 
    @Test
    public void passesDataForLanguage_EndOfLine_shortSplitCombined() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefg", 19);
-      sendCharacters(pf, "hijklmnop", 19);
-      sendCharacters(pf, "urmqu==Pol", 19);
-      sendCharacters(pf, "is", 18);
-      sendCharacters(pf, "h==", 17);
-      sendCharacters(pf, "Line 1\nKeep Line 2", 17);
-      sendCharacters(pf, "Keep Line 3", 16);
-      sendCharacters(pf, "which is longer than the rest");
-      endText(pf);
-      assertEquals("Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-   @Test
-   public void passesDataForLanguage_EndOfLine_longSplit() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "abcdefg", 13);
-      sendCharacters(pf, "hijklmnop", 12);
-      sendCharacters(pf, "urmqu==Poli", 8);
-      sendCharacters(pf, "sh==", 9);
-      sendCharacters(pf, "The first Line\nKeep Line 2", 10);
-      sendCharacters(pf, "Keep Line 3", 11);
-      sendCharacters(pf, "which is longer than the rest", 12);
-      endText(pf);
-      assertEquals("The first Line\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-   @Test
-   public void passesDataForLanguage_EndOfLine_splitAlone() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
       sendCharacters(pf, "abcdefg");
       sendCharacters(pf, "hijklmnop");
-      sendCharacters(pf, "urumq==Pol");
-      sendCharacters(pf, "is");
-      sendCharacters(pf, "h==");
+      sendCharacters(pf, "urmqu" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3);
+      sendCharacters(pf, "Line 1\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Line 1\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
+   }
+
+
+   @Test
+   public void passesDataForLanguage_EndOfLine_splitAlone() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3);
       sendCharacters(pf, "Line Jeden\nKeep Line 2");
       sendCharacters(pf, "Keep Line 3");
       sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Line Jeden\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
-   }
-
-   //
-   // Detects second language header
-   //
-
-   @Test
-   public void detectsSecondHeaderOnSameLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
-
-      startText(pf);
-      sendCharacters(pf, "Words More words ==Header 1== H1 data ==Polish== Polish data", 22);
-      endText(pf);
-      assertEquals(" Polish data", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Line Jeden\nKeep Line 2Keep Line 3which is longer than the rest", pf.sent());
    }
 
    @Test
-   public void detectsSecondHeaderOnDifferentLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void ignoresDataBeforeStart() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "Words More words", 3);
-      sendCharacters(pf, "==Header 1==", 15);
-      sendCharacters(pf, "H1 data ", 6);
-      sendCharacters(pf, "==Polish==", 0);
-      sendCharacters(pf, "Polish data", 22);
+      sendCharacters(pf, "Outside line 1");
+      sendCharacters(pf, "Outside line 2");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "-->,--Content line 1\n((((", 6, 15);
+      sendCharacters(pf, "****Content line 2====", 4, 14);
+      sendCharacters(pf, "which is longer than the others");
       endText(pf);
-      assertEquals("Polish data", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Content line 1\nContent line 2which is longer than the others", pf.sent());
+   }
+
+   @Test
+   public void ignoresPreviousHeaders_SameLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, "==Not the header==Tis ==still no==of thee\n" + LANGUAGE_HEADER + "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresPreviousHeaders_DifferentLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, "==Not the header==");
+      sendCharacters(pf, "Tis of thee\n");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresWrongLevelHeaders_SameLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, "=" + LANGUAGE_HEADER + "=Tis of thee\n" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresWrongLevelHeaders_DifferentLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, "=" + LANGUAGE_HEADER + "=");
+      sendCharacters(pf, "Tis of the\n");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresUnbalancedLeft_SameLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, "=" + LANGUAGE_HEADER + "Tis of the\n" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresUnbalancedLeft_DifferentLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, "=" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Tis of the\n");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresUnbalancedRight_SameLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, LANGUAGE_HEADER + "=Tis of thee\n" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
+   }
+
+   @Test
+   public void ignoresUnbalancedRight_DifferentLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "My Country\n");
+      sendCharacters(pf, LANGUAGE_HEADER + "=");
+      sendCharacters(pf, "Tis of the\n");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "Sweet land of liberty");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Sweet land of liberty", pf.sent());
    }
 
    @Test
    public void detectsSecondHeaderSplitOverDifferentLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "Words More words", 3);
-      sendCharacters(pf, "==Head", 3);
-      sendCharacters(pf, "er 1== H1 data ==Po", 6);
-      sendCharacters(pf, "lish==Polish data", 22);
+      sendCharacters(pf, "Words More words");
+      sendCharacters(pf, "==Head");
+      sendCharacters(pf, "er 1== H1 data " + LH_P1);
+      sendCharacters(pf, LH_P2 + LH_P3 + "Polish data");
       endText(pf);
-      assertEquals("Polish data", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Polish data", pf.sent());
    }
 
 
    @Test
    public void failedPartialLongMatchRestartsCorrectly() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h Line Jeden\nKeep Line 2==Polish==", 9);
-      sendCharacters(pf, "Keep Line 3", 10);
-      sendCharacters(pf, "which is longer than the rest", 11);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, "h Line Jeden\nKeep Line 2" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
       endText(pf);
-      assertEquals("Keep Line 3which is longer than the rest", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Keep Line 3which is longer than the rest", pf.sent());
    }
 
-   //
-   // Detects end
-   //
-
    @Test
-   public void detectsEndInSameLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void passesPartialMatches() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h==\nLine Jeden\nKeep Line 2==Spanish==We shouldn't see this line.", 9);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, "h Line Jeden\nKeep Line 2" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest==Partial Ending");
       endText(pf);
-      assertEquals("\nLine Jeden\nKeep Line 2==Spanish==", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "Keep Line 3which is longer than the rest==Partial Ending", pf.sent());
+   }
+
+   @Test
+   public void passesEndingMatch() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, "h Line Jeden\nKeep Line 2" + LANGUAGE_HEADER);
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest==Ending==");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "Keep Line 3which is longer than the rest==Ending==", pf.sent());
+   }
+
+
+   //
+   //  Stops passing data after next header
+   //
+   @Test
+   public void detectsEndInSameLine() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2==Spanish==We shouldn't see this line.");
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2==Spanish==", pf.sent());
    }
 
    @Test
    public void detectsEndAtEndOfSameLine() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h==\nLine Jeden\nKeep Line 2==Spanish==", 9);
-      sendCharacters(pf, "We shouldn't see this line.", 3);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2==Spanish==");
+      sendCharacters(pf, "We shouldn't see this line.");
       endText(pf);
-      assertEquals("\nLine Jeden\nKeep Line 2==Spanish==", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2==Spanish==", pf.sent());
    }
 
 
    @Test
    public void detectsEndInDiffernetLines() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h==\nLine Jeden\nKeep Line 2\n", 9);
-      sendCharacters(pf, "Keep Line 3", 10);
-      sendCharacters(pf, "which is longer than the rest", 11);
-      sendCharacters(pf, "==New Mexico==", 11);
-      sendCharacters(pf, "Other data", 11);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
       endText(pf);
-      assertEquals("\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the rest==New Mexico==", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the rest==New " +
+            "Mexico==",
+            pf.sent());
    }
 
    @Test
-   public void passesThirdLevelHeaders() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void doesNotEndForLevel3Headers() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h==\nLine Jeden\nKeep Line 2\n", 9);
-      sendCharacters(pf, "Keep Line 3", 10);
-      sendCharacters(pf, "which is longer than the rest", 11);
-      sendCharacters(pf, "===Warszawa=== the capital", 22);
-      sendCharacters(pf, "==New Mexico==", 11);
-      sendCharacters(pf, "Other data", 11);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "===Warszawa=== the capital");
+      sendCharacters(pf, " and largest city");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
       endText(pf);
-      assertEquals("\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the rest===Warszawa=== the " +
-            "capital==New Mexico==", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest===Warszawa=== the capital and largest city==New Mexico==", pf.sent());
+   }
+
+
+   @Test
+   public void doesntCloseForUnbalancedHeadersHeaders_3_2() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "===Warszawa== the capital");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
+
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest===Warszawa== the capital==New Mexico==", pf.sent());
    }
 
    @Test
-   public void ignoresUnbalancedHeadersHeaders_3_2() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void doesntCloseForUnbalancedHeadersHeaders_2_3() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h==\nLine Jeden\nKeep Line 2\n", 9);
-      sendCharacters(pf, "Keep Line 3", 10);
-      sendCharacters(pf, "which is longer than the rest", 11);
-      sendCharacters(pf, "===Warszawa== the capital", 22);
-      sendCharacters(pf, "==New Mexico==", 11);
-      sendCharacters(pf, "Other data", 11);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "==Warszawa=== the capital");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
       endText(pf);
-      assertEquals("\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the rest===Warszawa== the " +
-            "capital==New Mexico==", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest==Warszawa=== the capital==New Mexico==", pf.sent());
    }
 
    @Test
-   public void ignoresUnbalancedHeadersHeaders_2_3() throws Throwable {
-      TestableLanguagePrefilter pf = makeSpy();
+   public void doesntCloseForUnclosedHeader() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
       startText(pf);
-      sendCharacters(pf, "abcdefg", 5);
-      sendCharacters(pf, "hijklmnop", 6);
-      sendCharacters(pf, "urumq==Pol", 7);
-      sendCharacters(pf, "is", 8);
-      sendCharacters(pf, "h==\nLine Jeden\nKeep Line 2\n", 9);
-      sendCharacters(pf, "Keep Line 3", 10);
-      sendCharacters(pf, "which is longer than the rest", 11);
-      sendCharacters(pf, "==Warszawa=== the capital", 22);
-      sendCharacters(pf, "==New Mexico==", 11);
-      sendCharacters(pf, "Other data", 11);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "==Warszawa the capital\n");
+      sendCharacters(pf, "and largest city");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
       endText(pf);
-      assertEquals("\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the rest==Warszawa=== the " +
-            "capital==New Mexico==", pf.sent());
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest==Warszawa the capital\nand largest city==New Mexico==", pf.sent());
+   }
+
+   @Test
+   public void unclosedHeaderCanCauseProblems() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, "urumq" + LH_P1);
+      sendCharacters(pf, LH_P2);
+      sendCharacters(pf, LH_P3 + "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "==Warszawa the capital ");
+      sendCharacters(pf, "and largest city");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
+
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest==Warszawa the capital and largest city==", pf.sent());
    }
 
 
-   // Does't pass different preceeding language
+   @Test
+   public void doesntCloseForTagBeforeStart() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
-   // Doesn't pass succeeding different language
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "==Warszawa== the capital", 12, 12);
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
-   // Isn't confused by false == in language text
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest the capital==New Mexico==", pf.sent());
+   }
 
-   // Recognizes when language start broken across invocations (one for each character at wich its broken)
+   @Test
+   public void doesntCloseForTagAfterEnd() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
-   // Recognizes when end broken across invocations
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest==warszawa==", 0, 29);
+      sendCharacters(pf, " the capital");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
-   // First article contains polish.  Starting second article begins filtering.
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest the capital==New Mexico==", pf.sent());
+   }
 
-   // First article contains Polish, Second article can also contain polish.
+   //
+   //  header open only once
+   //
 
-   // Make sure partial data from previous article doesn't affect subsequent articles.
+   @Test
+   public void targetHeaderWIllClose() throws Throwable {
+      TestableLanguagePrefilter pf = make();
 
-   // Doesn't start on ===Polish=== or ====Polish====
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, " the capital");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
 
-   // Doesn't stop on ===Sthg=== or ====sthg====
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest" + LANGUAGE_HEADER, pf.sent());
+   }
 
+   @Test
+   public void targetHeaderWontReopenClose() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "\nLine Jeden\nKeep Line 2\n");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      sendCharacters(pf, "==Stop==");
+      sendCharacters(pf, "data, data, and more data.");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, " the capital");
+      sendCharacters(pf, "==New Mexico==");
+      sendCharacters(pf, "Other data");
+
+      endText(pf);
+      assertEquals(LANGUAGE_HEADER + "\nLine Jeden\nKeep Line 2\nKeep Line 3which is longer than the " +
+            "rest==Stop==", pf.sent());
+   }
+
+   //
+   //  resets between articles
+   //
+   @Test
+   public void resetsBetweenArticles_noEndInone() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "One, Two, buckle my shoe.");
+      endText(pf);
+
+      startText(pf);
+      sendCharacters(pf, "Article two, line 1");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "Three, Four, shut the door.");
+
+      assertEquals(LANGUAGE_HEADER + "One, Two, buckle my shoe." +
+            LANGUAGE_HEADER + "Three, Four, shut the door.", pf.sent());
+   }
+
+   @Test
+   public void resetsBetweenArticles_endInone() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, "abcdefg");
+      sendCharacters(pf, "hijklmnop");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "One, Two, buckle my shoe.");
+      sendCharacters(pf, "==Stop Here== don't print this");
+      endText(pf);
+
+      startText(pf);
+      sendCharacters(pf, "Article two, line 1");
+      sendCharacters(pf, LANGUAGE_HEADER);
+      sendCharacters(pf, "Three, Four, shut the door.");
+
+      assertEquals(LANGUAGE_HEADER + "One, Two, buckle my shoe.==Stop Here==" +
+            LANGUAGE_HEADER + "Three, Four, shut the door.", pf.sent());
+   }
 }

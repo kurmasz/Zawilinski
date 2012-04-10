@@ -86,7 +86,7 @@
  *    <dd>
  *       The language pre-filter retains only the Polish section of an article.  Specifically,
  *       it dumps all article text until it encounters the substring "{@code ==Polish==}".  It then retains all article
- *       data until it encounters the header for the next language section (e.g., "{@code ==Spanish==}").
+ *       data until it encounters the headerContent for the next language section (e.g., "{@code ==Spanish==}").
  *    </dd>
  *
  *    <dt>Size Pre-filter</dt>

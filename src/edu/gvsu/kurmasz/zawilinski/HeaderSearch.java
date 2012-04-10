@@ -1,14 +1,14 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 /**
- * Helper class to search through multiple groups of characters for a MediaWiki header (e.g.,
- * ==Polish==). Note that this class cannot handle an intermediate '=' in the header.  For example,
- * it won't recognize "==this=that==" as a header.
+ * Helper class to search through multiple groups of characters for a MediaWiki headerContent (e.g.,
+ * ==Polish==). Note that this class cannot handle an intermediate '=' in the headerContent.  For example,
+ * it won't recognize "==this=that==" as a headerContent.
  *
  * This class has to handle two main challenges:
  * <ol>
- * <li>The header may be broken across several groups of characters</li>
- * <li>The data is "dirty".  We can't assume that the header markers (e.g., "===") will be closed and balanced.</li>
+ * <li>The headerContent may be broken across several groups of characters</li>
+ * <li>The data is "dirty".  We can't assume that the headerContent markers (e.g., "===") will be closed and balanced.</li>
  * </ol>
  *
  * @author Zachary Kurmas
@@ -23,12 +23,36 @@ class HeaderSearch {
     * The result of the current processing step
     */
    public static class Result {
-      public String header;
+
+      /**
+       * The <em>content</em> of the header (or {@code null} if no header found yet). The content is the "Polish"
+       * part of "==Polish=="
+       */
+      public String headerContent;
+
+      /**
+       * The index of the first character is the search string after the full header.
+       */
       public int next;
 
-      public Result(String header, int next) {
-         this.header = header;
+      /**
+       * Constructor
+       *
+       * @param headerContent the text of the headerContent
+       * @param next          the index of the location immediately after the full header
+       */
+      public Result(String headerContent, int next) {
+         this.headerContent = headerContent;
          this.next = next;
+      }
+
+      /**
+       * Build the full header by placing the opening and closing markup around it.
+       *
+       * @return the full headerContent
+       */
+      public String fullHeader() {
+         return HEADER + this.headerContent + HEADER;
       }
    }
 
@@ -46,9 +70,15 @@ class HeaderSearch {
    // these regular instance variables, then make sure you add the appropriate
    // tests, because all the tests assume these values are constant.
 
+   // This is the minimum header level.  Thus ==Foo== is considered a header, but =Foo= is not.
+   // (Single = is just another character.  Two == is the opening of a header and the algorithm
+   // then expects to see a closing ==)
    private static final int MIN_HEADER_LEVEL = 2;
-   private static final int DESIRED_HEADER_LEVEL = 2;
-   private static final char HEADER_CHAR = '=';
+
+   // These are set to make it difficult to introduce bugs when changing the header character or depth.
+   private static final String HEADER = "==";
+   private static final int DESIRED_HEADER_LEVEL = HEADER.length();
+   private static final char HEADER_CHAR = HEADER.charAt(0);
 
    private boolean isOpen(char c) {
       return c == HEADER_CHAR;
@@ -82,7 +112,7 @@ class HeaderSearch {
       if (isOpen(ch)) {
          foundInStage++;
       } else if (foundInStage >= MIN_HEADER_LEVEL) {
-         // Make sure we start each header section with a clean buffer
+         // Make sure we start each headerContent section with a clean buffer
          if (buffer.length() > 0) {
             buffer = new StringBuffer();
          }
