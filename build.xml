@@ -12,7 +12,7 @@
 
 
    <!-- version info -->
-   <property name="zawilinski_ver" value="1.0.0"/>
+   <property name="zawilinski_ver" value="1.0.1"/>
 
    <!-- build info -->
    <property name="src" location="src"/>
@@ -133,7 +133,7 @@
 
    <!-- javadoc =============================================== -->
    <target name="javadoc" description="Javadoc documentation.">
-      <javadoc classpathref="javadoc.classpath" destdir="${javadocs}" access="protected"
+      <javadoc classpathref="classpath:javadoc" destdir="${javadocs}" access="protected"
                packagenames="edu.gvsu.kurmasz.zawilinski.*">
          <packageset dir="src" defaultexcludes="yes">
             <include name="edu/gvsu/**"/>

@@ -147,18 +147,19 @@
  *       each call to {@code handleTextElementCharacters} may contain only part of the article text.</p>
  *
  *       <p>It is not always necessary to write a pre-filter.  If the articles of interest are small enough and few
- *       enough, then using the {@link TextSizePrefilter} as the only pre-filter will be sufficient.</p>
+ *       enough, then using the {@link edu.gvsu.kurmasz.zawilinski.TextSizePrefilter} as the only pre-filter will be
+ *       sufficient.</p>
  * </dd>
  *
  *   <dt><b>Write post-filter</b>:</dt>
  *   <dd>Post-filters decide whether to retain or discard the document object sub-tree for a particular article or
  *   revision.
  *   (Each article may have many revisions.)
- *       A post-filter is an implementation of the {@link edu.gvsu.kurmasz.zawilinski.PostFilteredMediaWikiLoader.PostFilter} interface.
+ *       A post-filter is an implementation of the {@link edu.gvsu.kurmasz.zawilinski.PostFilter} interface.
  *       This interface defines two methods: {@code keepPage} and {@code keepRevision}.  Writing these methods requires
  *       the programmer to know the <a href="doc-files/mediaWikiImportSchema.png">MediaWiki XML Schema</a> and the
  *       Java classes that correspond to each element in the schema.
- *      (See {@link the edu.gvsu.kurmasz.zawilinski.mw} package for details.} <p></p>
+ *      (See the {@link edu.gvsu.kurmasz.zawilinski.mw.current} package for details.} <p></p>
  *    </dd>
  *
  *    <dt><b>Analyze remaining entries</b>:</dt>
