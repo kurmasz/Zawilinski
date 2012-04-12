@@ -21,56 +21,56 @@ import java.io.InputStream;
 
 public class PreFilteredMediaWikiLoader_noMock_Test {
 
-   @Test
-   public void loadWithNoFiltersLoadsDataAsExpected() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
-      Assert.assertNotNull("input", input);
-      InputSource inputSource = new InputSource(input);
-      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
-      Log log = new Log();
-
-      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(inputSource, log, unmarshaller);
-      MediaWikiType root = observed.getValue();
-      SampleContentCheck.verifyMWSampleContent(root);
-   }
-
-   @Test
-   public void loadWithOneFilter() throws Throwable {
-
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
-      Assert.assertNotNull("input", input);
-      InputSource inputSource = new InputSource(input);
-      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
-      Log log = new Log();
-
-      XMLFilter filter = new CharSubPrefilter('e', '8');
-
-      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(inputSource, log, unmarshaller, filter);
-      MediaWikiType root = observed.getValue();
-      SampleContentCheck.verifyMWSampleContent_8fore(root);
-   }
-
-   // This test also verifies that the substitutions are performed in the correct order.
-   // If they are performed in a different order we get a different answer.
-   // It also demonstrates that filters can compose
-   @Test
-   public void loadWithThreeFilters() throws Throwable {
-
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
-      Assert.assertNotNull("input", input);
-      InputSource inputSource = new InputSource(input);
-      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
-      Log log = new Log();
-
-      XMLFilter filter1 = new CharSubPrefilter('e', 'a');
-      XMLFilter filter2 = new CharSubPrefilter('a', 'o');
-      XMLFilter filter3 = new CharSubPrefilter('o', '8');
-
-      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(inputSource, log, unmarshaller,
-            filter1, filter2, filter3);
-      MediaWikiType root = observed.getValue();
-      SampleContentCheck.verifyMWSampleContent_8foreoa(root);
-   }
+//   @Test
+//   public void loadWithNoFiltersLoadsDataAsExpected() throws Throwable {
+//      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+//      Assert.assertNotNull("input", input);
+//      InputSource inputSource = new InputSource(input);
+//      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
+//      Log log = new Log();
+//
+//      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(inputSource, log, unmarshaller);
+//      MediaWikiType root = observed.getValue();
+//      SampleContentCheck.verifyMWSampleContent(root);
+//   }
+//
+//   @Test
+//   public void loadWithOneFilter() throws Throwable {
+//
+//      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+//      Assert.assertNotNull("input", input);
+//      InputSource inputSource = new InputSource(input);
+//      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
+//      Log log = new Log();
+//
+//      XMLFilter filter = new CharSubPrefilter('e', '8');
+//
+//      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(inputSource, log, unmarshaller, filter);
+//      MediaWikiType root = observed.getValue();
+//      SampleContentCheck.verifyMWSampleContent_8fore(root);
+//   }
+//
+//   // This test also verifies that the substitutions are performed in the correct order.
+//   // If they are performed in a different order we get a different answer.
+//   // It also demonstrates that filters can compose
+//   @Test
+//   public void loadWithThreeFilters() throws Throwable {
+//
+//      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+//      Assert.assertNotNull("input", input);
+//      InputSource inputSource = new InputSource(input);
+//      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
+//      Log log = new Log();
+//
+//      XMLFilter filter1 = new CharSubPrefilter('e', 'a');
+//      XMLFilter filter2 = new CharSubPrefilter('a', 'o');
+//      XMLFilter filter3 = new CharSubPrefilter('o', '8');
+//
+//      JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(inputSource, log, unmarshaller,
+//            filter1, filter2, filter3);
+//      MediaWikiType root = observed.getValue();
+//      SampleContentCheck.verifyMWSampleContent_8foreoa(root);
+//   }
 
    @Test
    public void load_InputStream_WithThreeFilters() throws Throwable {

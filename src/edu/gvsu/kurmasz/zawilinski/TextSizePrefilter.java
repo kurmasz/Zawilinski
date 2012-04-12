@@ -30,7 +30,7 @@ public class TextSizePrefilter extends TextPrefilter {
    /**
     * Debug level used to list truncated entries.
     */
-   public static final int TRUNCATIONS = MediaWikiLoader.PARSE_BEGIN_END - 10;
+   public static final int TRUNCATIONS = XMLLoader.PARSE_BEGIN_END - 10;
 
    /**
     * Constructor

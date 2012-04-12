@@ -37,17 +37,17 @@ public class PreFilteredMediaWikiLoader {
       try {
          saxParser = spf.newSAXParser();
       } catch (ParserConfigurationException e) {
-         throw new MediaWikiLoader.XMLConfigurationException(
+         throw new XMLLoader.XMLConfigurationException(
                "Problem generating SAX parser.", e);
       } catch (SAXException e) {
-         throw new MediaWikiLoader.XMLConfigurationException(
+         throw new XMLLoader.XMLConfigurationException(
                "Problem configuring SAX parser.", e);
       }
 
       try {
          return saxParser.getXMLReader();
       } catch (SAXException e) {
-         throw new MediaWikiLoader.XMLConfigurationException("Problem creating XMLReader.", e);
+         throw new XMLLoader.XMLConfigurationException("Problem creating XMLReader.", e);
       }
    }
 
@@ -57,14 +57,14 @@ public class PreFilteredMediaWikiLoader {
     *
     * @param source       the source of the XML data
     * @param log          a {@code Log} to which to report progress
-    * @param unmarshaller the JAXB unmarshaller to use
+    * @param listener the JAXB unmarshaller to use
     * @param filterList   a list of SAX filters to apply.
     * @return a {@code MediaWikiType} object representing the root of the filtered XML stream.
     * @throws JAXBException if there is a problem generating the DOM
-    * @throws MediaWikiLoader.XMLConfigurationException
+    * @throws edu.gvsu.kurmasz.zawilinski.XMLLoader.XMLConfigurationException
     *                       if there is a problem configuring the XML filters or parser
     */
-   public static JAXBElement<MediaWikiType> load(InputSource source, Log log, Unmarshaller unmarshaller,
+   public static JAXBElement<MediaWikiType> load(InputSource source, Log log, Unmarshaller.Listener listener,
                                                  XMLFilter... filterList) throws JAXBException {
 
       if (source == null) {
@@ -73,9 +73,9 @@ public class PreFilteredMediaWikiLoader {
       if (log == null) {
          throw new IllegalArgumentException("Log may not be null");
       }
-      if (unmarshaller == null) {
-         throw new IllegalArgumentException("Unmarshaller may not be null.");
-      }
+//      if (listener == null) {
+//         throw new IllegalArgumentException("Unmarshaller may not be null.");
+//      }
 
       XMLReader tail = createSAXReader();
 
@@ -89,7 +89,7 @@ public class PreFilteredMediaWikiLoader {
       }
 
       Source saxSource = new SAXSource(tail, source);
-      return MediaWikiLoader.load(saxSource, log, unmarshaller);
+      return MediaWikiLoader.load(saxSource, log, listener);
    }
 
    /**
@@ -101,12 +101,12 @@ public class PreFilteredMediaWikiLoader {
     * @param filterList a list of SAX filters to apply
     * @return a {@code MediaWikiType} object representing the root of the filtered XML stream.
     * @throws JAXBException if there is a problem generating the DOM
-    * @throws MediaWikiLoader.XMLConfigurationException
+    * @throws edu.gvsu.kurmasz.zawilinski.XMLLoader.XMLConfigurationException
     *                       if there is a problem configuring the XML filters or parser
     */
    public static JAXBElement<MediaWikiType> load(InputStream source, Log log,
                                                  XMLFilter... filterList) throws JAXBException {
-      return load(new InputSource(source), log, MediaWikiLoader.createUnmarshaller(), filterList);
+      return load(new InputSource(source), log, null, filterList);
    }
 
 

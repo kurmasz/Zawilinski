@@ -1,7 +1,6 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 import edu.gvsu.kurmasz.warszawa.io.OutputHelper;
-import edu.gvsu.kurmasz.zawilinski.MediaWikiLoader.XMLConfigurationException;
 
 import javax.xml.bind.*;
 import java.io.FileNotFoundException;
@@ -21,7 +20,7 @@ public class WiktionaryWriter {
    /**
     * Constructor
     *
-    * @throws XMLConfigurationException if there are any problems with configuring the XML parsing
+    * @throws edu.gvsu.kurmasz.zawilinski.XMLLoader.XMLConfigurationException if there are any problems with configuring the XML parsing
     *                                   classes
     */
    public WiktionaryWriter() {
@@ -29,7 +28,7 @@ public class WiktionaryWriter {
       // Setup JAXB objects
       //
       try {
-         JAXBContext jaxbContext = JAXBContext.newInstance(MediaWikiLoader.CONTEXT_PATH);
+         JAXBContext jaxbContext = JAXBContext.newInstance(MediaWikiLoader.ROOT_CLASS);
          marshaller = jaxbContext.createMarshaller();
 
          // make pretty
@@ -37,7 +36,7 @@ public class WiktionaryWriter {
                Boolean.TRUE);
 
       } catch (JAXBException e) {
-         throw new XMLConfigurationException(
+         throw new XMLLoader.XMLConfigurationException(
                "Problem setting up JAXB objects.", e);
       }
    } // end constructor
@@ -48,14 +47,14 @@ public class WiktionaryWriter {
     * whitespace and tabs).
     *
     * @param value {@code true} for nice formatting {@code false} otherwise.
-    * @throws XMLConfigurationException if the underlying call to {@code setProperty} throws an
+    * @throws edu.gvsu.kurmasz.zawilinski.XMLLoader.XMLConfigurationException if the underlying call to {@code setProperty} throws an
     *                                   exception.
     */
    public void setFormattedOutput(boolean value) {
       try {
          marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,  value);
       } catch (PropertyException e) {
-         throw new XMLConfigurationException(
+         throw new XMLLoader.XMLConfigurationException(
                "Error setting formatting on JAXB context: ", e);
       }
    }

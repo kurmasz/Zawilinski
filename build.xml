@@ -12,7 +12,7 @@
 
 
    <!-- version info -->
-   <property name="zawilinski_ver" value="1.0.0"/>
+   <property name="zawilinski_ver" value="1.0.1"/>
 
    <!-- build info -->
    <property name="src" location="src"/>

@@ -13,7 +13,7 @@ import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 // Created Mar 16, 2010
 public interface PostFilter {
 
-   public static final int PAGE_FILTER_PROGRESS = MediaWikiLoader.PARSE_BEGIN_END - 1;
+   public static final int PAGE_FILTER_PROGRESS = XMLLoader.PARSE_BEGIN_END - 1;
    public static final int REVISION_FILTER_PROGRESS = PAGE_FILTER_PROGRESS - 1;
 
    /**

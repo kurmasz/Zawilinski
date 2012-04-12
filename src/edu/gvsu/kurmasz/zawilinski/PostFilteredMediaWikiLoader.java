@@ -37,12 +37,11 @@ import java.io.InputStream;
 // Created Feb 12, 2010
 public class PostFilteredMediaWikiLoader {
 
-    public static JAXBElement<MediaWikiType> loadFilteredPages(InputStream source, Log log,
+   public static JAXBElement<MediaWikiType> loadFilteredPages(InputStream source, Log log,
                                                               PostFilter postFilter,
                                                               XMLFilter... filterList) throws JAXBException {
-      Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
-      unmarshaller.setListener(new PageFilterListener(postFilter, log));
-      return PreFilteredMediaWikiLoader.load(new InputSource(source), log, unmarshaller, filterList);
+      Unmarshaller.Listener listener = new PageFilterListener(postFilter, log);
+      return PreFilteredMediaWikiLoader.load(new InputSource(source), log, listener, filterList);
    }
 
    public static void main(String[] args) throws JAXBException {
