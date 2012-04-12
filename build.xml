@@ -95,7 +95,7 @@
    </target>
 
    <target name="compile:source" description="compile source" depends="makedirs, compile:schemaClasses">
-      <javac srcdir="${src}" destdir="${build}" classpathref="compile.classpath" debug="on" encoding="${encoding}"
+      <javac srcdir="${src}" destdir="${build}" classpathref="classpath:source" debug="on" encoding="${encoding}"
              includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
       </javac>
@@ -106,7 +106,7 @@
 
    <!-- Test ================================================== -->
    <target name="compile:test" depends="compile">
-      <javac srcdir="${src:test}" destdir="${build:test}" classpathref="test.classpath" debug="on"
+      <javac srcdir="${src:test}" destdir="${build:test}" classpathref="classpath:test" debug="on"
              encoding="${encoding}" includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
       </javac>
