@@ -3,8 +3,6 @@ package edu.gvsu.kurmasz.zawilinski;
 import edu.gvsu.kurmasz.warszawa.io.InputHelper;
 import edu.gvsu.kurmasz.warszawa.log.Log;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
-import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
-import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLFilter;
 

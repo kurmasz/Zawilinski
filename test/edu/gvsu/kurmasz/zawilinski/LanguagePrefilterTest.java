@@ -3,18 +3,14 @@ package edu.gvsu.kurmasz.zawilinski;
 import edu.gvsu.kurmasz.warszawa.log.Log;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Matchers;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 /**
@@ -905,7 +901,6 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
 
       Log log = new Log();
       LanguagePrefilter lpf = new LanguagePrefilter("Polish");
-
 
       JAXBElement<MediaWikiType> observed = PreFilteredMediaWikiLoader.load(input, log, lpf);
       MediaWikiType root = observed.getValue();

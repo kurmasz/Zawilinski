@@ -3,9 +3,8 @@ package edu.gvsu.kurmasz.zawilinski;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
-import org.apache.tools.bzip2.CBZip2InputStream;
 
-import java.io.*;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
