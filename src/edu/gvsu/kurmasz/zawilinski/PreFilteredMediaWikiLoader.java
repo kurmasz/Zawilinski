@@ -92,14 +92,13 @@ public class PreFilteredMediaWikiLoader {
       return MediaWikiLoader.load(saxSource, log, unmarshaller);
    }
 
-
    /**
     * Loads and filters and XML stream, then returns a
     * {@code JAXBElement<MediaWikiType>} object representing the root.
     *
-    * @param source       the source of the XML data
-    * @param log          a {@code Log} to which to report progress
-    * @param filterList   a list of SAX filters to apply
+    * @param source     the source of the XML data
+    * @param log        a {@code Log} to which to report progress
+    * @param filterList a list of SAX filters to apply
     * @return a {@code MediaWikiType} object representing the root of the filtered XML stream.
     * @throws JAXBException if there is a problem generating the DOM
     * @throws MediaWikiLoader.XMLConfigurationException

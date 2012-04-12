@@ -16,31 +16,37 @@
 
    <!-- build info -->
    <property name="src" location="src"/>
+   <property name="src:test" location="test"/>
+
    <property name="build" location="out/antProduction"/>
-   <property name="test_build" location="out/antTest"/>
+   <property name="build:test" location="out/antTest"/>
+
+   <property name="encoding" value="utf-8"/>
+   <property name="resources" location="resources"/>
+   <property name="testList" value="**/*Test.class"/>
+
    <property name="schemaJavaSource" location="schemaJavaSource"/>
    <property name="schemaClassFiles" location="${build}"/>
-   <property name="test_src" location="test"/>
-   <property name="test_lib" location="test_lib"/>
-   <property name="test_list" value="**/*Test.java"/>
 
-   <path id="compile.classpath">
+   <path id="classpath:source">
       <fileset dir="bundled_packages">
          <include name="**/*.jar"/>
       </fileset>
    </path>
 
-   <path id="test.classpath">
-      <path refid="compile.classpath"/>
+   <path id="classpath:test">
+      <path refid="classpath:source"/>
       <pathelement location="${build}"/>
-      <pathelement location="${test_build}"/>
-      <fileset dir="${test_lib}">
+      <pathelement location="${build:test}"/>
+      <pathelement location="${resources}"/>
+      <fileset dir="test_lib">
+
          <include name="**/*.jar"/>
       </fileset>
    </path>
 
-   <path id="javadoc.classpath">
-      <path refid="compile.classpath"/>
+   <path id="classpath:javadoc">
+      <path refid="classpath:source"/>
    </path>
 
    <!-- distribution info -->
@@ -51,12 +57,12 @@
    <target name="makedirs" description="Make any necessary directories">
       <mkdir dir="${build}"/>
       <mkdir dir="${dist}"/>
-      <mkdir dir="${test_build}"/>
+      <mkdir dir="${build:test}"/>
       <mkdir dir="${schemaJavaSource}"/>
       <mkdir dir="${schemaClassFiles}"/>
    </target>
 
-   <!-- jaxbCompile ================================================== -->
+   <!-- Compile schema for JAXB ================================================== -->
    <target name="jaxb" description="Compile schema for Jaxb" depends="makedirs">
       <xjc schema="schemas/export-0.5.xsd" destdir="${schemaJavaSource}"
            package="edu.gvsu.kurmasz.zawilinski.mw.current">
@@ -80,53 +86,50 @@
    </target>
 
 
-   <!-- Compile ================================================== -->
-   <target name="compileSchemaClasses" description="compile source" depends="makedirs, jaxb">
-      <javac srcdir="${schemaJavaSource}" destdir="${schemaClassFiles}" debug="on"
+   <!-- Compile Source ================================================== -->
+   <target name="compile:schemaClasses" description="compile source" depends="makedirs, jaxb">
+      <javac srcdir="${schemaJavaSource}" destdir="${schemaClassFiles}" debug="on" encoding="${encoding}"
              includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
       </javac>
    </target>
 
-   <target name="compileSource" description="compile source" depends="makedirs, compileSchemaClasses">
-      <javac srcdir="${src}" destdir="${build}" classpathref="compile.classpath" debug="on" includeantruntime="false">
-         <compilerarg value="-Xlint:unchecked"/>
-      </javac>
-   </target>
-
-   <target name="compileTest" description="compile test" depends="makedirs, compileSource">
-      <javac srcdir="${test_src}" destdir="${test_build}" classpathref="test.classpath" debug="on"
+   <target name="compile:source" description="compile source" depends="makedirs, compile:schemaClasses">
+      <javac srcdir="${src}" destdir="${build}" classpathref="classpath:source" debug="on" encoding="${encoding}"
              includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
       </javac>
    </target>
 
 
-   <target name="compile" description="compile" depends="compileSchemaClasses, compileSource, compileTest"/>
+   <target name="compile" description="compile" depends="compile:schemaClasses, compile:source"/>
 
 
-   <!-- Test stuff ================================================== -->
-   <target name="build_test" depends="compileTest"/>
+   <!-- Test ================================================== -->
+   <target name="compile:test" depends="compile">
+      <javac srcdir="${src:test}" destdir="${build:test}" classpathref="classpath:test" debug="on"
+             encoding="${encoding}" includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+      </javac>
+   </target>
 
-   <target name="test" depends="build_test">
+   <target name="test" depends="compile:test">
       <junit fork="yes" haltonfailure="yes">
          <assertions enableSystemAssertions="true"/>
-         <classpath refid="test.classpath"/>
 
          <!-- This is necessary for Java 7 on windows only -->
          <!-- Hopefully there will come a time when it is no longer necessary -->
-         <!-- <jvmarg value="-XX:-UseSplitVerifier"/> -->
+         <jvmarg value="-XX:-UseSplitVerifier"/>
 
          <batchtest fork="yes">
-            <fileset dir="${test_src}">
-               <include name="${test_list}"/>
+            <fileset dir="${build:test}">
+               <include name="${testList}"/>
             </fileset>
          </batchtest>
          <formatter type="plain" usefile="false"/>
-
+         <classpath refid="classpath:test"/>
       </junit>
    </target>
-
 
    <!-- javadoc =============================================== -->
    <target name="javadoc" description="Javadoc documentation.">
@@ -165,14 +168,14 @@
       </sequential>
    </macrodef>
 
-   <target name="dist_class" description="Jar file containing class files only."
+
+   <target name="dist:class" description="Jar file containing class files only."
            depends="compile,test,javadoc">
       <buildDist src=""/>
       <!-- Don't include any source code -->
    </target>
 
-
-   <target name="dist_src" description="Jar file containing releasable Zawilisnki class and source."
+   <target name="dist:src" description="Jar file containing releasable Zawilisnki class and source."
            depends="compile,test,javadoc">
       <buildDist src="-src">  <!-- jar file name ends with src -->
          <addSrc> <!-- add the following filesets to the .jar file -->
@@ -181,7 +184,7 @@
       </buildDist>
    </target>
 
-   <target name="dist" description="Distribution 'public' kurmasUtil packages" depends="dist_class, dist_src">
+   <target name="dist" description="Distribution 'public' kurmasUtil packages" depends="dist:class, dist:src">
       <copy todir="${dist}">
          <fileset dir="doc-files"/>
       </copy>
@@ -191,11 +194,18 @@
    <target name="clean" description="Delete class files and docs dir.">
       <delete>
          <fileset dir="${build}/" includes="**/*.class"/>
+         <fileset dir="${build:test}/" includes="**/*.class"/>
          <fileset dir="${src}/" includes="**/*.class"/>
          <fileset dir="${dist}/" includes="**"/>
-         <fileset dir="${schemaJavaSource}" includes="**"/>
+         <!-- <fileset dir="${schemaJavaSource}" includes="**"/>-->
          <!-- there shouldn't be any .class files here, but it happens -->
          <!-- <fileset dir="${test_build}/" includes="**/*.class" /> -->
+      </delete>
+   </target>
+
+   <target name="clean:schema" description="Delete the auto-generated schema source">
+      <delete>
+         <fileset dir="${schemaJavaSource}"/>
       </delete>
    </target>
 

@@ -136,7 +136,7 @@ public class MediaWikiLoader {
     * @throws IllegalArgumentException if any parameters are {@code null}
     */
    public static JAXBElement<MediaWikiType> load(Source source, Log log) throws JAXBException {
-      return load(source, log, createUnmarshaller(CONTEXT_PATH));
+      return load(source, log, createUnmarshaller());
    }
 
    /**

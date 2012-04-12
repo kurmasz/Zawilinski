@@ -1,12 +1,14 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 /**
- * Helper class to search through multiple groups of characters for a MediaWiki header (e.g., ==Polish==).
+ * Helper class to search through multiple groups of characters for a MediaWiki header (e.g.,
+ * ==Polish==).
  *
  * This class has to handle two main challenges:
  * <ol>
- * <li>The header may be broken across several groups of characters</li>
- * <li>The data is "dirty".  We can't assume that the header markers (e.g., "===") will be closed and balanced.</li>
+ * <li>The header may be broken across several groups of characters.</li>
+ * <li>The data is "dirty".  We can't assume that the headers will be closed and balanced. (For example,
+ * we have to expect unclosed headers or unbalanced headers like ==This===.)</li>
  * </ol>
  *
  * @author Zachary Kurmas
@@ -15,15 +17,42 @@ package edu.gvsu.kurmasz.zawilinski;
 // Created  3/15/12 at 12:26 PM
 // (C) Zachary Kurmas 2012
 
-public class HeaderSearch {
+class HeaderSearch {
 
+   /**
+    * The result of the current processing step
+    */
    public static class Result {
-      public String header;
+
+      /**
+       * The <em>content</em> of the header (or {@code null} if no header found yet). The content is the "Polish"
+       * part of "==Polish=="
+       */
+      public String headerContent;
+
+      /**
+       * The index of the first character is the search string after the full header.
+       */
       public int next;
 
-      public Result(String header, int next) {
-         this.header = header;
+      /**
+       * Constructor
+       *
+       * @param headerContent the text of the headerContent
+       * @param next          the index of the location immediately after the full header
+       */
+      public Result(String headerContent, int next) {
+         this.headerContent = headerContent;
          this.next = next;
+      }
+
+      /**
+       * Build the full header by placing the opening and closing markup around it.
+       *
+       * @return the full headerContent
+       */
+      public String fullHeader() {
+         return HEADER + this.headerContent + HEADER;
       }
    }
 
@@ -36,18 +65,26 @@ public class HeaderSearch {
    private int openSize;
 
 
-   // For now, we don't see these values changing.  At some point, we may want to make these regular instance variables.
-   // If you do make these regular instance variables, then make sure you add the appropriate tests, because all the tests
-   // assume these values are constant.
-   private static final int MIN_HEADER_LEVEL = 2;
-   private static final int DESIRED_HEADER_LEVEL = 2;
-   private static final char HEADER_CHAR = '=';
+   // For now, we don't anticipate these values changing.  At some point,
+   // we may want to make these regular instance variables. If you do make
+   // these regular instance variables, then make sure you add the appropriate
+   // tests, because all the tests assume these values are constant.
 
-   protected boolean isOpen(char c) {
+   // This is the minimum header level.  Thus ==Foo== is considered a header, but =Foo= is not.
+   // (Single = is just another character.  Two == is the opening of a header and the algorithm
+   // then expects to see a closing ==)
+   private static final int MIN_HEADER_LEVEL = 2;
+
+   // These are set to make it difficult to introduce bugs when changing the header character or depth.
+   private static final String HEADER = "==";
+   private static final int DESIRED_HEADER_LEVEL = HEADER.length();
+   private static final char HEADER_CHAR = HEADER.charAt(0);
+
+   private boolean isOpen(char c) {
       return c == HEADER_CHAR;
    }
 
-   protected boolean isClose(char c) {
+   private boolean isClose(char c) {
       return c == HEADER_CHAR;
    }
 
@@ -55,7 +92,7 @@ public class HeaderSearch {
       return c == '\n';
    }
 
-   protected boolean isHeader(char c) {
+   private boolean isHeader(char c) {
       return !isOpen(c) && !isClose(c) && !isNewline(c);
    }
 
@@ -90,7 +127,7 @@ public class HeaderSearch {
 
    private void processIn(char ch) {
       if (isHeader(ch)) {
-         foundInStage++;
+         //foundInStage++;  At present, we don't care how many characters are in the header content.
          buffer.append(ch);
       } else if (isClose(ch)) {
          setStage(Stage.CLOSE);
@@ -105,7 +142,11 @@ public class HeaderSearch {
       if (isClose(ch)) {
          foundInStage++;
       } else if (foundInStage < MIN_HEADER_LEVEL) {
-         throw new IllegalArgumentException("This case hasn't been handled yet");
+         for (int i = 0; i < foundInStage; i++) {
+            buffer.append(HEADER_CHAR);
+         }
+         setStage(Stage.IN);
+         processIn(ch);
       } else if (foundInStage == DESIRED_HEADER_LEVEL && openSize == DESIRED_HEADER_LEVEL) {
          setStage(Stage.POST);
       } else { // foundInStage != DESIRED_HEADER_LEVEL or openSize != DESIRED_HEADER_LEVEL

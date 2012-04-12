@@ -107,13 +107,19 @@ public class TextPrefilterTest {
       tp.endElement(uri, localName, qName);
    }
 
-   static char[] sendCharacters(TextPrefilter pf, String s) throws SAXException {
+
+   static char[] sendCharacters(TextPrefilter pf, String s, int start, int length) throws SAXException {
       char[] myChars = s.toCharArray();
-      pf.characters(myChars, 0, myChars.length);
+      pf.characters(myChars, start, length);
       return myChars;
    }
 
-   static char[] sendCharacters(TextPrefilter pf, String s, int start) throws SAXException {
+   static char[] sendCharacters(TextPrefilter pf, String s) throws SAXException {
+      return sendCharacters(pf, s, 0, s.length());
+   }
+
+   /*
+   static char[] sendPaddedCharacters(TextPrefilter pf, String s, int start) throws SAXException {
       char[] myChars = new char[(s.length() + start) * 2];
 
       for (int i = 0; i < start; i++) {
@@ -126,6 +132,7 @@ public class TextPrefilterTest {
       pf.characters(myChars, start, s.length());
       return myChars;
    }
+   */
 
    //
    // constructor
