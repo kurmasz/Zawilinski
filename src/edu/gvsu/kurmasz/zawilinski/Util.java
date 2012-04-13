@@ -1,10 +1,8 @@
 package edu.gvsu.kurmasz.zawilinski;
 
-import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +20,12 @@ public class Util {
     * {@code PrintStream} to which to send error messages (currently the
     * standard error).
     */
-   public static final PrintStream error_out = System.err;
+   //public static final PrintStream error_out = System.err;
 
    /**
     * Constructor to prevent users from instantiating this class.
     */
    private Util() {
-      return;
    }
 
    /**
@@ -97,12 +94,12 @@ public class Util {
       return getText(getRevisions(page).get(rev_num));
    }
 
-   public static void print(MediaWikiType root) {
-      for (PageType page : root.getPage()) {
-         System.out.println("Title: " + page.getTitle());
-         for (RevisionType revision : getRevisions(page)) {
-            System.out.println("\t" + getText(revision));
-         }
-      }
-   }
+//   static void print(MediaWikiType root) {
+//      for (PageType page : root.getPage()) {
+//         System.out.println("Title: " + page.getTitle());
+//         for (RevisionType revision : getRevisions(page)) {
+//            System.out.println("\t" + getText(revision));
+//         }
+//      }
+//   }
 } // end Util.

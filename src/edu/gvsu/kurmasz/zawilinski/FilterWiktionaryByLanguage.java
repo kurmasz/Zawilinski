@@ -24,7 +24,9 @@ import java.util.List;
 // (C) 2010 Zachary Kurmas
 // Created February 12, 2010
 public class FilterWiktionaryByLanguage {
-   private static final java.io.PrintStream usage_out = Util.error_out;
+
+   private static final java.io.PrintStream error_out = System.err;
+   private static final java.io.PrintStream usage_out = System.err;
 
    /**
     * Container for command-line options.
@@ -192,14 +194,14 @@ public class FilterWiktionaryByLanguage {
          try {
             writer.write(root, options.outputFile);
          } catch (FileNotFoundException fnf) {
-            Util.error_out.println("Cannot open \"" + options.outputFile
+            error_out.println("Cannot open \"" + options.outputFile
                   + "\" for writing.");
          }
       } catch (FileNotFoundException fnfe) {
-         Util.error_out.println("Could not open \"" + options.inputFile
+         error_out.println("Could not open \"" + options.inputFile
                + "\".");
       } catch (IOException e) {
-         Util.error_out.println("Could not open \"" + options.inputFile
+         error_out.println("Could not open \"" + options.inputFile
                + "\" as a compressed file.");
       }
    } // end main

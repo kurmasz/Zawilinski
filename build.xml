@@ -1,4 +1,4 @@
-<project name="LanguageWiki" basedir="." default="all">
+<project name="Zawilinski" basedir="." default="all">
 
    <!-- Setup ================================================== -->
    <property file="build.properties"/>

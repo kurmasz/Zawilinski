@@ -51,6 +51,6 @@ public class PostFilteredMediaWikiLoader {
       Log log = new Log(System.err, 0);
       JAXBElement<MediaWikiType> elem = loadFilteredPages(source, log, PostFilter.KEEP_ALL);
       MediaWikiType root = elem.getValue();
-      Util.print(root);
+      //Util.print(root);
    }
 }
