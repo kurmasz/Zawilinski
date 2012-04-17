@@ -108,7 +108,7 @@ public class FilterWiktionaryByLanguage {
          return Util.getTextSize(page) > 0;
       }
 
-      public boolean keepRevision(RevisionType revision) {
+      public boolean keepRevision(RevisionType revision, PageType page) {
          // IMPORTANT! Notice the "startsWith" This filter works properly
          // only if the LanguagePrefilter SAX filter has been applied (which
          // assures that each <text>segment begins with the requested

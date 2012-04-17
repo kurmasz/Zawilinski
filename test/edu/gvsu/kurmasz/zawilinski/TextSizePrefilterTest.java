@@ -337,4 +337,13 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
       verify(mlog).println(TextSizePrefilter.TRUNCATIONS, "37 19 Sample page 2");
       verifyNoMoreInteractions(mlog);
    }
+
+   @Test
+   public void filterAllowsNullLog() throws Throwable {
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      Assert.assertNotNull("input", input);
+      // 41 is the length of the longest article text string currently in the sample data
+      TextSizePrefilter filter = new TextSizePrefilter(19, null);
+      PreFilteredMediaWikiLoader.load(input, mock(Log.class), filter);
+   }
 }

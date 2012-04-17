@@ -23,7 +23,7 @@ public class PostFilterTest {
 
    @Test
    public void keepAllRevisionReturnsTrue() throws Throwable {
-      assertTrue(PostFilter.KEEP_ALL.keepRevision(mock(RevisionType.class)));
+      assertTrue(PostFilter.KEEP_ALL.keepRevision(mock(RevisionType.class), mock(PageType.class)));
    }
 
    @Test
@@ -33,7 +33,7 @@ public class PostFilterTest {
 
    @Test
    public void keepNoRevisionReturnsFalse() throws Throwable {
-      assertFalse(PostFilter.KEEP_NONE.keepRevision(mock(RevisionType.class)));
+      assertFalse(PostFilter.KEEP_NONE.keepRevision(mock(RevisionType.class), mock(PageType.class)));
    }
 }
 

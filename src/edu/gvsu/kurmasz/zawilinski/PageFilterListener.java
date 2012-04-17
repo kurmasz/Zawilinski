@@ -141,9 +141,8 @@ public class PageFilterListener extends Unmarshaller.Listener {
       else if (target instanceof RevisionType) {
          revisionCount++;
          RevisionType revision = (RevisionType) target;
-
          // See if we want to keep the page.
-         if (filter.keepRevision(revision)) {
+         if (filter.keepRevision(revision, currentPage)) {
             keptRevisionCount++;
 
             if (log.willLog(PostFilter.REVISION_FILTER_PROGRESS)) {

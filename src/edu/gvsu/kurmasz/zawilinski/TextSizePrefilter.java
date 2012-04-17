@@ -116,7 +116,7 @@ public class TextSizePrefilter extends TextPrefilter {
       // Print truncation information to the log
       // TODO: Have the superclass also save the revision id so that we know *which* revision was
       // truncated.
-      if (currentTextSize > this.textSizeLimit) {
+      if (currentTextSize > this.textSizeLimit && log != null) {
          log.println(TRUNCATIONS, String.format("%d %d %s", currentTextSize, textSizeLimit, getCurrentTitle()));
       }
    }

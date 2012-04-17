@@ -32,7 +32,7 @@ public interface PostFilter {
     * @return {@code true} if {@code revision} should be kept, {@code
     *         false} otherwise.
     */
-   public boolean keepRevision(RevisionType revision);
+   public boolean keepRevision(RevisionType revision, PageType page);
 
 
    /**
@@ -43,7 +43,7 @@ public interface PostFilter {
          return true;
       }
 
-      public boolean keepRevision(RevisionType revision) {
+      public boolean keepRevision(RevisionType revision, PageType page) {
          return true;
       }
    };
@@ -56,7 +56,7 @@ public interface PostFilter {
          return false;
       }
 
-      public boolean keepRevision(RevisionType revision) {
+      public boolean keepRevision(RevisionType revision, PageType page) {
          return false;
       }
    };

@@ -5,6 +5,7 @@ import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
@@ -35,7 +36,7 @@ public class PageFilterListenerTest {
          return answer;
       }
 
-      public boolean keepRevision(RevisionType revision) {
+      public boolean keepRevision(RevisionType revision, PageType page) {
          return itemsToKeep.contains(revision);
       }
    }
@@ -142,6 +143,37 @@ public class PageFilterListenerTest {
       verifyZeroInteractions(mw);
    }
 
+   @Test
+   public void afterUnmarshallChecksWhetherToKeepPageWhenGivenPage() throws Throwable {
+      MediaWikiType mw = mock(MediaWikiType.class);
+      PageType firstPage = mock(PageType.class);
+
+      PostFilter pf = mock(PostFilter.class);
+      PageFilterListener pfl = new PageFilterListener(pf, mock(Log.class));
+      pfl.beforeUnmarshal(mw, null);
+      pfl.beforeUnmarshal(firstPage, null);
+      pfl.afterUnmarshal(firstPage, null);
+
+      verify(pf).keepPage(firstPage);
+   }
+
+   @Test
+   public void afterUnmarshallDoesNotCheckPageWhenGivenRevision() throws Throwable {
+      MediaWikiType mw = mock(MediaWikiType.class);
+      PageType firstPage = mock(PageType.class);
+      RevisionType revision = mock(RevisionType.class);
+
+      PostFilter pf = mock(PostFilter.class);
+      PageFilterListener pfl = new PageFilterListener(pf, mock(Log.class));
+      pfl.beforeUnmarshal(mw, null);
+      pfl.beforeUnmarshal(firstPage, null);
+      pfl.beforeUnmarshal(revision, null);
+      pfl.afterUnmarshal(revision, null);
+
+      verify(pf, never()).keepPage(Matchers.<PageType>any());
+
+   }
+
 
    @Test
    public void afterUnmarshallAttemptsToRemoveLastPageIfDesired() throws Throwable {
@@ -205,5 +237,36 @@ public class PageFilterListenerTest {
       pfl.afterUnmarshal(secondPage, null);
       pfl.beforeUnmarshal(thirdPage, null);
       verify(mw, times(1)).getPage();
+   }
+
+   @Test
+   public void afterUnmarshallChecksRevisionWhenGivenRevision() throws Throwable {
+      MediaWikiType mw = mock(MediaWikiType.class);
+      PageType firstPage = mock(PageType.class);
+      RevisionType revision = mock(RevisionType.class);
+
+      PostFilter pf = mock(PostFilter.class);
+      PageFilterListener pfl = new PageFilterListener(pf, mock(Log.class));
+      pfl.beforeUnmarshal(mw, null);
+      pfl.beforeUnmarshal(firstPage, null);
+      pfl.beforeUnmarshal(revision, null);
+      pfl.afterUnmarshal(revision, null);
+
+      verify(pf).keepRevision(revision, firstPage);
+   }
+
+   @Test
+   public void afterUnmarshallChecksDoesNotCheckRevisionWhenGivenPage() throws Throwable {
+      MediaWikiType mw = mock(MediaWikiType.class);
+      PageType firstPage = mock(PageType.class);
+
+      PostFilter pf = mock(PostFilter.class);
+      PageFilterListener pfl = new PageFilterListener(pf, mock(Log.class));
+      pfl.beforeUnmarshal(mw, null);
+      pfl.beforeUnmarshal(firstPage, null);
+      pfl.afterUnmarshal(firstPage, null);
+
+      verify(pf, never()).keepRevision(Matchers.<RevisionType>any(), Matchers.<PageType>any());
+
    }
 }
