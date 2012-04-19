@@ -38,9 +38,9 @@ import java.io.InputStream;
 // Created Feb 12, 2010
 public class PostFilteredMediaWikiLoader {
 
-    public static JAXBElement<MediaWikiType> loadFilteredPages(InputStream source, SimpleLog log,
-                                                              PostFilter postFilter,
-                                                              XMLFilter... filterList) throws JAXBException {
+    public static JAXBElement<MediaWikiType> load(InputStream source, SimpleLog log,
+                                                  PostFilter postFilter,
+                                                  XMLFilter... filterList) throws JAXBException {
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
       unmarshaller.setListener(new PageFilterListener(postFilter, log));
       return PreFilteredMediaWikiLoader.load(new InputSource(source), log, unmarshaller, filterList);
@@ -50,7 +50,7 @@ public class PostFilteredMediaWikiLoader {
       String filename = "/Users/kurmasz/Documents/LocalResearch/LanguageWiki/SampleInput/mw_sample_0.4.xml";
       InputStream source = InputHelper.openFilteredInputStreamOrQuit(new File(filename));
       SimpleLog log = new Log(System.err, 0);
-      JAXBElement<MediaWikiType> elem = loadFilteredPages(source, log, PostFilter.KEEP_ALL);
+      JAXBElement<MediaWikiType> elem = load(source, log, PostFilter.KEEP_ALL);
       MediaWikiType root = elem.getValue();
       //Util.print(root);
    }

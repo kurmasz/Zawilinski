@@ -189,8 +189,8 @@ public class FilterWiktionaryByLanguage {
       WiktionaryWriter writer = new WiktionaryWriter();
 
       try {
-         JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.loadFilteredPages(InputHelper
-               .openFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
+         JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.load(InputHelper
+                 .openFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
          try {
             writer.write(root, options.outputFile);
          } catch (FileNotFoundException fnf) {
