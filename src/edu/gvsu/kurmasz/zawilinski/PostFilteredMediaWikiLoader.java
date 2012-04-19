@@ -2,6 +2,7 @@ package edu.gvsu.kurmasz.zawilinski;
 
 import edu.gvsu.kurmasz.warszawa.io.InputHelper;
 import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLFilter;
@@ -37,7 +38,7 @@ import java.io.InputStream;
 // Created Feb 12, 2010
 public class PostFilteredMediaWikiLoader {
 
-    public static JAXBElement<MediaWikiType> loadFilteredPages(InputStream source, Log log,
+    public static JAXBElement<MediaWikiType> loadFilteredPages(InputStream source, SimpleLog log,
                                                               PostFilter postFilter,
                                                               XMLFilter... filterList) throws JAXBException {
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
@@ -48,7 +49,7 @@ public class PostFilteredMediaWikiLoader {
    public static void main(String[] args) throws JAXBException {
       String filename = "/Users/kurmasz/Documents/LocalResearch/LanguageWiki/SampleInput/mw_sample_0.4.xml";
       InputStream source = InputHelper.openFilteredInputStreamOrQuit(new File(filename));
-      Log log = new Log(System.err, 0);
+      SimpleLog log = new Log(System.err, 0);
       JAXBElement<MediaWikiType> elem = loadFilteredPages(source, log, PostFilter.KEEP_ALL);
       MediaWikiType root = elem.getValue();
       //Util.print(root);

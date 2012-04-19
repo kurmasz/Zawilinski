@@ -1,6 +1,6 @@
 package edu.gvsu.kurmasz.zawilinski;
 
-import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
@@ -36,14 +36,14 @@ public class PageFilterListener extends Unmarshaller.Listener {
 
    // The code that determines whether we want to keep a particular page.
    private PostFilter filter;
-   private Log log;
+   private SimpleLog log;
 
    /**
     * Constructor
     *
     * @param filter filter to apply
     */
-   public PageFilterListener(PostFilter filter, Log log) {
+   public PageFilterListener(PostFilter filter, SimpleLog log) {
       this.filter = filter;
       this.log = log;
    }

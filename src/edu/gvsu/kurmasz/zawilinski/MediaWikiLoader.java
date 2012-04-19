@@ -1,6 +1,7 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import org.xml.sax.InputSource;
 
@@ -90,7 +91,7 @@ public class MediaWikiLoader {
     * @throws JAXBException            if there is a problem generating the DOM
     * @throws IllegalArgumentException if any parameters are {@code null}
     */
-   public static JAXBElement<MediaWikiType> load(Source source, Log log, Unmarshaller unmarshaller) throws
+   public static JAXBElement<MediaWikiType> load(Source source, SimpleLog log, Unmarshaller unmarshaller) throws
          JAXBException {
 
       if (source == null) {
