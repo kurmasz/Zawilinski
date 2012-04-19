@@ -60,7 +60,7 @@ public class FilterWiktionaryByLanguage {
       public String logFile = null;
 
       @JoswaOption(argName = "level", usage = "minimum log level printed.")
-      public Integer logLevel = MediaWikiLoader.PARSE_BEGIN_END;
+      public Integer logLevel = Zawilinski.PARSE_BEGIN_END;
 
       @JoswaOption(shortName = 'o', usage = "output file (or \"-\" for standard output)", argName = "file")
       public String outputFile = "-";
@@ -160,7 +160,7 @@ public class FilterWiktionaryByLanguage {
 
       Log textSizeLog;
       if (options.textSizeLog != null) {
-         textSizeLog = Log.makeLogOrQuit(options.textSizeLog, TextSizePrefilter.TRUNCATIONS);
+         textSizeLog = Log.makeLogOrQuit(options.textSizeLog, Zawilinski.TRUNCATIONS);
       } else {
          textSizeLog = new Log();
       }

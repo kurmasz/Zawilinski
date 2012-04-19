@@ -27,8 +27,8 @@ import java.io.InputStream;
  * Debug levels: (activates all levels above):
  * <ul>
  * <li>PARSE_BEGIN_END: Announce beginning and end of parsing
- * <li>PAGE_FILTER_PROGRESS: Announces which Wiktionary entries kept and which dumped.
- * <li>REVISION_FILTER_PROGRESS: Announces which Wiktionary revisions are kept and which are dumped.
+ * <li>PAGE_DUMPED: Announces which Wiktionary entries kept and which dumped.
+ * <li>REVISION_DUMPED: Announces which Wiktionary revisions are kept and which are dumped.
  * </ul>
  *
  * @author Zachary Kurmas

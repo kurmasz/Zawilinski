@@ -121,18 +121,18 @@ public class PageFilterListener extends Unmarshaller.Listener {
          if (filter.keepPage(page)) {
             keptPageCount++;
 
-            if (log.willLog(PostFilter.PAGE_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.PAGE_KEPT)) {
                String message = String.format("%-11s %5d %7d %30s %d",
                      "kept page", keptPageCount, pageCount, page
                      .getTitle(), Util.getTextSize(page));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.PAGE_KEPT, message);
             }
          } else {
-            if (log.willLog(PostFilter.PAGE_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.PAGE_DUMPED)) {
                String message = String.format("%-11s %5d %7d %30s %d",
                      "dumped page", keptPageCount, pageCount, page
                      .getTitle(), Util.getTextSize(page));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.PAGE_DUMPED, message);
             }
             pageToDelete = page;
          } // end else
@@ -145,20 +145,20 @@ public class PageFilterListener extends Unmarshaller.Listener {
          if (filter.keepRevision(revision, currentPage)) {
             keptRevisionCount++;
 
-            if (log.willLog(PostFilter.REVISION_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.REVISION_KEPT)) {
                String message = String.format(
                      "    %-11s %5d %7d %12s %d", "kept rev.",
                      keptRevisionCount, revisionCount, revision
                      .getId(), Util.getTextSize(revision));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.REVISION_KEPT, message);
             }
          } else {
-            if (log.willLog(PostFilter.REVISION_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.REVISION_DUMPED)) {
                String message = String.format(
                      "    %-11s %5d %7d %12s %d", "dumped rev.",
                      keptRevisionCount, revisionCount, revision
                      .getId(), Util.getTextSize(revision));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.PAGE_DUMPED, message);
             }
             revisionToDelete = revision;
 

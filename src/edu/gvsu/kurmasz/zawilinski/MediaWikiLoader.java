@@ -37,11 +37,6 @@ public class MediaWikiLoader {
    public static final String CONTEXT_PATH = "edu.gvsu.kurmasz.zawilinski.mw.current";
 
    /**
-    * The debug level at which the beginning and end of parsing is recorded in the log.
-    */
-   public static final int PARSE_BEGIN_END = 100;
-
-   /**
     * Exception describing a problem with the XML software setup.
     * Typically these exceptions indicate a bug in the code or a runtime configuration problem.
     */
@@ -108,9 +103,9 @@ public class MediaWikiLoader {
          throw new IllegalArgumentException("Unmarshaller may not be null.");
       }
 
-      log.println(PARSE_BEGIN_END, "Begin unmarshal.");
+      log.println(Zawilinski.PARSE_BEGIN_END, "Begin unmarshal.");
       Object answer = unmarshaller.unmarshal(source);
-      log.println(PARSE_BEGIN_END, "Complete unmarshal.");
+      log.println(Zawilinski.PARSE_BEGIN_END, "Complete unmarshal.");
 
       assert answer instanceof JAXBElement : "Unexpected return type from unmarshal!  "
             + answer.getClass().getName();

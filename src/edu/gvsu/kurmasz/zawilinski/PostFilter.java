@@ -13,51 +13,50 @@ import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 // Created Mar 16, 2010
 public interface PostFilter {
 
-   public static final int PAGE_FILTER_PROGRESS = MediaWikiLoader.PARSE_BEGIN_END - 1;
-   public static final int REVISION_FILTER_PROGRESS = PAGE_FILTER_PROGRESS - 1;
-
-   /**
-    * Determines whether {@code page} should be retained or discarded.
-    *
-    * @param page the {@code PageType} object under consideration
-    * @return {@code true} if {@code page} should be kept, {@code false}
-    *         otherwise.
-    */
-   public boolean keepPage(PageType page);
-
-   /**
-    * Determines whether {@code revision} should be retained or discarded.
-    *
-    * @param revision the {@code RevisionType} object under consideration
-    * @return {@code true} if {@code revision} should be kept, {@code
-    *         false} otherwise.
-    */
-   public boolean keepRevision(RevisionType revision, PageType page);
 
 
-   /**
-    * {@code PostFilter} that retains all pages and all revisions.
-    */
-   public static final PostFilter KEEP_ALL = new PostFilter() {
-      public boolean keepPage(PageType page) {
-         return true;
-      }
+    /**
+     * Determines whether {@code page} should be retained or discarded.
+     *
+     * @param page the {@code PageType} object under consideration
+     * @return {@code true} if {@code page} should be kept, {@code false}
+     *         otherwise.
+     */
+    public boolean keepPage(PageType page);
 
-      public boolean keepRevision(RevisionType revision, PageType page) {
-         return true;
-      }
-   };
+    /**
+     * Determines whether {@code revision} should be retained or discarded.
+     *
+     * @param revision the {@code RevisionType} object under consideration
+     * @return {@code true} if {@code revision} should be kept, {@code
+     *         false} otherwise.
+     */
+    public boolean keepRevision(RevisionType revision, PageType page);
 
-   /**
-    * {@code PostFilter} that discards all pages and all revisions.
-    */
-   public static final PostFilter KEEP_NONE = new PostFilter() {
-      public boolean keepPage(PageType page) {
-         return false;
-      }
 
-      public boolean keepRevision(RevisionType revision, PageType page) {
-         return false;
-      }
-   };
+    /**
+     * {@code PostFilter} that retains all pages and all revisions.
+     */
+    public static final PostFilter KEEP_ALL = new PostFilter() {
+        public boolean keepPage(PageType page) {
+            return true;
+        }
+
+        public boolean keepRevision(RevisionType revision, PageType page) {
+            return true;
+        }
+    };
+
+    /**
+     * {@code PostFilter} that discards all pages and all revisions.
+     */
+    public static final PostFilter KEEP_NONE = new PostFilter() {
+        public boolean keepPage(PageType page) {
+            return false;
+        }
+
+        public boolean keepRevision(RevisionType revision, PageType page) {
+            return false;
+        }
+    };
 }
