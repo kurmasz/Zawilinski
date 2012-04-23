@@ -177,9 +177,5 @@ public class SampleContentCheck {
       assertEquals(42857, contributor.getId().intValue());
 
       assertEquals("What's up, Doc?", p2r3.getComment().getValue());
-
-
    }
-
-
 }
