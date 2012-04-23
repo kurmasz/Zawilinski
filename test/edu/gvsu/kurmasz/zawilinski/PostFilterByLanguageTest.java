@@ -1,28 +1,17 @@
 package edu.gvsu.kurmasz.zawilinski;
 
-import edu.gvsu.kurmasz.warszawa.log.Log;
-import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import javax.xml.bind.JAXBElement;
-
-import java.io.InputStream;
-
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.verifyStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Util.class})
