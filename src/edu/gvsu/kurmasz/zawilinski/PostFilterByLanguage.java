@@ -3,15 +3,21 @@ package edu.gvsu.kurmasz.zawilinski;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
- * Keep only those pages that contain some data for the specified language.
- * IMPORTANT! This filter is written specifically to run after the {@link
+ * Keep only those pages that contain some data for the specified language and
+ * remove the trailing level 2 language header left by the prefilter.
+ * <p/>
+ * <p>IMPORTANT! This filter is written specifically to run after the {@link
  * LanguagePrefilter} SAX filter is applied. This SAX filter assures that all
  * text segments <em>begin</em> with the expected language string (e.g.,
- * "==Polish=="). If you don't apply the SAX filter, you need a post-filter
+ * "==Polish=="). If you don't apply the SAX filter, you need a different
+ * post-filter
  * that checks to see if the revision text <em>contains</em> the
- * languageString.
+ * languageString.</p>
  *
  * @author Zachary Kurmas
  */
@@ -22,6 +28,8 @@ public class PostFilterByLanguage implements PostFilter {
     // Wiktionary.
     // This string typically looks like this ==Polish== (with the "==")
     private String languageString;
+
+    private Pattern headerPattern = Pattern.compile("([^=])==([^=\\n])+==$");
 
     /**
      * Constructor
@@ -41,12 +49,22 @@ public class PostFilterByLanguage implements PostFilter {
     }
 
     public boolean keepRevision(RevisionType revision, PageType page) {
-        // IMPORTANT! Notice the "startsWith" This filter works properly
+        String text = Util.getText(revision);
+
+        // If the text contains the next header (e.g., ==Spanish==), then
+        // remove it.
+        Matcher m = headerPattern.matcher(text);
+        if (m.find()) {
+            String g1 = m.group(1);
+            text = m.replaceFirst(g1);
+            Util.setText(revision, text);
+        }
+
+        // IMPORTANT! This filter works properly
         // only if the LanguagePrefilter SAX filter has been applied (which
         // assures that each <text>segment begins with the requested
         // language headerContent.
-        //return Util.getText(revision).startsWith(languageString);
-        return Util.getTextSize(revision) > 0;
+        return text.length() > 0;
     }
 }
 

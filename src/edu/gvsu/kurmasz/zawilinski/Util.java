@@ -94,6 +94,11 @@ public class Util {
       return getText(getRevisions(page).get(rev_num));
    }
 
+
+    public static void setText(RevisionType revision, String text) {
+        revision.getText().setValue(text);
+    }
+
 //   static void print(MediaWikiType root) {
 //      for (PageType page : root.getPage()) {
 //         System.out.println("Title: " + page.getTitle());
