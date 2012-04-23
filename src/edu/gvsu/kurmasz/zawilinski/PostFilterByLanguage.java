@@ -29,7 +29,7 @@ public class PostFilterByLanguage implements PostFilter {
     // This string typically looks like this ==Polish== (with the "==")
     private String languageString;
 
-    private Pattern headerPattern = Pattern.compile("([^=])==([^=\\n])+==$");
+    private Pattern headerPattern = Pattern.compile("([^=])==([^=\\n])+(=[^=\\n]+)*==$");
 
     /**
      * Constructor

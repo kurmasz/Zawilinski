@@ -109,6 +109,20 @@ public class PostFilterByLanguageTest {
     }
 
     @Test
+    public void keepRevisionRemovesTrailingHeaderIfPresent_andIncludesInnerEquals() throws Throwable {
+        mockStatic(Util.class);
+
+        RevisionType revision = mock(RevisionType.class);
+        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+
+        when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "==The=next=language==");
+        pfl.keepRevision(revision, mock(PageType.class));
+
+        verifyStatic();
+        Util.setText(revision, SAMPLE_TEXT);
+    }
+
+    @Test
     public void keepRevisionsDoesNotModifyTextIfNoTrailerPresent() throws Throwable {
         mockStatic(Util.class);
 
@@ -122,4 +136,50 @@ public class PostFilterByLanguageTest {
         verifyStatic(never());
         Util.setText(revision, SAMPLE_TEXT);
     }
+
+    @Test
+    public void removeRevisionDoesNotModifyTrailingL3Header() throws Throwable {
+        mockStatic(Util.class);
+
+        RevisionType revision = mock(RevisionType.class);
+        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+
+        when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "===Level 3===");
+
+        pfl.keepRevision(revision, mock(PageType.class));
+
+        verifyStatic(never());
+        Util.setText(revision, SAMPLE_TEXT);
+    }
+
+    @Test
+    public void removeRevisionDoesNotModifyTrailingUnbalancedL2L3Header() throws Throwable {
+        mockStatic(Util.class);
+
+        RevisionType revision = mock(RevisionType.class);
+        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+
+        when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "==Level 3 oops===");
+
+        pfl.keepRevision(revision, mock(PageType.class));
+
+        verifyStatic(never());
+        Util.setText(revision, SAMPLE_TEXT);
+    }
+
+    @Test
+    public void removeRevisionDoesNotModifyTrailingUnbalancedL3L2Header() throws Throwable {
+        mockStatic(Util.class);
+
+        RevisionType revision = mock(RevisionType.class);
+        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+
+        when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "===Level 3==");
+
+        pfl.keepRevision(revision, mock(PageType.class));
+
+        verifyStatic(never());
+        Util.setText(revision, SAMPLE_TEXT);
+    }
 }
+
