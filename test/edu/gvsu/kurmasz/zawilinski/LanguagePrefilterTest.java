@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBElement;
 import java.io.InputStream;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -37,6 +38,10 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
        * @param language language to search for
        */
       public TestableLanguagePrefilter(String language) {
+         super(language);
+      }
+
+      public TestableLanguagePrefilter(Pattern language) {
          super(language);
       }
 
@@ -871,7 +876,7 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    }
 
    @Test
-   public void resetsBetweenArticles_endInone() throws Throwable {
+   public void resetsBetweenArticles_endInOne() throws Throwable {
       TestableLanguagePrefilter pf = make();
 
       startText(pf);
@@ -890,6 +895,179 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
       assertEquals(LANGUAGE_HEADER + "One, Two, buckle my shoe.==Stop Here==" +
             LANGUAGE_HEADER + "Three, Four, shut the door.", pf.sent());
    }
+
+   //
+   // "Extra" characters in header
+   //
+   // Normally, the header should be ==Language==.  However, we also allow spaces in the header,
+   // and allow the header to be a link.  So == Language == and ==[[Language]]== Should also be allowed.
+
+   @Test
+   public void allowSingleSpaceAroundLanguage() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      String header = "== " + LANGUAGE + "==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(header + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
+   }
+
+   @Test
+   public void allowMultipleSpaceAroundLanguage() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      String header = "== \t    " + LANGUAGE + "\t  \t ==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(header + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
+   }
+
+   @Test
+   public void allowLinkAroundLanguage() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      String header = "==[[" + LANGUAGE + "]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(header + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
+   }
+
+   @Test
+   public void allowLinkAndSpacesAroundLanguage() throws Throwable {
+      TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      String header = "== [[" + LANGUAGE + "]]   ==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(header + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
+   }
+
+   @Test
+   public void doesNotAllowSingleBrackets() throws Throwable {
+      TestableLanguagePrefilter pf = makeSpy();
+
+      startText(pf);
+      String header = "==[" + LANGUAGE + "]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
+   }
+
+   @Test
+   public void doesNotAllowThreeBrackets() throws Throwable {
+      TestableLanguagePrefilter pf = makeSpy();
+
+      startText(pf);
+      String header = "==[[[" + LANGUAGE + "]]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
+   }
+
+   @Test
+   public void doesNotAllowFourBrackets() throws Throwable {
+      TestableLanguagePrefilter pf = makeSpy();
+
+      startText(pf);
+      String header = "==[[[[" + LANGUAGE + "]]]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
+   }
+
+   //
+   // Constructor parameters not interpreted as regular expressions
+   //
+   @Test
+   public void languageNotRegexp_Positive() throws Throwable {
+      TestableLanguagePrefilter pf = new TestableLanguagePrefilter("P[ae]g");
+
+      startText(pf);
+      String header = "==[[P[ae]g]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(header + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
+   }
+
+   @Test
+   public void languageNotRegexp_negative() throws Throwable {
+      TestableLanguagePrefilter pf = spy(new TestableLanguagePrefilter("P[ae]g"));
+
+      startText(pf);
+      String header = "==[[Peg]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
+   }
+
+   //
+   // Allows language to be a regular expression
+   //
+   @Test
+   public void regexp_positive() throws Throwable {
+      TestableLanguagePrefilter pf = new TestableLanguagePrefilter(Pattern.compile("P[ae]g"));
+
+      startText(pf);
+      String header = "==[[Peg]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      assertEquals(header + "First line to keep\nKeep Line 2Keep Line 3which is longer than the rest",
+            pf.sent());
+   }
+
+   @Test
+   public void regexp_negative() throws Throwable {
+      TestableLanguagePrefilter pf = spy(new TestableLanguagePrefilter(Pattern.compile("P[ae]g")));
+
+      startText(pf);
+      String header = "==[[Pig]]==";
+      sendCharacters(pf, header);
+      sendCharacters(pf, "First line to keep\nKeep Line 2");
+      sendCharacters(pf, "Keep Line 3");
+      sendCharacters(pf, "which is longer than the rest");
+      endText(pf);
+      verify(pf, never()).sendCharacters(Matchers.<char[]>any(), anyInt(), anyInt());
+   }
+
 
    //
    // Complete test

@@ -86,19 +86,6 @@ public class FilterWiktionaryByLanguage {
    // (C) 2010 Zachary Kurmas
    // Created February 12, 2010
    private static class PostFilterByLanguage implements PostFilter {
-      // The string that indicates the start of a language section in
-      // Wiktionary.
-      // This string typically looks like this ==Polish== (with the "==")
-      private String languageString;
-
-      /**
-       * Constructor
-       *
-       * @param language the language to filter for.
-       */
-      public PostFilterByLanguage(String language) {
-         this.languageString = "==" + language + "==";
-      }
 
       // override
       public boolean keepPage(PageType page) {
@@ -176,7 +163,7 @@ public class FilterWiktionaryByLanguage {
       // to keep in the DOM and which to discard.
 
       LanguagePrefilter lpf = new LanguagePrefilter(options.language);
-      PostFilterByLanguage postFilter = new PostFilterByLanguage(options.language);
+      PostFilterByLanguage postFilter = new PostFilterByLanguage();
 
       // pfwl.addSAXFilter(new BugChecker("Top"));
       // pfwl.addSAXFilter(new PerformanceFilter(new PrintStream(new
