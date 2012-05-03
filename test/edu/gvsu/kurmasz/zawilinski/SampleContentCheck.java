@@ -64,6 +64,7 @@ public class SampleContentCheck {
 
    public static void verifyMWSampleContentTextSqueeze(MediaWikiType doc, String[][] expected) {
       int pageNum = 0;
+       assertEquals("NumPages", expected.length, doc.getPage().size());
       for (PageType page : doc.getPage()) {
          int revNum = 0;
          for (Object rawRev : page.getRevisionOrUploadOrLogitem()) {
@@ -177,9 +178,5 @@ public class SampleContentCheck {
       assertEquals(42857, contributor.getId().intValue());
 
       assertEquals("What's up, Doc?", p2r3.getComment().getValue());
-
-
    }
-
-
 }

@@ -1,6 +1,6 @@
 package edu.gvsu.kurmasz.zawilinski;
 
-import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
 import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
@@ -36,14 +36,14 @@ public class PageFilterListener extends Unmarshaller.Listener {
 
    // The code that determines whether we want to keep a particular page.
    private PostFilter filter;
-   private Log log;
+   private SimpleLog log;
 
    /**
     * Constructor
     *
     * @param filter filter to apply
     */
-   public PageFilterListener(PostFilter filter, Log log) {
+   public PageFilterListener(PostFilter filter, SimpleLog log) {
       this.filter = filter;
       this.log = log;
    }
@@ -121,18 +121,18 @@ public class PageFilterListener extends Unmarshaller.Listener {
          if (filter.keepPage(page)) {
             keptPageCount++;
 
-            if (log.willLog(PostFilter.PAGE_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.PAGE_KEPT)) {
                String message = String.format("%-11s %5d %7d %30s %d",
                      "kept page", keptPageCount, pageCount, page
                      .getTitle(), Util.getTextSize(page));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.PAGE_KEPT, message);
             }
          } else {
-            if (log.willLog(PostFilter.PAGE_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.PAGE_DUMPED)) {
                String message = String.format("%-11s %5d %7d %30s %d",
                      "dumped page", keptPageCount, pageCount, page
                      .getTitle(), Util.getTextSize(page));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.PAGE_DUMPED, message);
             }
             pageToDelete = page;
          } // end else
@@ -145,20 +145,20 @@ public class PageFilterListener extends Unmarshaller.Listener {
          if (filter.keepRevision(revision, currentPage)) {
             keptRevisionCount++;
 
-            if (log.willLog(PostFilter.REVISION_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.REVISION_KEPT)) {
                String message = String.format(
                      "    %-11s %5d %7d %12s %d", "kept rev.",
                      keptRevisionCount, revisionCount, revision
                      .getId(), Util.getTextSize(revision));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.REVISION_KEPT, message);
             }
          } else {
-            if (log.willLog(PostFilter.REVISION_FILTER_PROGRESS)) {
+            if (log.willLog(Zawilinski.REVISION_DUMPED)) {
                String message = String.format(
                      "    %-11s %5d %7d %12s %d", "dumped rev.",
                      keptRevisionCount, revisionCount, revision
                      .getId(), Util.getTextSize(revision));
-               log.println(PostFilter.PAGE_FILTER_PROGRESS, message);
+               log.println(Zawilinski.PAGE_DUMPED, message);
             }
             revisionToDelete = revision;
 

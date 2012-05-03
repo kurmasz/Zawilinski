@@ -1,6 +1,7 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import org.xml.sax.InputSource;
 
@@ -35,11 +36,6 @@ public class MediaWikiLoader {
     * MediaWiki schema).
     */
    public static final String CONTEXT_PATH = "edu.gvsu.kurmasz.zawilinski.mw.current";
-
-   /**
-    * The debug level at which the beginning and end of parsing is recorded in the log.
-    */
-   public static final int PARSE_BEGIN_END = 100;
 
    /**
     * Exception describing a problem with the XML software setup.
@@ -95,7 +91,7 @@ public class MediaWikiLoader {
     * @throws JAXBException            if there is a problem generating the DOM
     * @throws IllegalArgumentException if any parameters are {@code null}
     */
-   public static JAXBElement<MediaWikiType> load(Source source, Log log, Unmarshaller unmarshaller) throws
+   public static JAXBElement<MediaWikiType> load(Source source, SimpleLog log, Unmarshaller unmarshaller) throws
          JAXBException {
 
       if (source == null) {
@@ -108,9 +104,9 @@ public class MediaWikiLoader {
          throw new IllegalArgumentException("Unmarshaller may not be null.");
       }
 
-      log.println(PARSE_BEGIN_END, "Begin unmarshal.");
+      log.println(Zawilinski.PARSE_BEGIN_END, "Begin unmarshal.");
       Object answer = unmarshaller.unmarshal(source);
-      log.println(PARSE_BEGIN_END, "Complete unmarshal.");
+      log.println(Zawilinski.PARSE_BEGIN_END, "Complete unmarshal.");
 
       assert answer instanceof JAXBElement : "Unexpected return type from unmarshal!  "
             + answer.getClass().getName();

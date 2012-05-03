@@ -2,6 +2,7 @@ package edu.gvsu.kurmasz.zawilinski;
 
 import edu.gvsu.kurmasz.warszawa.io.InputHelper;
 import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLFilter;
@@ -27,8 +28,8 @@ import java.io.InputStream;
  * Debug levels: (activates all levels above):
  * <ul>
  * <li>PARSE_BEGIN_END: Announce beginning and end of parsing
- * <li>PAGE_FILTER_PROGRESS: Announces which Wiktionary entries kept and which dumped.
- * <li>REVISION_FILTER_PROGRESS: Announces which Wiktionary revisions are kept and which are dumped.
+ * <li>PAGE_DUMPED: Announces which Wiktionary entries kept and which dumped.
+ * <li>REVISION_DUMPED: Announces which Wiktionary revisions are kept and which are dumped.
  * </ul>
  *
  * @author Zachary Kurmas
@@ -37,9 +38,9 @@ import java.io.InputStream;
 // Created Feb 12, 2010
 public class PostFilteredMediaWikiLoader {
 
-    public static JAXBElement<MediaWikiType> loadFilteredPages(InputStream source, Log log,
-                                                              PostFilter postFilter,
-                                                              XMLFilter... filterList) throws JAXBException {
+    public static JAXBElement<MediaWikiType> load(InputStream source, SimpleLog log,
+                                                  PostFilter postFilter,
+                                                  XMLFilter... filterList) throws JAXBException {
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
       unmarshaller.setListener(new PageFilterListener(postFilter, log));
       return PreFilteredMediaWikiLoader.load(new InputSource(source), log, unmarshaller, filterList);
@@ -48,8 +49,8 @@ public class PostFilteredMediaWikiLoader {
    public static void main(String[] args) throws JAXBException {
       String filename = "/Users/kurmasz/Documents/LocalResearch/LanguageWiki/SampleInput/mw_sample_0.4.xml";
       InputStream source = InputHelper.openFilteredInputStreamOrQuit(new File(filename));
-      Log log = new Log(System.err, 0);
-      JAXBElement<MediaWikiType> elem = loadFilteredPages(source, log, PostFilter.KEEP_ALL);
+      SimpleLog log = new Log(System.err, 0);
+      JAXBElement<MediaWikiType> elem = load(source, log, PostFilter.KEEP_ALL);
       MediaWikiType root = elem.getValue();
       //Util.print(root);
    }

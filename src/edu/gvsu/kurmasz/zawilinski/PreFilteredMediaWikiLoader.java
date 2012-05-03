@@ -1,6 +1,6 @@
 package edu.gvsu.kurmasz.zawilinski;
 
-import edu.gvsu.kurmasz.warszawa.log.Log;
+import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -64,7 +64,7 @@ public class PreFilteredMediaWikiLoader {
     * @throws MediaWikiLoader.XMLConfigurationException
     *                       if there is a problem configuring the XML filters or parser
     */
-   public static JAXBElement<MediaWikiType> load(InputSource source, Log log, Unmarshaller unmarshaller,
+   public static JAXBElement<MediaWikiType> load(InputSource source, SimpleLog log, Unmarshaller unmarshaller,
                                                  XMLFilter... filterList) throws JAXBException {
 
       if (source == null) {
@@ -104,7 +104,7 @@ public class PreFilteredMediaWikiLoader {
     * @throws MediaWikiLoader.XMLConfigurationException
     *                       if there is a problem configuring the XML filters or parser
     */
-   public static JAXBElement<MediaWikiType> load(InputStream source, Log log,
+   public static JAXBElement<MediaWikiType> load(InputStream source, SimpleLog log,
                                                  XMLFilter... filterList) throws JAXBException {
       return load(new InputSource(source), log, MediaWikiLoader.createUnmarshaller(), filterList);
    }

@@ -27,10 +27,7 @@ public class TextSizePrefilter extends TextPrefilter {
 
    private SimpleLog log;
 
-   /**
-    * Debug level used to list truncated entries.
-    */
-   public static final int TRUNCATIONS = MediaWikiLoader.PARSE_BEGIN_END - 10;
+
 
    /**
     * Constructor
@@ -117,7 +114,7 @@ public class TextSizePrefilter extends TextPrefilter {
       // TODO: Have the superclass also save the revision id so that we know *which* revision was
       // truncated.
       if (currentTextSize > this.textSizeLimit && log != null) {
-         log.println(TRUNCATIONS, String.format("%d %d %s", currentTextSize, textSizeLimit, getCurrentTitle()));
+         log.println(Zawilinski.TRUNCATIONS, String.format("%d %d %s", currentTextSize, textSizeLimit, getCurrentTitle()));
       }
    }
 

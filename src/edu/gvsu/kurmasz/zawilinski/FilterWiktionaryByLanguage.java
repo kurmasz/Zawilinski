@@ -5,8 +5,6 @@ import edu.gvsu.kurmasz.warszawa.deprecated.joswa.JoswaOptionParser;
 import edu.gvsu.kurmasz.warszawa.io.InputHelper;
 import edu.gvsu.kurmasz.warszawa.log.Log;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
-import edu.gvsu.kurmasz.zawilinski.mw.current.PageType;
-import edu.gvsu.kurmasz.zawilinski.mw.current.RevisionType;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -60,7 +58,7 @@ public class FilterWiktionaryByLanguage {
       public String logFile = null;
 
       @JoswaOption(argName = "level", usage = "minimum log level printed.")
-      public Integer logLevel = MediaWikiLoader.PARSE_BEGIN_END;
+      public Integer logLevel = Zawilinski.PARSE_BEGIN_END;
 
       @JoswaOption(shortName = 'o', usage = "output file (or \"-\" for standard output)", argName = "file")
       public String outputFile = "-";
@@ -70,39 +68,6 @@ public class FilterWiktionaryByLanguage {
 
       @JoswaOption(argName = "limit", usage = "maximum number of characters passed to unmarshaller (per revision)")
       public Integer textSizeLimit = TextSizePrefilter.UNLIMITED;
-   }
-
-   /**
-    * Keep only those pages that contain some data for the specified language.
-    * IMPORTANT! This filter is written specifically to run after the {@code
-    * LanguageFilter} SAX filter is applied. This SAX filter assures that all
-    * text segments <em>begin</em> with the expected language string (e.g.,
-    * "==Polish=="). If you don't apply the SAX filter, you need a post-filter
-    * that checks to see if the revision text <em>contains</em> the
-    * languageString.
-    *
-    * @author Zachary Kurmas
-    */
-   // (C) 2010 Zachary Kurmas
-   // Created February 12, 2010
-   private static class PostFilterByLanguage implements PostFilter {
-
-      // override
-      public boolean keepPage(PageType page) {
-         // If the total size of all revisions is 0 (or there are no
-         // revisions), then this page contains no data for the requested
-         // language.
-         return Util.getTextSize(page) > 0;
-      }
-
-      public boolean keepRevision(RevisionType revision, PageType page) {
-         // IMPORTANT! Notice the "startsWith" This filter works properly
-         // only if the LanguagePrefilter SAX filter has been applied (which
-         // assures that each <text>segment begins with the requested
-         // language headerContent.
-         //return Util.getText(revision).startsWith(languageString);
-         return Util.getTextSize(revision) > 0;
-      }
    }
 
    /**
@@ -147,7 +112,7 @@ public class FilterWiktionaryByLanguage {
 
       Log textSizeLog;
       if (options.textSizeLog != null) {
-         textSizeLog = Log.makeLogOrQuit(options.textSizeLog, TextSizePrefilter.TRUNCATIONS);
+         textSizeLog = Log.makeLogOrQuit(options.textSizeLog, Zawilinski.TRUNCATIONS);
       } else {
          textSizeLog = new Log();
       }
@@ -163,7 +128,7 @@ public class FilterWiktionaryByLanguage {
       // to keep in the DOM and which to discard.
 
       LanguagePrefilter lpf = new LanguagePrefilter(options.language);
-      PostFilterByLanguage postFilter = new PostFilterByLanguage();
+      edu.gvsu.kurmasz.zawilinski.PostFilterByLanguage postFilter = new edu.gvsu.kurmasz.zawilinski.PostFilterByLanguage();
 
       // pfwl.addSAXFilter(new BugChecker("Top"));
       // pfwl.addSAXFilter(new PerformanceFilter(new PrintStream(new
@@ -176,7 +141,7 @@ public class FilterWiktionaryByLanguage {
       WiktionaryWriter writer = new WiktionaryWriter();
 
       try {
-         JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.loadFilteredPages(InputHelper
+         JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.load(InputHelper
                .openFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
          try {
             writer.write(root, options.outputFile);

@@ -134,7 +134,7 @@ public class MediaWikiLoaderTest {
       Unmarshaller unmarshaler = mock(Unmarshaller.class);
       MediaWikiLoader.load(source, log, unmarshaler);
 
-      verify(log).println(MediaWikiLoader.PARSE_BEGIN_END, "Begin unmarshal.");
+      verify(log).println(Zawilinski.PARSE_BEGIN_END, "Begin unmarshal.");
    }
 
    @Test
@@ -144,7 +144,7 @@ public class MediaWikiLoaderTest {
       Unmarshaller unmarshaler = mock(Unmarshaller.class);
       MediaWikiLoader.load(source, log, unmarshaler);
 
-      verify(log).println(MediaWikiLoader.PARSE_BEGIN_END, "Complete unmarshal.");
+      verify(log).println(Zawilinski.PARSE_BEGIN_END, "Complete unmarshal.");
    }
 
    @Test
