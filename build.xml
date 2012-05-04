@@ -157,7 +157,7 @@
          <jar destfile="${dist}/${jarName}-${zawilinski_ver}@{src}.jar">
             <manifest>
                <attribute name="Built-By" value="Zachary Kurmas"/>
-               <attribute name="Main-Class" value="edu.gvsu.kurmasz.zawilinski.FilterWiktionaryByLanguage"/>
+               <attribute name="Main-Class" value="edu.gvsu.kurmasz.zawilinski.Zawilinski"/>
             </manifest>
             <fileset dir="${dist}" includes="doc/**"/>
             <zipgroupfileset dir="bundled_packages" includes="**/*.jar"/>

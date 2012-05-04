@@ -142,7 +142,7 @@ public class FilterWiktionaryByLanguage {
 
       try {
          JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.load(InputHelper
-                 .openFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
+                 .openMappedAndFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
          try {
             writer.write(root, options.outputFile);
          } catch (FileNotFoundException fnf) {

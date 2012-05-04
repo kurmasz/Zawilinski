@@ -1,11 +1,9 @@
 package edu.gvsu.kurmasz.zawilinski;
 
+import javax.xml.bind.JAXBException;
+
 /**
- * Created by IntelliJ IDEA.
- * User: kurmasz
- * Date: 4/19/12
- * Time: 4:48 PM
- * To change this template use File | Settings | File Templates.
+ * Logging levels and {@link #main(String[])}
  */
 public class Zawilinski {
 
@@ -45,4 +43,23 @@ public class Zawilinski {
     public static final int REVISION_KEPT = PAGE_KEPT - 1;
 
 
+    public static void main(String[] args) throws JAXBException {
+
+        if (args.length < 1) {
+            System.err.println("Usage:  java -jar zawilinski.jar programName [param1] [param2] ...");
+            return;
+        }
+
+        String program = args[0];
+        String[] otherArgs = new String[args.length -1];
+        System.arraycopy(args, 1, otherArgs, 0, args.length -1);
+
+        if (program.equals("Langauge") || program.equals(FilterWiktionaryByLanguage.class.getSimpleName())) {
+            FilterWiktionaryByLanguage.main(otherArgs);
+        } else if (program.equals("Title") || program.equals(FilterWiktionaryByTitle.class.getSimpleName())) {
+            FilterWiktionaryByTitle.main(otherArgs);
+        } else {
+            System.err.printf("Program \"%s\" not recognized\n", program);
+        }
+    }
 }
