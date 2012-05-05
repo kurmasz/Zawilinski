@@ -70,7 +70,7 @@ public class FilterWiktionaryByLanguage {
       public Integer textSizeLimit = TextSizePrefilter.UNLIMITED;
    }
 
-    /**
+   /**
     * Main
     *
     * @param args
@@ -128,7 +128,7 @@ public class FilterWiktionaryByLanguage {
       // to keep in the DOM and which to discard.
 
       LanguagePrefilter lpf = new LanguagePrefilter(options.language);
-       edu.gvsu.kurmasz.zawilinski.PostFilterByLanguage postFilter = new edu.gvsu.kurmasz.zawilinski.PostFilterByLanguage(options.language);
+      edu.gvsu.kurmasz.zawilinski.PostFilterByLanguage postFilter = new edu.gvsu.kurmasz.zawilinski.PostFilterByLanguage();
 
       // pfwl.addSAXFilter(new BugChecker("Top"));
       // pfwl.addSAXFilter(new PerformanceFilter(new PrintStream(new
@@ -142,7 +142,7 @@ public class FilterWiktionaryByLanguage {
 
       try {
          JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.load(InputHelper
-                 .openMappedAndFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
+               .openMappedAndFilteredInputStream(options.inputFile), postFilterLog, postFilter, lpf, lts);
          try {
             writer.write(root, options.outputFile);
          } catch (FileNotFoundException fnf) {

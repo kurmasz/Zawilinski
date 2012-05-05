@@ -26,7 +26,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         PageType page = mock(PageType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getTextSize(page)).thenReturn(new Long("1"));
 
@@ -38,7 +38,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         PageType page = mock(PageType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getTextSize(page)).thenReturn(new Long("0"));
 
@@ -50,7 +50,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT);
 
@@ -62,7 +62,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT_WITH_TRAILER);
 
@@ -75,7 +75,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn("");
 
@@ -88,7 +88,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT_WITH_TRAILER);
         pfl.keepRevision(revision, mock(PageType.class));
@@ -102,7 +102,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "==The=next=language==");
         pfl.keepRevision(revision, mock(PageType.class));
@@ -116,7 +116,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT);
 
@@ -131,7 +131,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "===Level 3===");
 
@@ -146,7 +146,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "==Level 3 oops===");
 
@@ -161,7 +161,7 @@ public class PostFilterByLanguageTest {
         mockStatic(Util.class);
 
         RevisionType revision = mock(RevisionType.class);
-        PostFilterByLanguage pfl = new PostFilterByLanguage("someLanguage");
+        PostFilterByLanguage pfl = new PostFilterByLanguage();
 
         when(Util.getText(revision)).thenReturn(SAMPLE_TEXT + "===Level 3==");
 

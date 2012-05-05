@@ -12,7 +12,7 @@
 
 
    <!-- version info -->
-   <property name="zawilinski_ver" value="1.0.1"/>
+   <property name="zawilinski_ver" value="1.0.3"/>
 
    <!-- build info -->
    <property name="src" location="src"/>
@@ -151,8 +151,9 @@
       <attribute name="src" default="NOT SET"/>
       <element name="addSrc" optional="yes"/>
       <sequential>
-         <propertyfile file="${build}/edu/gvsu/kurmasz/zawilinski/builddate.properties">
+         <propertyfile file="${build}/edu/gvsu/kurmasz/zawilinski/buildInfo.properties">
             <entry key="builddate" value="now" type="date" pattern="yyyy.MM.dd HH.mm.ss"/>
+            <entry key="version" value="${zawilinski_ver}"/>
          </propertyfile>
          <jar destfile="${dist}/${jarName}-${zawilinski_ver}@{src}.jar">
             <manifest>

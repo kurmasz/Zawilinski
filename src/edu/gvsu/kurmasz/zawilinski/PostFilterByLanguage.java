@@ -24,21 +24,8 @@ import java.util.regex.Pattern;
 // (C) 2010 Zachary Kurmas
 // Created February 12, 2010
 public class PostFilterByLanguage implements PostFilter {
-    // The string that indicates the start of a language section in
-    // Wiktionary.
-    // This string typically looks like this ==Polish== (with the "==")
-    private String languageString;
 
     private Pattern headerPattern = Pattern.compile("([^=])==([^=\\n])+(=[^=\\n]+)*==$");
-
-    /**
-     * Constructor
-     *
-     * @param language the language to filter for.
-     */
-    public PostFilterByLanguage(String language) {
-        this.languageString = "==" + language + "==";
-    }
 
     // override
     public boolean keepPage(PageType page) {

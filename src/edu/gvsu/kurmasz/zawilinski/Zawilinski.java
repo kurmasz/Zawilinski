@@ -1,6 +1,7 @@
 package edu.gvsu.kurmasz.zawilinski;
 
 import javax.xml.bind.JAXBException;
+import edu.gvsu.kurmasz.warszawa.util.BuildInfo;
 
 /**
  * Logging levels and {@link #main(String[])}
@@ -46,7 +47,9 @@ public class Zawilinski {
     public static void main(String[] args) throws JAXBException {
 
         if (args.length < 1) {
-            System.err.println("Usage:  java -jar zawilinski.jar programName [param1] [param2] ...");
+	    BuildInfo bi = BuildInfo.make(Zawilinski.class);
+	    System.out.println("Zawilinski version " + bi.getVersion() + " built "
+            + bi.getBuildDate() + ".");
             return;
         }
 

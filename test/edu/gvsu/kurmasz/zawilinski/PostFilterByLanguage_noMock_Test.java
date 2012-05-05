@@ -17,7 +17,7 @@ public class PostFilterByLanguage_noMock_Test {
         InputStream input = this.getClass().getResourceAsStream("/testLanguageFilter.xml");
         assertNotNull(input);
         LanguagePrefilter lpf = new LanguagePrefilter(language);
-        PostFilterByLanguage postFilter = new PostFilterByLanguage(language);
+        PostFilterByLanguage postFilter = new PostFilterByLanguage();
         JAXBElement<MediaWikiType> root = PostFilteredMediaWikiLoader.load(input, mock(Log.class), postFilter, lpf);
 
         String[][] expected = {
