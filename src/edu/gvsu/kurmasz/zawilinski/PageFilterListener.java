@@ -12,6 +12,11 @@ import javax.xml.bind.Unmarshaller;
  * has finished loading, this code checks to see if the page is wanted. If
  * not, it removes that page, thereby freeing memory.
  *
+ * <p>
+ *     Log data for pages:  #pages_kept #pages_total title page_size<br/>
+ *     Log data for revisions: #revisions_kept_total #revisions_total rev_number rev_size
+
+ * </p>
  * @author Zachary Kurmas
  */
 // (C) 2010 Zachary Kurmas
