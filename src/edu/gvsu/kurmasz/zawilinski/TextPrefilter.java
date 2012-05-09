@@ -178,6 +178,8 @@ public abstract class TextPrefilter extends XMLFilterImpl {
     */
    protected void sendCharacters(char[] ch, int start, int length)
          throws SAXException {
+       assert start + length <= ch.length : String.format("Error! sendCharacters(ch, %d, %d) will produce an error because length is only %d.",
+               start, length, ch.length);
       super.characters(ch, start, length);
    }
 

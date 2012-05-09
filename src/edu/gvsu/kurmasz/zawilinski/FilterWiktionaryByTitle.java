@@ -68,13 +68,15 @@ public class FilterWiktionaryByTitle {
         String logfile = "titlePrefilter.log";
         Log log;
 
-        try {
-            log = new Log(logfile, Zawilinski.PAGE_DUMPED);
-        } catch (FileNotFoundException e) {
-            usage_out.println("Could not open logfile \"" + logfile + "\" for writing.");
-            System.exit(2);
-            return;
-        }
+        log = new Log();
+//        try {
+//            log = new Log(logfile, Zawilinski.PAGE_DUMPED);
+//        } catch (FileNotFoundException e) {
+//            usage_out.println("Could not open logfile \"" + logfile + "\" for writing.");
+//            System.exit(2);
+//            return;
+//        }
+
 
         Pattern[] patterns = new Pattern[args.length - 1];
         for (int i = 0; i < args.length - 1; i++) {
@@ -86,7 +88,7 @@ public class FilterWiktionaryByTitle {
         // Some Wiktionary entries have been vandalized by adding several gigabytes of random
         // text.  This filter prevents these entries from unnecessarily slowing down (or
         // even crashing) the filter.
-        TextSizePrefilter lts = new TextSizePrefilter(2048, log);
+        TextSizePrefilter lts = new TextSizePrefilter(1000000, log);
 
         WiktionaryWriter writer = new WiktionaryWriter();
 
