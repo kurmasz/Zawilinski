@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Matchers;
 import org.xml.sax.SAXException;
 
+import javax.swing.table.TableStringConverter;
 import javax.xml.bind.JAXBElement;
 import java.io.InputStream;
 import java.util.regex.Pattern;
@@ -73,23 +74,6 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    private static final String LH_P2 = LANGUAGE_HEADER.substring(5, 8);
    private static final String LH_P3 = LANGUAGE_HEADER.substring(8);
 
-   /*
-   private static final char[] CHARS = "\n .,abcdefghijklmnopqrstuvwxyz-?<>".toCharArray();
-
-   private static char[] makeRandomString(int length) {
-      // The use of the seed 0 and a new Random object is needed for repeatability
-      java.util.Random rand = new java.util.Random(0);
-
-      char[] answer = new char[length];
-
-      for (int i = 0; i < length; i++) {
-         answer[i] = CHARS[rand.nextInt(CHARS.length)];
-      }
-      return answer;
-   }
-
-   private static char[] LONG_ARRAY = makeRandomString(8192);
-   */
    public TestableLanguagePrefilter make() {
       return new TestableLanguagePrefilter(LANGUAGE);
    }
@@ -895,6 +879,20 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
       assertEquals(LANGUAGE_HEADER + "One, Two, buckle my shoe.==Stop Here==" +
             LANGUAGE_HEADER + "Three, Four, shut the door.", pf.sent());
    }
+
+    //
+    // Header can be end of text
+    //
+    @Test
+    public void headerCanBeEndOfText() throws Throwable {
+           TestableLanguagePrefilter pf = make();
+
+      startText(pf);
+      sendCharacters(pf, LANGUAGE_HEADER);
+      endText(pf);
+
+      assertEquals(LANGUAGE_HEADER, pf.sent());
+    }
 
    //
    // "Extra" characters in header

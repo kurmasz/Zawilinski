@@ -173,6 +173,13 @@ class HeaderSearch {
       }
    }
 
+    /**
+     * Process a set of characters
+     * @param ch the set of characters
+     * @param start the index of the first character to examine
+     * @param length the number of characters to examine
+     * @return a {@link Result} object describing the results of the search.
+     */
    public Result process(char[] ch, int start, int length) {
       for (int i = start; i < start + length; i++) {
          processChar(ch[i]);
@@ -182,4 +189,17 @@ class HeaderSearch {
       }
       return null;
    }
+
+    /**
+     * Return a {@link Result} if the status of the search is simply waiting for one more character to verify that
+     * the header is balanced. This is used to check for a header at the very end of the input.
+     * @return a {@link Result} object describing the results of the search.
+     */
+    public Result getCurrentContent() {
+        if (stage == Stage.CLOSE && foundInStage == DESIRED_HEADER_LEVEL && openSize == DESIRED_HEADER_LEVEL ) {
+            return new Result(buffer.toString(), -1);
+        } else {
+            return null;
+        }
+    }
 }
