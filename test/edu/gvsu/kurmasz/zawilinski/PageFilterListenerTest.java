@@ -118,7 +118,7 @@ public class PageFilterListenerTest {
       // should try to remove page
       @SuppressWarnings("unchecked")
       List<Object> revs = mock(List.class);
-      stub(firstPage.getRevisionOrUploadOrLogitem()).toReturn(revs);
+      stub(firstPage.getRevisionOrUpload()).toReturn(revs);
       pfl.beforeUnmarshal(mock(RevisionType.class), null);
       verify(revs).remove(firstRev);
    }
@@ -216,7 +216,7 @@ public class PageFilterListenerTest {
       // should try to remove page
       @SuppressWarnings("unchecked")
       List<Object> revs = mock(List.class);
-      stub(firstPage.getRevisionOrUploadOrLogitem()).toReturn(revs);
+      stub(firstPage.getRevisionOrUpload()).toReturn(revs);
       pfl.afterUnmarshal(firstPage, null);
       verify(revs).remove(firstRev);
    }

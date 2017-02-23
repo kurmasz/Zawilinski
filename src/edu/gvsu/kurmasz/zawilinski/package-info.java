@@ -13,7 +13,7 @@
  * large (tens of gigabytes) XML files.  There are two basic approaches for loading
  * XML files: stream parsers
  * and tree-based parsers.  Stream parsers (e.g., Simple API for XML -- SAX)
- * are efficient; however, writing one is time consuming and difficult because
+ * are efficient; however, writing this type of filter is time consuming and difficult because
  * the programmer has to explicitly keep track of the current position in the XML parse tree
  * and often must write code to buffer previous XML events.</p>
  *

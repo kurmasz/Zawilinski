@@ -1,0 +1,88 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd"
+           version="0.10" xml:lang="en">
+    <siteinfo>
+        <sitename>Wiktionary</sitename>
+        <dbname>enwiktionary</dbname>
+        <base>https://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
+        <generator>MediaWiki 1.29.0-wmf.9</generator>
+        <case>case-sensitive</case>
+        <namespaces>
+            <namespace key="-2" case="case-sensitive">Media</namespace>
+            <namespace key="-1" case="first-letter">Special</namespace>
+            <namespace key="0" case="case-sensitive"/>
+            <namespace key="1" case="case-sensitive">Talk</namespace>
+            <namespace key="2" case="first-letter">User</namespace>
+            <namespace key="3" case="first-letter">User talk</namespace>
+            <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+            <namespace key="2600" case="first-letter">Topic</namespace>
+        </namespaces>
+    </siteinfo>
+    <page>
+        <title>Sample page 1</title>
+        <ns>4</ns>
+        <id>6</id>
+        <restrictions>edit=autoconfirmed:move=sysop</restrictions>
+        <revision>
+            <id>3</id>
+            <timestamp>2002-12-12T08:06:51Z</timestamp>
+            <contributor>
+                <username>Sjc~enwiktionary</username>
+                <id>2</id>
+            </contributor>
+            <model>wikitext</model>
+            <format>text/x-wiki</format>
+            <comment>/* For more information */ remove non-existing page</comment>
+            <text xml:space="preserve">Content for rev 1</text>
+            <sha1>irxqfdb24mmz7xc5vdutt51kjf6zxjh</sha1>
+        </revision>
+        <revision>
+            <id>4</id>
+            <parentid>3</parentid>
+            <timestamp>2002-12-12T08:11:20Z</timestamp>
+            <contributor>
+                <username>Zachary Kurmas</username>
+                <id>42856</id>
+            </contributor>
+            <model>wikitext</model>
+            <format>text/x-wiki</format>
+            <comment>/* For more information */ remove non-existing page</comment>
+            <text xml:space="preserve">Content for rev 2 (pickles)</text>
+            <sha1>cw5x5uc0k9rojqbnxb1n3nd0p0fl0mi</sha1>
+        </revision>
+    </page>
+    <page>
+        <title>Sample page 2</title>
+        <id>61</id>
+        <revision>
+            <id>21</id>
+            <timestamp>2009-08-10T05:21:17Z</timestamp>
+            <contributor>
+                <username>Ivan Štambuk</username>
+                <id>42855</id>
+            </contributor>
+            <comment>Another comment</comment>
+            <text xml:space="preserve">Content for rev 1 of page 2 (blueberries)</text>
+        </revision>
+        <revision>
+            <id>22</id>
+            <timestamp>2009-08-10T22:00:17Z</timestamp>
+            <contributor>
+                <username>Zachary Kurmas</username>
+                <id>42856</id>
+            </contributor>
+            <comment>/* For more information */ remove non-existing page</comment>
+            <text xml:space="preserve">Content for rev 2 of page 2</text>
+        </revision>
+        <revision>
+            <id>36</id>
+            <timestamp>2009-08-10T22:00:17Z</timestamp>
+            <contributor>
+                <username>Bugs Bunny</username>
+                <id>42857</id>
+            </contributor>
+            <comment>What's up, Doc?</comment>
+            <text xml:space="preserve">Content for rev 3 of page 2 (carrots)</text>
+        </revision>
+    </page>
+</mediawiki>

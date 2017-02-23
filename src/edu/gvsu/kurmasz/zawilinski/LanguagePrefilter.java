@@ -7,7 +7,7 @@ import org.xml.sax.SAXException;
 import java.util.regex.Pattern;
 
 /**
- * A pre-filter that only allows text through if it in the section for the specified language.   Note:  In addition
+ * A pre-filter that only allows text through that is in the section for the specified language.   Note:  In addition
  * to the expected headers of the form {@code ==Language==}, this filter also allows (1) spaces around the language
  * (e.g., ({@code == Language ==} and (2) the language to be a link (e.g., {@code "==[[Language]]=="}.
  *

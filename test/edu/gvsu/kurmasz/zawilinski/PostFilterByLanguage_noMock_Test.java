@@ -14,7 +14,7 @@ public class PostFilterByLanguage_noMock_Test {
     @Test
     public void testAll() throws Throwable {
         final String language = "Polish";
-        InputStream input = this.getClass().getResourceAsStream("/testLanguageFilter.xml");
+        InputStream input = this.getClass().getResourceAsStream("/testLanguageFilter_current.xml");
         assertNotNull(input);
         LanguagePrefilter lpf = new LanguagePrefilter(language);
         PostFilterByLanguage postFilter = new PostFilterByLanguage();

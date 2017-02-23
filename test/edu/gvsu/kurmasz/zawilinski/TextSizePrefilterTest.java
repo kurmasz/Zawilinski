@@ -290,7 +290,7 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
    //
    @Test
    public void filterDoesNothingifNoDataTooLarge() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       Log log = new Log();
 
@@ -303,7 +303,7 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
 
    @Test
    public void filterActuallyFilters() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       Log log = new Log();
 
@@ -323,7 +323,7 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
 
    @Test
    public void filterWritesToLog() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       Log log = new Log();
       SimpleLog mlog = mock(SimpleLog.class);
@@ -340,7 +340,7 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
 
    @Test
    public void filterAllowsNullLog() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       // 41 is the length of the longest article text string currently in the sample data
       TextSizePrefilter filter = new TextSizePrefilter(19, null);

@@ -64,7 +64,7 @@
 
    <!-- Compile schema for JAXB ================================================== -->
    <target name="jaxb" description="Compile schema for Jaxb" depends="makedirs">
-      <xjc schema="schemas/export-0.5.xsd" destdir="${schemaJavaSource}"
+      <xjc schema="schemas/export-0.10.xsd" destdir="${schemaJavaSource}"
            package="edu.gvsu.kurmasz.zawilinski.mw.current">
          <produces dir="${schemaJavaSource}/edu/gvsu/kurmasz/zawilinski/mw/current"/>
       </xjc>

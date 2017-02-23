@@ -23,7 +23,7 @@ public class PreFilteredMediaWikiLoader_noMock_Test {
 
    @Test
    public void loadWithNoFiltersLoadsDataAsExpected() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       InputSource inputSource = new InputSource(input);
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
@@ -37,7 +37,7 @@ public class PreFilteredMediaWikiLoader_noMock_Test {
    @Test
    public void loadWithOneFilter() throws Throwable {
 
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       InputSource inputSource = new InputSource(input);
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
@@ -56,7 +56,7 @@ public class PreFilteredMediaWikiLoader_noMock_Test {
    @Test
    public void loadWithThreeFilters() throws Throwable {
 
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       InputSource inputSource = new InputSource(input);
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
@@ -75,7 +75,7 @@ public class PreFilteredMediaWikiLoader_noMock_Test {
    @Test
    public void load_InputStream_WithThreeFilters() throws Throwable {
 
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       Log log = new Log();
 

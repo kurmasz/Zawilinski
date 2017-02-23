@@ -45,7 +45,7 @@ public class MediaWikiLoaderTest {
    // verify that the test resources are configured correctly.
    @Test
    public void openResource() throws Throwable {
-      InputStream is = this.getClass().getResourceAsStream("/testLanguageFilter.xml");
+      InputStream is = this.getClass().getResourceAsStream("/testLanguageFilter_current.xml");
       Assert.assertNotNull("Oops", is);
    }
 

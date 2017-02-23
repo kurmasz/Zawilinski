@@ -86,7 +86,7 @@ public class PageFilterListener extends Unmarshaller.Listener {
    // Remove the specified revision from the current page's list of revisions.
    private void removeRevision() {
       if (revisionToDelete != null) {
-         boolean answer = currentPage.getRevisionOrUploadOrLogitem()
+         boolean answer = currentPage.getRevisionOrUpload()
                .remove(revisionToDelete);
          assert answer : "Couldn't delete desired revision.";
          revisionToDelete = null;

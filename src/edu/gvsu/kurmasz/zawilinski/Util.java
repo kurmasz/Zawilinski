@@ -37,7 +37,7 @@ public class Util {
     public static List<RevisionType> getRevisions(PageType page) {
         ArrayList<RevisionType> answer = new ArrayList<RevisionType>();
 
-        for (Object o : page.getRevisionOrUploadOrLogitem()) {
+        for (Object o : page.getRevisionOrUpload()) {
             if (o instanceof RevisionType) {
                 answer.add((RevisionType) o);
             }

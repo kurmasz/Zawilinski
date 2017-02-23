@@ -1,1 +1,3 @@
-~/DownloadedSoftware/jaxb-ri-20091104/bin/xjc.sh -d . -p edu.gvsu.cis.kurmasz.lw.test.mw export-0.5.xsd
+~/LocalInstall/Libraries/jaxb-ri-20110601/bin/xjc.sh -d . -p edu.gvsu.cis.kurmasz.lw.test.mw export-0.10.xsd
+
+#~/DownloadedSoftware/jaxb-ri-20091104/bin/xjc.sh -d . -p edu.gvsu.cis.kurmasz.lw.test.mw export-0.5.xsd

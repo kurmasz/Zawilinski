@@ -1,7 +1,7 @@
-<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd"
-           version="0.5" xml:lang="en">
-   <siteinfo>
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd"
+              version="0.10" xml:lang="en">
+   <xsiteinfo>
       <sitename>Wiktionary</sitename>
       <base>http://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
       <generator>MediaWiki 1.16alpha-wmf</generator>
@@ -20,7 +20,7 @@
          <contributor>
             <username>Ivan Štambuk</username>
             <id>42855</id>
-         </contributor>q
+         </contributor>
          <comment>/* For more information */ remove non-existing page</comment>
          <text xml:space="preserve">Content for rev 1</text>
       </revision>
@@ -46,7 +46,7 @@
             <id>42855</id>
          </contributor>
          <comment>Another comment</comment>
-         <text xml:space="preserve">Content for rev 1 of page 2 (blueberries)</text>
+         <text xml:space="preserve">Content for rev 1 of page 2</text>
       </revision>
       <revision>
          <id>22</id>

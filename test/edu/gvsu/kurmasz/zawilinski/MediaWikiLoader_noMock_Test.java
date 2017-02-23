@@ -23,7 +23,7 @@ public class MediaWikiLoader_noMock_Test {
    //
    @Test
    public void loadReturnsExpectedData() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       SAXSource saxSource = new SAXSource(new InputSource(input));
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
@@ -47,7 +47,7 @@ public class MediaWikiLoader_noMock_Test {
 
    @Test(expected = JAXBException.class)
    public void loadThrowsExceptionIfUnparsableFile() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5_broken.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current_broken.xml");
       Assert.assertNotNull("input", input);
       SAXSource saxSource = new SAXSource(new InputSource(input));
       Unmarshaller unmarshaller = MediaWikiLoader.createUnmarshaller();
@@ -62,7 +62,7 @@ public class MediaWikiLoader_noMock_Test {
 
    @Test
    public void load_Source_Log_ReturnsExpectedData() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       SAXSource saxSource = new SAXSource(new InputSource(input));
       Log log = new Log();
@@ -84,7 +84,7 @@ public class MediaWikiLoader_noMock_Test {
 
    @Test(expected = JAXBException.class)
    public void load_Source_Log_ThrowsExceptionIfUnparsableFile() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5_broken.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current_broken.xml");
       Assert.assertNotNull("input", input);
       SAXSource saxSource = new SAXSource(new InputSource(input));
       Log log = new Log();
@@ -98,7 +98,7 @@ public class MediaWikiLoader_noMock_Test {
 
    @Test
    public void load_InputStream_Log_ReturnsExpectedData() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
       Assert.assertNotNull("input", input);
       Log log = new Log();
 
@@ -118,7 +118,7 @@ public class MediaWikiLoader_noMock_Test {
 
    @Test(expected = JAXBException.class)
    public void load_InputStream_Log_ThrowsExceptionIfUnparsableFile() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5_broken.xml");
+      InputStream input = this.getClass().getResourceAsStream("/mw_sample_current_broken.xml");
       Assert.assertNotNull("input", input);
       Log log = new Log();
 

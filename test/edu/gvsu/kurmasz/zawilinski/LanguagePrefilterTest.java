@@ -1074,7 +1074,7 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    //
    @Test
    public void completeTest() throws Throwable {
-      InputStream input = this.getClass().getResourceAsStream("/testLanguageFilter.xml");
+      InputStream input = this.getClass().getResourceAsStream("/testLanguageFilter_current.xml");
       Assert.assertNotNull("input", input);
 
       Log log = new Log();

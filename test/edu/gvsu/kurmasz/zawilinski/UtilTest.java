@@ -34,7 +34,7 @@ public class UtilTest {
         bigList.add(mock(LogItemType.class));
         bigList.add(r4);
 
-        when(page.getRevisionOrUploadOrLogitem()).thenReturn(bigList);
+        when(page.getRevisionOrUpload()).thenReturn(bigList);
 
         List<RevisionType> observed = Util.getRevisions(page);
 
@@ -62,7 +62,7 @@ public class UtilTest {
     }
 
     private MediaWikiType getRoot() throws JAXBException {
-        InputStream input = this.getClass().getResourceAsStream("/mw_sample_0.5.xml");
+        InputStream input = this.getClass().getResourceAsStream("/mw_sample_current.xml");
         Assert.assertNotNull("input", input);
         Log log = new Log();
 
@@ -73,7 +73,7 @@ public class UtilTest {
     @Test
     public void getText_revision_system() throws Throwable {
         MediaWikiType root = getRoot();
-        RevisionType rev = (RevisionType) root.getPage().get(1).getRevisionOrUploadOrLogitem().get(1);
+        RevisionType rev = (RevisionType) root.getPage().get(1).getRevisionOrUpload().get(1);
         assertEquals("Content for rev 2 of page 2", Util.getText(rev));
     }
 
@@ -94,7 +94,7 @@ public class UtilTest {
     @Test
     public void getTextSize_revision_system() throws Throwable {
         MediaWikiType root = getRoot();
-        RevisionType rev = (RevisionType) root.getPage().get(1).getRevisionOrUploadOrLogitem().get(1);
+        RevisionType rev = (RevisionType) root.getPage().get(1).getRevisionOrUpload().get(1);
         assertEquals("Content for rev 2 of page 2".length(), Util.getTextSize(rev));
     }
 
@@ -122,7 +122,7 @@ public class UtilTest {
         revs.add(r1);
         revs.add(r2);
         revs.add(r3);
-        when(page.getRevisionOrUploadOrLogitem()).thenReturn(revs);
+        when(page.getRevisionOrUpload()).thenReturn(revs);
 
         assertEquals("size", 25, Util.getTextSize(page));
     }
@@ -161,7 +161,7 @@ public class UtilTest {
         revs.add(r1);
         revs.add(r2);
         revs.add(r3);
-        when(page.getRevisionOrUploadOrLogitem()).thenReturn(revs);
+        when(page.getRevisionOrUpload()).thenReturn(revs);
 
         assertEquals("R1", "text 1", Util.getText(page, 0));
         assertEquals("R2", "text 2 foo bar", Util.getText(page, 1));
@@ -195,7 +195,7 @@ public class UtilTest {
     public void setText_system() throws Throwable {
         String newText = "I love radishes!";
         MediaWikiType root = getRoot();
-        RevisionType rev = (RevisionType) root.getPage().get(1).getRevisionOrUploadOrLogitem().get(0);
+        RevisionType rev = (RevisionType) root.getPage().get(1).getRevisionOrUpload().get(0);
         Util.setText(rev, newText);
 
         assertEquals(newText, rev.getText().getValue());
