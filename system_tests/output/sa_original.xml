@@ -1,0 +1,3832 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="en">
+  <siteinfo>
+    <sitename>Wiktionary</sitename>
+    <dbname>enwiktionary</dbname>
+    <base>https://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
+    <generator>MediaWiki 1.29.0-wmf.9</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2" case="case-sensitive">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="case-sensitive" />
+      <namespace key="1" case="case-sensitive">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="case-sensitive">Wiktionary</namespace>
+      <namespace key="5" case="case-sensitive">Wiktionary talk</namespace>
+      <namespace key="6" case="case-sensitive">File</namespace>
+      <namespace key="7" case="case-sensitive">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="case-sensitive">Template</namespace>
+      <namespace key="11" case="case-sensitive">Template talk</namespace>
+      <namespace key="12" case="case-sensitive">Help</namespace>
+      <namespace key="13" case="case-sensitive">Help talk</namespace>
+      <namespace key="14" case="case-sensitive">Category</namespace>
+      <namespace key="15" case="case-sensitive">Category talk</namespace>
+      <namespace key="90" case="case-sensitive">Thread</namespace>
+      <namespace key="91" case="case-sensitive">Thread talk</namespace>
+      <namespace key="92" case="case-sensitive">Summary</namespace>
+      <namespace key="93" case="case-sensitive">Summary talk</namespace>
+      <namespace key="100" case="case-sensitive">Appendix</namespace>
+      <namespace key="101" case="case-sensitive">Appendix talk</namespace>
+      <namespace key="102" case="case-sensitive">Concordance</namespace>
+      <namespace key="103" case="case-sensitive">Concordance talk</namespace>
+      <namespace key="104" case="case-sensitive">Index</namespace>
+      <namespace key="105" case="case-sensitive">Index talk</namespace>
+      <namespace key="106" case="case-sensitive">Rhymes</namespace>
+      <namespace key="107" case="case-sensitive">Rhymes talk</namespace>
+      <namespace key="108" case="case-sensitive">Transwiki</namespace>
+      <namespace key="109" case="case-sensitive">Transwiki talk</namespace>
+      <namespace key="110" case="case-sensitive">Wikisaurus</namespace>
+      <namespace key="111" case="case-sensitive">Wikisaurus talk</namespace>
+      <namespace key="114" case="case-sensitive">Citations</namespace>
+      <namespace key="115" case="case-sensitive">Citations talk</namespace>
+      <namespace key="116" case="case-sensitive">Sign gloss</namespace>
+      <namespace key="117" case="case-sensitive">Sign gloss talk</namespace>
+      <namespace key="118" case="case-sensitive">Reconstruction</namespace>
+      <namespace key="119" case="case-sensitive">Reconstruction talk</namespace>
+      <namespace key="828" case="case-sensitive">Module</namespace>
+      <namespace key="829" case="case-sensitive">Module talk</namespace>
+      <namespace key="2300" case="case-sensitive">Gadget</namespace>
+      <namespace key="2301" case="case-sensitive">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+      <namespace key="2600" case="first-letter">Topic</namespace>
+    </namespaces>
+  </siteinfo>
+<page>
+    <title>SA</title>
+    <ns>0</ns>
+    <id>5115</id>
+    <revision>
+      <id>10375</id>
+      <timestamp>2003-05-14T14:02:08Z</timestamp>
+      <contributor>
+        <username>Dhum Dhum</username>
+        <id>19</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">==Abbreviation==
+
+===Meanings===
+#[[South Australia]]
+
+===Translations===
+*[[Dutch]]: [[Zuid-Australië]]</text>
+      <sha1>0ba1jtgmca7l681m14uhn8a6n91r144</sha1>
+    </revision>
+    <revision>
+      <id>10649</id>
+      <parentid>10375</parentid>
+      <timestamp>2003-05-14T14:07:07Z</timestamp>
+      <contributor>
+        <username>Dhum Dhum</username>
+        <id>19</id>
+      </contributor>
+      <minor />
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">==Abbreviation==
+
+===Meanings===
+#[[South Australia]] (state)
+
+===Translations===
+*[[Dutch]]: [[Zuid-Australië]]</text>
+      <sha1>m6lgbqk90owappgnj64l5idoas80hsw</sha1>
+    </revision>
+    <revision>
+      <id>170718</id>
+      <parentid>10649</parentid>
+      <timestamp>2003-05-17T09:30:33Z</timestamp>
+      <contributor>
+        <username>Dhum Dhum</username>
+        <id>19</id>
+      </contributor>
+      <comment>layout</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">===Abbreviation===
+#[[South Australia]] (state)</text>
+      <sha1>71hf8jormfghcl9x6oywvjqyxlocnla</sha1>
+    </revision>
+    <revision>
+      <id>170719</id>
+      <parentid>170718</parentid>
+      <timestamp>2005-03-12T15:02:37Z</timestamp>
+      <contributor>
+        <username>Paul G</username>
+        <id>654</id>
+      </contributor>
+      <comment>more senses</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">===Abbreviation===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+#[[South Australia]] (''state'')
+#(''in gay [[personal ad]]s'') [[Straight-acting]].</text>
+      <sha1>n9uf8cr4dssa48r91xgo0oh1cuqle4s</sha1>
+    </revision>
+    <revision>
+      <id>245846</id>
+      <parentid>170719</parentid>
+      <timestamp>2005-03-12T15:03:48Z</timestamp>
+      <contributor>
+        <username>Paul G</username>
+        <id>654</id>
+      </contributor>
+      <minor />
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">===Abbreviation===
+'''SA'''
+
+#[[South Africa]].
+#[[South America]].
+#[[South Australia]] (''state'').
+#(''in gay [[personal ad]]s'') [[Straight-acting]].</text>
+      <sha1>6fv6xs2swcq1b3zpx8drbqyujzzpu1v</sha1>
+    </revision>
+    <revision>
+      <id>439987</id>
+      <parentid>245846</parentid>
+      <timestamp>2005-06-30T01:26:25Z</timestamp>
+      <contributor>
+        <username>Conversion script</username>
+        <id>0</id>
+      </contributor>
+      <minor />
+      <comment>[[SA]] moved to [[sA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">===Abbreviation===
+'''SA'''
+
+#[[South Africa]].
+#[[South America]].
+#[[South Australia]] (''state'').
+#(''in gay [[personal ad]]s'') [[Straight-acting]].</text>
+      <sha1>6fv6xs2swcq1b3zpx8drbqyujzzpu1v</sha1>
+    </revision>
+    <revision>
+      <id>492041</id>
+      <parentid>439987</parentid>
+      <timestamp>2005-07-07T07:32:08Z</timestamp>
+      <contributor>
+        <username>SemperBlotto</username>
+        <id>3336</id>
+      </contributor>
+      <minor />
+      <comment>[[sA]] moved to [[SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">===Abbreviation===
+'''SA'''
+
+#[[South Africa]].
+#[[South America]].
+#[[South Australia]] (''state'').
+#(''in gay [[personal ad]]s'') [[Straight-acting]].</text>
+      <sha1>6fv6xs2swcq1b3zpx8drbqyujzzpu1v</sha1>
+    </revision>
+    <revision>
+      <id>527039</id>
+      <parentid>492041</parentid>
+      <timestamp>2005-07-27T20:05:49Z</timestamp>
+      <contributor>
+        <username>SSL69</username>
+        <id>5578</id>
+      </contributor>
+      <minor />
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">==English==
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+#[[South Australia]] (''state'')
+#(''in gay [[personal ad]]s'') [[Straight-acting]]</text>
+      <sha1>qbcwlgl88kzihzrh3po538ds6is0edh</sha1>
+    </revision>
+    <revision>
+      <id>666426</id>
+      <parentid>527039</parentid>
+      <timestamp>2005-11-19T02:50:43Z</timestamp>
+      <contributor>
+        <username>--Stranger</username>
+        <id>6670</id>
+      </contributor>
+      <comment>AU tweak</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">==English==
+
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+# {{AU}} [[South Australia]]/South Australian
+#(''in gay [[personal ad]]s'') [[Straight-acting]]</text>
+      <sha1>72h7qmrwn83vdp9rb9kobsqxdab7z8m</sha1>
+    </revision>
+    <revision>
+      <id>701132</id>
+      <parentid>666426</parentid>
+      <timestamp>2005-12-15T01:35:20Z</timestamp>
+      <contributor>
+        <username>Hippietrail</username>
+        <id>671</id>
+      </contributor>
+      <comment>disambig see also</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">''See also [[sa]], [[Sa]], [[så]]''
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+# {{AU}} [[South Australia]]/South Australian
+#(''in gay [[personal ad]]s'') [[Straight-acting]]</text>
+      <sha1>2k44mqzglf7apf8r6bum9y91owsyz2y</sha1>
+    </revision>
+    <revision>
+      <id>1264298</id>
+      <parentid>701132</parentid>
+      <timestamp>2006-07-24T09:46:45Z</timestamp>
+      <contributor>
+        <username>Jyril</username>
+        <id>1598</id>
+      </contributor>
+      <minor />
+      <comment>{{see}}</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Sa|sa|sá|så|sä}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]</text>
+      <sha1>jy5bj249neqq5cms7eo4trcomdofsvl</sha1>
+    </revision>
+    <revision>
+      <id>1683867</id>
+      <parentid>1264298</parentid>
+      <timestamp>2006-10-15T11:56:43Z</timestamp>
+      <contributor>
+        <username>RobotGMwikt</username>
+        <id>3478</id>
+      </contributor>
+      <minor />
+      <comment>robot  Adding: [[tr:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Sa|sa|sá|så|sä}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+
+[[tr:SA]]</text>
+      <sha1>prk0qxw1lo6yddc83286a0rddvwfdca</sha1>
+    </revision>
+    <revision>
+      <id>1716925</id>
+      <parentid>1683867</parentid>
+      <timestamp>2006-10-23T09:14:44Z</timestamp>
+      <contributor>
+        <ip>82.175.64.170</ip>
+      </contributor>
+      <comment>/* {{initialism}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Sa|sa|sá|så|sä}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[tr:SA]]</text>
+      <sha1>akpjhp3d7ecl6tqvr1t53mzvj4dqnf5</sha1>
+    </revision>
+    <revision>
+      <id>2200129</id>
+      <parentid>1716925</parentid>
+      <timestamp>2007-03-12T13:13:33Z</timestamp>
+      <contributor>
+        <username>RobotGMwikt</username>
+        <id>3478</id>
+      </contributor>
+      <minor />
+      <comment>robot  Adding: [[pl:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Sa|sa|sá|så|sä}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+#[[South Africa]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>amk2mbpp57otby79c6m91nfa2pzanon</sha1>
+    </revision>
+    <revision>
+      <id>2337797</id>
+      <parentid>2200129</parentid>
+      <timestamp>2007-04-23T13:41:49Z</timestamp>
+      <contributor>
+        <username>Widsith</username>
+        <id>6763</id>
+      </contributor>
+      <comment>/* English */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Sa|sa|sá|så|sä}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>9flc4sgk6aqhsg6xy1gekxgxzaojkuy</sha1>
+    </revision>
+    <revision>
+      <id>2581418</id>
+      <parentid>2337797</parentid>
+      <timestamp>2007-06-21T00:19:37Z</timestamp>
+      <contributor>
+        <username>BD2412</username>
+        <id>5540</id>
+      </contributor>
+      <minor />
+      <comment>clean up  ([[Project:AWB|AWB]])</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of 'sa'}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>bpv1n4bbnet0f8yay8i46uiip3cx3vx</sha1>
+    </revision>
+    <revision>
+      <id>3337094</id>
+      <parentid>2581418</parentid>
+      <timestamp>2007-11-24T00:02:55Z</timestamp>
+      <contributor>
+        <username>BD2412</username>
+        <id>5540</id>
+      </contributor>
+      <minor />
+      <comment>standardize appendix titles, Replaced: '}} → &quot;}}  [[Project:AutoWikiBrowser|AWB]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>nf8ey3n2s447uszfsw64ouue9e41vmu</sha1>
+    </revision>
+    <revision>
+      <id>3567482</id>
+      <parentid>3337094</parentid>
+      <timestamp>2008-01-14T09:59:40Z</timestamp>
+      <contributor>
+        <username>Thecurran</username>
+        <id>42390</id>
+      </contributor>
+      <comment>/* {{initialism}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].</text>
+      <sha1>3fszx4wkz8emzwlxovuwc1vtwnqczgx</sha1>
+    </revision>
+    <revision>
+      <id>3567898</id>
+      <parentid>3567482</parentid>
+      <timestamp>2008-01-14T11:32:13Z</timestamp>
+      <contributor>
+        <username>Thecurran</username>
+        <id>42390</id>
+      </contributor>
+      <comment>/* {{abbreviation}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].</text>
+      <sha1>bp4ha085pr6elvm5ihg4vh1ci34464m</sha1>
+    </revision>
+    <revision>
+      <id>3571562</id>
+      <parentid>3567898</parentid>
+      <timestamp>2008-01-14T23:04:09Z</timestamp>
+      <contributor>
+        <username>Thecurran</username>
+        <id>42390</id>
+      </contributor>
+      <comment>/* {{abbreviation}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].</text>
+      <sha1>ogbqs6af5onu8a95fmcg5bn1sv3d2cy</sha1>
+    </revision>
+    <revision>
+      <id>3571646</id>
+      <parentid>3571562</parentid>
+      <timestamp>2008-01-14T23:15:40Z</timestamp>
+      <contributor>
+        <username>Thecurran</username>
+        <id>42390</id>
+      </contributor>
+      <comment>/* {{abbreviation}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+[[Category:Provinces of Indonesia]]</text>
+      <sha1>7jzeqhckbtkax6ur8gg65zooi3ulm1b</sha1>
+    </revision>
+    <revision>
+      <id>3571765</id>
+      <parentid>3571646</parentid>
+      <timestamp>2008-01-14T23:28:51Z</timestamp>
+      <contributor>
+        <username>Thecurran</username>
+        <id>42390</id>
+      </contributor>
+      <comment>/* {{abbreviation}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+[[pl:SA]]
+[[tr:SA]]
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].</text>
+      <sha1>ogbqs6af5onu8a95fmcg5bn1sv3d2cy</sha1>
+    </revision>
+    <revision>
+      <id>3596914</id>
+      <parentid>3571765</parentid>
+      <timestamp>2008-01-18T21:27:47Z</timestamp>
+      <contributor>
+        <username>Interwicket</username>
+        <id>46132</id>
+      </contributor>
+      <minor />
+      <comment>sort iwikis</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>adm0rl04do6wnqev7vz6szhktzqm4mu</sha1>
+    </revision>
+    <revision>
+      <id>4870779</id>
+      <parentid>3596914</parentid>
+      <timestamp>2008-07-21T16:21:10Z</timestamp>
+      <contributor>
+        <username>VolkovBot</username>
+        <id>41045</id>
+      </contributor>
+      <minor />
+      <comment>robot  Adding: [[fr:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{see|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+[[fr:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>p8j5s6kzwqmmhqgsmngkn6b9t6pype7</sha1>
+    </revision>
+    <revision>
+      <id>5459027</id>
+      <parentid>4870779</parentid>
+      <timestamp>2008-11-03T03:55:25Z</timestamp>
+      <contributor>
+        <username>Thecurran</username>
+        <id>42390</id>
+      </contributor>
+      <comment>/* Intro */ Template fixed</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|Appendix:Variations of &quot;sa&quot;}}
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+[[fr:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>dpx17ok9msty9oygjw042uvt06mneoq</sha1>
+    </revision>
+    <revision>
+      <id>7091586</id>
+      <parentid>5459027</parentid>
+      <timestamp>2009-08-05T12:25:21Z</timestamp>
+      <contributor>
+        <username>Hippietrail</username>
+        <id>671</id>
+      </contributor>
+      <comment>also</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+[[fr:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>c4koi1h7z7eitmiueqavd4fxsyowe55</sha1>
+    </revision>
+    <revision>
+      <id>7728593</id>
+      <parentid>7091586</parentid>
+      <timestamp>2009-11-15T16:27:08Z</timestamp>
+      <contributor>
+        <username>Conrad.Bot</username>
+        <id>57447</id>
+      </contributor>
+      <comment>Updating anagrams</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[Saudi Arabia]], a member state of the [[United Nations]].
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+
+[[fr:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>mgadfo15p6wkhn4377ockvhsmkefev2</sha1>
+    </revision>
+    <revision>
+      <id>8458245</id>
+      <parentid>7728593</parentid>
+      <timestamp>2010-02-20T01:42:44Z</timestamp>
+      <contributor>
+        <username>Bequw</username>
+        <id>36224</id>
+      </contributor>
+      <comment>ISO 3166-1 code</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+===Symbol===
+{{infl|mul|symbol}}
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+
+[[fr:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>c0eftd787fm1nzcfigdqouuinhjql0u</sha1>
+    </revision>
+    <revision>
+      <id>8464315</id>
+      <parentid>8458245</parentid>
+      <timestamp>2010-02-21T12:45:11Z</timestamp>
+      <contributor>
+        <username>Interwicket</username>
+        <id>46132</id>
+      </contributor>
+      <minor />
+      <comment>iwiki +[[:io:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+===Symbol===
+{{infl|mul|symbol}}
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+#[[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+#[[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+#(''in gay [[personal ad]]s'') [[straight-acting]]
+#abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+#[[South Australia]], a state of [[Australia]].
+#[[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>6bpq4jauhc2vjhufkgf103kdrfdhrkh</sha1>
+    </revision>
+    <revision>
+      <id>8886745</id>
+      <parentid>8464315</parentid>
+      <timestamp>2010-04-22T13:55:45Z</timestamp>
+      <contributor>
+        <username>AutoFormat</username>
+        <id>32732</id>
+      </contributor>
+      <minor />
+      <comment>minor spacing</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>a97oshlvuub8oedr65hsozdb0z5ywd2</sha1>
+    </revision>
+    <revision>
+      <id>10388121</id>
+      <parentid>8886745</parentid>
+      <timestamp>2010-09-13T06:05:53Z</timestamp>
+      <contributor>
+        <username>Saltmarsh</username>
+        <id>6800</id>
+      </contributor>
+      <comment>/* {{initialism}} */ +term</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{AU}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>a4knsrhgk48nwmk1wtwne3jr11dtk3i</sha1>
+    </revision>
+    <revision>
+      <id>11056536</id>
+      <parentid>10388121</parentid>
+      <timestamp>2010-11-28T17:28:45Z</timestamp>
+      <contributor>
+        <username>MglovesfunBot</username>
+        <id>264304</id>
+      </contributor>
+      <minor />
+      <comment>/* {{initialism}} */bot: bypassing template redirects, minor spacing</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>eaicqcz33d4s35xqybmsrp9ifnuzlsy</sha1>
+    </revision>
+    <revision>
+      <id>11551386</id>
+      <parentid>11056536</parentid>
+      <timestamp>2011-01-30T14:28:56Z</timestamp>
+      <contributor>
+        <username>Rukhabot</username>
+        <id>45268</id>
+      </contributor>
+      <minor />
+      <comment>interwikis: +[[cs:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>fhzs77a8ih9vy8dz321vkd2gseb7l19</sha1>
+    </revision>
+    <revision>
+      <id>12151684</id>
+      <parentid>11551386</parentid>
+      <timestamp>2011-02-27T22:54:34Z</timestamp>
+      <contributor>
+        <username>Daniel Carrero</username>
+        <id>21747</id>
+      </contributor>
+      <minor />
+      <comment>added [[Category:Nazism]] using [[Help:Gadget-HotCat|HotCat]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{alphagram|[[as#English|as]]}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>6cewmcrjs4o6gpggh19xs63b23ulh06</sha1>
+    </revision>
+    <revision>
+      <id>12720326</id>
+      <parentid>12151684</parentid>
+      <timestamp>2011-04-02T11:45:21Z</timestamp>
+      <contributor>
+        <username>MglovesfunBot</username>
+        <id>264304</id>
+      </contributor>
+      <minor />
+      <comment>/* Anagrams */bot: converting alphagram to a plain link</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>ili8fkx2cd78hf4orztmb5qozce1q1x</sha1>
+    </revision>
+    <revision>
+      <id>13076137</id>
+      <parentid>12720326</parentid>
+      <timestamp>2011-05-10T08:04:58Z</timestamp>
+      <contributor>
+        <username>VolkovBot</username>
+        <id>41045</id>
+      </contributor>
+      <minor />
+      <comment>r2.5.1) (robot Adding: [[he:SA]], [[my:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>5cf69hff28xl8mwa92vlq8iryckz9fx</sha1>
+    </revision>
+    <revision>
+      <id>13487722</id>
+      <parentid>13076137</parentid>
+      <timestamp>2011-07-07T19:18:51Z</timestamp>
+      <contributor>
+        <username>Flubot</username>
+        <id>478721</id>
+      </contributor>
+      <minor />
+      <comment>adding en to topical categories</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:en:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>ju93x338ep9z6ywgt5hjy8wcbn6cjkl</sha1>
+    </revision>
+    <revision>
+      <id>13813205</id>
+      <parentid>13487722</parentid>
+      <timestamp>2011-09-08T19:31:55Z</timestamp>
+      <contributor>
+        <username>Gtroy</username>
+        <id>517709</id>
+      </contributor>
+      <comment>/* {{initialism}} */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:en:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# {{medicine}} [[situational awareness]]
+# {{medicine}} [[situation awareness]]
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+[[Category:en:Medicine]]
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>ofu86bux2mwz41t5o6rmh82llvrbcd4</sha1>
+    </revision>
+    <revision>
+      <id>13813232</id>
+      <parentid>13813205</parentid>
+      <timestamp>2011-09-08T19:32:56Z</timestamp>
+      <contributor>
+        <username>Equinox</username>
+        <id>84390</id>
+      </contributor>
+      <minor />
+      <comment>/* {{initialism}} */ merge medicine stuff into 1 line bc it's synonyms</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:en:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# {{medicine}} [[situational awareness]], [[situation awareness]]
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+[[Category:en:Medicine]]
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>85b4xkhpzebo4u1mjlxjnsnb0ojo407</sha1>
+    </revision>
+    <revision>
+      <id>13815106</id>
+      <parentid>13813232</parentid>
+      <timestamp>2011-09-08T20:45:11Z</timestamp>
+      <contributor>
+        <username>Gtroy</username>
+        <id>517709</id>
+      </contributor>
+      <comment>/* Anagrams */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{infl|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:en:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# {{medicine}} [[situational awareness]], [[situation awareness]]
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+[[Category:en:Medicine]]
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]
+
+
+[[Category:en:Emergency medicine]]</text>
+      <sha1>hy8jyyhev9fpgi6qrx7xb8mkemivir6</sha1>
+    </revision>
+    <revision>
+      <id>15485652</id>
+      <parentid>13815106</parentid>
+      <timestamp>2011-12-24T16:27:32Z</timestamp>
+      <contributor>
+        <username>MglovesfunBot</username>
+        <id>264304</id>
+      </contributor>
+      <minor />
+      <comment>bot: bypassing template redirects, minor spacing using [[Project:AWB|AWB]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:en:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# {{medicine}} [[situational awareness]], [[situation awareness]]
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+[[Category:en:Medicine]]
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]
+
+[[Category:en:Emergency medicine]]</text>
+      <sha1>4zoyfdf86ho2beuhe0hu4eq6pd9jfcp</sha1>
+    </revision>
+    <revision>
+      <id>16329043</id>
+      <parentid>15485652</parentid>
+      <timestamp>2012-03-01T07:10:31Z</timestamp>
+      <contributor>
+        <username>-sche</username>
+        <id>444485</id>
+      </contributor>
+      <comment>/* English */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+[[Category:en:Nazism]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+[[Category:en:Medicine]]
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]
+
+[[Category:en:Emergency medicine]]</text>
+      <sha1>3y2zu382l3uwxywhrckvaijq6digk8s</sha1>
+    </revision>
+    <revision>
+      <id>16329107</id>
+      <parentid>16329043</parentid>
+      <timestamp>2012-03-01T07:26:02Z</timestamp>
+      <contributor>
+        <username>KassadBot</username>
+        <id>230894</id>
+      </contributor>
+      <minor />
+      <comment>category en:Nazism moved to English section</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>oeot70j7nyarx9iuj8g2tw4alis48h6</sha1>
+    </revision>
+    <revision>
+      <id>16618931</id>
+      <parentid>16329107</parentid>
+      <timestamp>2012-04-06T07:20:10Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>69685</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (Robot: Adding [[de:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]]
+# [[South Africa]]
+# {{medicine}} [[sino-auricular]]
+# [[small arms]]
+# [[South America]]
+# {{Australia}} [[South Australia]]/[[South Australian]]
+# [[Société Anonyme]]
+# (''in gay [[personal ad]]s'') [[straight-acting]]
+# abbreviation for Stage Accompany (SA)
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[South Australia]], a state of [[Australia]].
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>lpqphayql6v2buk7sleax8t9cvxvu3n</sha1>
+    </revision>
+    <revision>
+      <id>18885175</id>
+      <parentid>16618931</parentid>
+      <timestamp>2012-11-25T12:43:49Z</timestamp>
+      <contributor>
+        <username>Pingku</username>
+        <id>38876</id>
+      </contributor>
+      <comment>/* English */  cleanup</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ}}
+{{also|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{Australia}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>7k3oi4kds9ti6i3n8x0cdsp5jp7qv4v</sha1>
+    </revision>
+    <revision>
+      <id>19205305</id>
+      <parentid>18885175</parentid>
+      <timestamp>2012-12-31T22:04:57Z</timestamp>
+      <contributor>
+        <username>NadandoBot</username>
+        <id>394541</id>
+      </contributor>
+      <minor />
+      <comment>fixing duplicated {{temp|also}}</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{Australia}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>mjvtc8eau8ljou1qsewxk2nd4k312oy</sha1>
+    </revision>
+    <revision>
+      <id>20622592</id>
+      <parentid>19205305</parentid>
+      <timestamp>2013-05-26T13:59:53Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Replace initialism with initialism-old in headers</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{Australia}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>l8jtcnrvp2am5lb9gdgfiq1pnm47y0c</sha1>
+    </revision>
+    <revision>
+      <id>20639953</id>
+      <parentid>20622592</parentid>
+      <timestamp>2013-05-27T11:16:15Z</timestamp>
+      <contributor>
+        <username>MglovesfunBot</username>
+        <id>264304</id>
+      </contributor>
+      <minor />
+      <comment>/* {{abbreviation-old}} */bot: {{abbreviation}} →‎ {{abbreviation-old}}</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{Australia}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>5w1r0bqp4rp58y2o6jn6qalkovi5x3g</sha1>
+    </revision>
+    <revision>
+      <id>20644549</id>
+      <parentid>20639953</parentid>
+      <timestamp>2013-05-27T13:26:08Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Add missing language</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{Australia}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>7xjr0slyjncetum922og9e9ioxf981r</sha1>
+    </revision>
+    <revision>
+      <id>21003383</id>
+      <parentid>20644549</parentid>
+      <timestamp>2013-06-12T20:11:30Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Add {{context| to context labels</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>nmpxcb93qv29lak0w0ymhitf0k243ko</sha1>
+    </revision>
+    <revision>
+      <id>21169931</id>
+      <parentid>21003383</parentid>
+      <timestamp>2013-06-18T20:27:00Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Add lang= to context</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay [[personal ad]]s|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>0r2uvywdtlzmsfca5mmp07pfiupdznd</sha1>
+    </revision>
+    <revision>
+      <id>24150678</id>
+      <parentid>21169931</parentid>
+      <timestamp>2013-12-07T16:03:15Z</timestamp>
+      <contributor>
+        <username>Equinox</username>
+        <id>84390</id>
+      </contributor>
+      <minor />
+      <comment>/* {{initialism-old|en}} */ # [[special agent]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[tr:SA]]</text>
+      <sha1>3m2xho546dsib0xq6ezgw8ybuy6osqw</sha1>
+    </revision>
+    <revision>
+      <id>25050507</id>
+      <parentid>24150678</parentid>
+      <timestamp>2014-01-17T17:02:02Z</timestamp>
+      <contributor>
+        <username>YS-Bot</username>
+        <id>757289</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.3) (Robot: Adding [[fi:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>bkvow1v3zkbaf7kwf9zw5jjn4i82pjj</sha1>
+    </revision>
+    <revision>
+      <id>25838183</id>
+      <parentid>25050507</parentid>
+      <timestamp>2014-03-16T18:25:16Z</timestamp>
+      <contributor>
+        <username>Kephir</username>
+        <id>759241</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+== Polish ==
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>10tr5yxxn5en5noz49ernu5c0k9mr4g</sha1>
+    </revision>
+    <revision>
+      <id>27418345</id>
+      <parentid>25838183</parentid>
+      <timestamp>2014-07-04T09:09:30Z</timestamp>
+      <contributor>
+        <ip>81.155.13.101</ip>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+'''SA'''
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+'''SA'''
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+
+----
+
+== Polish ==
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>aoe62ysne3yqkcmdp7kzpb6k1rn8w9h</sha1>
+    </revision>
+    <revision>
+      <id>27898935</id>
+      <parentid>27418345</parentid>
+      <timestamp>2014-07-31T19:30:08Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Add {{head}}</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+==={{initialism-old|en}}===
+{{head|en}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+==={{abbreviation-old|en}}===
+{{head|en}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+
+----
+
+== Polish ==
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>rt2xz1x4hhewnsmwhyo6htanegmeyg7</sha1>
+    </revision>
+    <revision>
+      <id>28451528</id>
+      <parentid>27898935</parentid>
+      <timestamp>2014-08-11T20:28:07Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Added part of speech to {{head}} and other fixes</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+
+----
+
+== Polish ==
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>la29akmf8gzw8k4k6g9243xjwoeb0oh</sha1>
+    </revision>
+    <revision>
+      <id>31972812</id>
+      <parentid>28451528</parentid>
+      <timestamp>2015-01-10T09:51:07Z</timestamp>
+      <contributor>
+        <username>Rukhabot</username>
+        <id>45268</id>
+      </contributor>
+      <minor />
+      <comment>interwikis: +[[ru:SA]] +[[sk:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+
+----
+
+== Polish ==
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>1733llylx00wgcqulxb5gevtugsmnq4</sha1>
+    </revision>
+    <revision>
+      <id>32000929</id>
+      <parentid>31972812</parentid>
+      <timestamp>2015-01-11T14:56:30Z</timestamp>
+      <contributor>
+        <username>DerbethBot</username>
+        <id>48857</id>
+      </contributor>
+      <minor />
+      <comment>added audio Pl-SA.ogg; added missing pron. section</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+
+----
+
+== Polish ==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio}}
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>3ibsks2nis9i256lnchuhkpq85t7en7</sha1>
+    </revision>
+    <revision>
+      <id>32069229</id>
+      <parentid>32000929</parentid>
+      <timestamp>2015-01-16T01:05:18Z</timestamp>
+      <contributor>
+        <username>MglovesfunBot</username>
+        <id>264304</id>
+      </contributor>
+      <minor />
+      <comment>bot: {{rfc-header}}</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+== Polish ==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio}}
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>3nq1lllntfdu11mpibtzpv0nmjfci2s</sha1>
+    </revision>
+    <revision>
+      <id>34484943</id>
+      <parentid>32069229</parentid>
+      <timestamp>2015-09-27T20:10:39Z</timestamp>
+      <contributor>
+        <username>NadandoBot</username>
+        <id>394541</id>
+      </contributor>
+      <comment>reordering language sections</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio}}
+
+=== Initialism ===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>td68tw515hxl7gvmzc6sgovfi0adv1o</sha1>
+    </revision>
+    <revision>
+      <id>34563043</id>
+      <parentid>34484943</parentid>
+      <timestamp>2015-10-15T18:50:41Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Applied [[WT:NORM]] rules</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>s8nr3vi9f1ynwjd5mpw7nqz9lw2z01s</sha1>
+    </revision>
+    <revision>
+      <id>35901604</id>
+      <parentid>34563043</parentid>
+      <timestamp>2015-12-21T04:48:00Z</timestamp>
+      <contributor>
+        <username>WingerBot</username>
+        <id>2024159</id>
+      </contributor>
+      <minor />
+      <comment>add lang code to audio templates</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{context|medicine|lang=en}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{context|Australia|lang=en}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{context|in gay personal ads|lang=en}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>m4qh3t8k1t3z3pkxiphdfs8hrdfuor0</sha1>
+    </revision>
+    <revision>
+      <id>36285905</id>
+      <parentid>35901604</parentid>
+      <timestamp>2016-01-18T00:16:44Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>term &gt; m, context &gt; label, cx &gt; lb, usex &gt; ux</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{label|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{label|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{label|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* [[as#English|as]] , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>rvgfxc9b4k79dtvk0p9yr8j01h1ha4y</sha1>
+    </revision>
+    <revision>
+      <id>38049687</id>
+      <parentid>36285905</parentid>
+      <timestamp>2016-04-24T22:50:17Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Added {{l}}</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{label|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{label|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{label|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{l|en|as}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+==={{abbreviation-old|fr}}===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>bc4zy4c5mwy291c9blb0djp2knnffgp</sha1>
+    </revision>
+    <revision>
+      <id>38504083</id>
+      <parentid>38049687</parentid>
+      <timestamp>2016-05-04T15:40:32Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Fix up headers</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{label|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{label|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{label|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{l|en|as}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+===Abbreviation===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>l1r33ivvmm2fxn96j37s7vcnoh6ztlj</sha1>
+    </revision>
+    <revision>
+      <id>38936836</id>
+      <parentid>38504083</parentid>
+      <timestamp>2016-07-03T04:26:18Z</timestamp>
+      <contributor>
+        <username>RobokoBot</username>
+        <id>2237272</id>
+      </contributor>
+      <minor />
+      <comment>Bot: Adding [[ca:SA]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{label|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{label|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{label|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{l|en|as}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+===Abbreviation===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[ca:SA]]
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>7bci7i06t6n3g73yrs51w798tz133hv</sha1>
+    </revision>
+    <revision>
+      <id>39146079</id>
+      <parentid>38936836</parentid>
+      <timestamp>2016-07-21T19:56:02Z</timestamp>
+      <contributor>
+        <username>MewBot</username>
+        <id>345682</id>
+      </contributor>
+      <minor />
+      <comment>Renamed label &gt; lb</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{lb|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[South America]].
+# {{lb|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{lb|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{l|en|as}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+===Abbreviation===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[ca:SA]]
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>pwosc0bk4fncasm98db8rciikcj5yki</sha1>
+    </revision>
+    <revision>
+      <id>39279281</id>
+      <parentid>39146079</parentid>
+      <timestamp>2016-07-25T10:22:10Z</timestamp>
+      <contributor>
+        <username>Pwolit iets</username>
+        <id>3197032</id>
+      </contributor>
+      <comment>/* Initialism */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{lb|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[sexual abuse]]
+# [[South America]].
+# {{lb|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{lb|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Anagrams===
+* {{l|en|as}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+===Abbreviation===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[ca:SA]]
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>15gafw75evrs35rxof96zetel7cnqqe</sha1>
+    </revision>
+    <revision>
+      <id>41699737</id>
+      <parentid>39279281</parentid>
+      <timestamp>2016-11-24T04:37:27Z</timestamp>
+      <contributor>
+        <ip>65.94.171.217</ip>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{also|ᎦᎪ|Appendix:Variations of &quot;sa&quot;}}
+==Translingual==
+
+===Symbol===
+{{head|mul|symbol}}
+
+# The [[ISO]] 3166-1 two-letter (alpha-2) code for [[Saudi Arabia]].
+
+[[Category:ISO 3166-1]]
+
+----
+
+==English==
+
+===Initialism===
+{{rfc-header|Initialism}}
+{{head|en|initialism}}
+
+# [[Sturmabteilung]].
+# [[South Africa]].
+# {{lb|en|medicine}} [[sino-auricular|Sino-auricular]].
+# [[small arms|Small arms]].
+# [[sexual abuse]]
+# [[South America]].
+# {{lb|en|Australia}} [[South Australia]], a state of [[Australia]].
+# [[special agent]]
+# [[Société Anonyme]].&lt;!---French?---&gt;
+# {{lb|en|in gay personal ads}} [[straight-acting|Straight-acting]].
+# Stage Accompany.
+
+===Abbreviation===
+{{rfc-header|Abbreviation}}
+{{head|en|abbreviation}}
+
+# [[North Sulawesi]], a province of [[Indonesia]].
+
+===Proper noun===
+{{en-proper-noun}}
+
+# {{lb|en|sports}} {{abbreviation of|lang=en|San Antonio}} 
+
+===Anagrams===
+* {{l|en|as}} , [[a's#English|a's]], [[A's#English|A's]], [[A*s#English|A*s]], [[AS#English|AS]], [[A*'s#English|A*'s]], [[A+'s#English|A+'s]], [[A♯s#English|A♯s]], [[A−'s#English|A−'s]]
+
+[[Category:en:Emergency medicine]]
+[[Category:en:Medicine]]
+[[Category:en:Nazism]]
+
+----
+
+==French==
+
+===Abbreviation===
+{{head|fr|abbreviation}}
+
+# [[société|Société]] [[anonyme|Anonyme]] (Incorporated ([[Inc.]])) (Limited liability company ([[Ltd.]]))
+
+----
+
+==Polish==
+
+===Pronunciation===
+* {{audio|Pl-SA.ogg|Audio|lang=pl}}
+
+===Initialism===
+{{head|pl|initialism}}
+
+# {{initialism of|spółka akcyjna|lang=pl}}
+
+[[ca:SA]]
+[[cs:SA]]
+[[de:SA]]
+[[fr:SA]]
+[[io:SA]]
+[[he:SA]]
+[[my:SA]]
+[[pl:SA]]
+[[ru:SA]]
+[[sk:SA]]
+[[fi:SA]]
+[[tr:SA]]</text>
+      <sha1>6h2a2bdyv060ky4cmjpbfsefmfnbv63</sha1>
+    </revision>
+  </page>
+</mediawiki>

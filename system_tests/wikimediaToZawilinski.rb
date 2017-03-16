@@ -1,3 +1,5 @@
+#! /usr/bin/ruby
+
 #
 # The JAXB writer produces XML formatted slightly differently than the wikimedia dumps.
 # This script converts Wikimedia dumps into the format produced by Zawilinksi.  After

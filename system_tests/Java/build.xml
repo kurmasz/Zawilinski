@@ -1,0 +1,39 @@
+<project name="ZawilinskiTest" basedir="." default="all">
+
+    <property name="src" location="src"/>
+    <property name="build" location="out/antProduction"/>
+    <property name="encoding" value="utf-8"/>
+
+    <path id="classpath">
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="makedirs">
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="compile" depends="makedirs">
+        <javac srcdir="${src}" destdir="${build}" classpathref="classpath" encoding="${encoding}"
+               debug="true" includeantruntime="false"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="zawilinskiSystemTest.jar">
+            <manifest>
+                <attribute name="Built-By" value="Zachary Kurmas"/>
+            </manifest>
+            <fileset dir="${build}"/>
+            <zipgroupfileset dir="lib" includes="**/*.jar"/>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete>
+            <fileset dir="${build}"/>
+        </delete>
+    </target>
+
+    <target name="all" depends="jar"/>
+</project>
