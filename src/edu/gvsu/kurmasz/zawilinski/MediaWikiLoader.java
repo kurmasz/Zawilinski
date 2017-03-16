@@ -1,6 +1,5 @@
 package edu.gvsu.kurmasz.zawilinski;
 
-import com.sun.org.apache.xalan.internal.utils.XMLSecurityManager;
 import edu.gvsu.kurmasz.warszawa.log.Log;
 import edu.gvsu.kurmasz.warszawa.log.SimpleLog;
 import edu.gvsu.kurmasz.zawilinski.mw.current.MediaWikiType;
@@ -61,10 +60,13 @@ public class MediaWikiLoader {
   private static Unmarshaller createUnmarshaller(String contextPath) {
     Unmarshaller unmarshaller;
     try {
+	// The XML library has built-in limits to prevent DoS attacks from maliciously large .xml files.
+	// MediaWiki xml files are very large, but not maliciously so.  This turns off the limits so these
+	// large files can be processed.
+      System.setProperty("totalEntitySizeLimit","0");
+      System.setProperty("jdk.xml.totalEntitySizeLimit","0");
       JAXBContext jaxbContext = JAXBContext.newInstance(contextPath);
       unmarshaller = jaxbContext.createUnmarshaller();
-      System.err.println("Setting " + XMLSecurityManager.Limit.TOTAL_ENTITY_SIZE_LIMIT.apiProperty());
-      unmarshaller.setProperty(XMLSecurityManager.Limit.TOTAL_ENTITY_SIZE_LIMIT.apiProperty(),"2123456789");
     } catch (JAXBException e) {
       throw new XMLConfigurationException(
           "Problem setting up JAXB objects.", e);
