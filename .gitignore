@@ -13,3 +13,5 @@ tags
 /dist
 /schemaJavaSource
 /out
+/system_tests/output
+makefile.local

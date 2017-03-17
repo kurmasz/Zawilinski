@@ -1,4 +1,4 @@
-package edu.gvsu.kurmasz.zawilinskiTest;
+package edu.gvsu.kurmasz.zawilinski.test;
 
 import edu.gvsu.kurmasz.warszawa.io.InputHelper;
 import edu.gvsu.kurmasz.warszawa.io.OutputHelper;
