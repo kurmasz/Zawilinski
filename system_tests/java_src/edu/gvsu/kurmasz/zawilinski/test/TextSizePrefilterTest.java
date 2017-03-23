@@ -79,7 +79,7 @@ public class TextSizePrefilterTest {
         SimpleLog log;
         if (args.length >= 3) {
             int level = 0;
-            if (args.length >= 3) {
+            if (args.length >= 4) {
                 level = Integer.parseInt(args[3]);
             }
             log = new Log(args[2], level);

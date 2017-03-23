@@ -193,7 +193,7 @@ $(expected)/estimated_total_revision_count.txt: $(fullDump)
 pre_filter:  $(fullDump) $(expected)/estimated_total_revision_count.txt
 	@echo
 	@echo Testing the pre-filter
-	$(zawilinski_test) $(test_pkg).TextSizePrefilterTest $(fullDump) Polish /dev/null | diff -w $(expected)/estimated_total_revision_count.txt - 
+	$(zawilinski_test) $(test_pkg).TextSizePrefilterTest $(fullDump) 50000 /dev/null | diff -w $(expected)/estimated_total_revision_count.txt - 
 
 #all: $(outputDir)/countRevisions $(outputDir)/countLanguageRevisions_Polish $(outputDir)/countLanguageRevisions_French
 
