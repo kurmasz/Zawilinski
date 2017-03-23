@@ -41,7 +41,7 @@ while line = STDIN.gets
     end
     total_revisions = 0
     revisions_with_language = 0
-  elsif (line =~ /<title>(.+)<\/title>/)
+  elsif (line.include?('<title>') && line =~ /<title>(.+)<\/title>/)
     title = $1
     title.gsub!('&quot;', '"')
     title.gsub!('&amp;', '&')
@@ -49,7 +49,7 @@ while line = STDIN.gets
       puts("ERROR! Found title outside page. #{title}")
     end
     total_revisions = 0
-  elsif (line =~ /<revision>/)
+  elsif (line.include?('<revision>'))
     in_revision = true
     foundOnce = false
     if (!in_page)
@@ -61,7 +61,7 @@ while line = STDIN.gets
     # The full regular expression for a language header is expensive (time-wise)
     # so, we first do a quick check for the bare language before
     # doing the more expensive check for the entire, correctly formatted header
-  elsif (!foundOnce && line =~ /#{language}/ && line =~ /(^|[^=])==\s*(\[\[#{language}\]\]|#{language})\s*==([^=]|$)/)
+  elsif (!foundOnce && line.include?(language) && line =~ /(^|[^=])==\s*(\[\[#{language}\]\]|#{language})\s*==([^=]|$)/)
     # Some revisions have ==Polish== more than once.  Two leading
     # causes (1) an extra ==Polish== section.  Such extra sections
     # are usually condensed into one within a few revisions.
@@ -73,7 +73,7 @@ while line = STDIN.gets
     if (!in_revision)
       puts("ERROR! Found langauge header outside revision. #{title}")
     end
-  elsif (line =~ /<\/revision>/)
+  elsif (line.include?('</revision>'))
     if (!in_revision)
       puts("ERROR! Found end_revision header" +
                "outside revision. #{title}")

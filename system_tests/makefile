@@ -169,6 +169,32 @@ filter_by_language_retains_desired_text: $(observed)/partial_dump_filtered_by_Po
 	@echo "** Pass ** $@"
 
 
+#################################################################
+#
+# Test 5: Text size prefilter.
+#
+#  TextSizePrefilterTest verifies that the post-filter doesn't receive
+#  articles with more text that should be allowed through the
+#  pre-filter.
+#
+#  Also, for each page, the program writes out (1) the page number, (2) the
+# number of revisions, and (3) the page title.  This output can be compared
+# with the output of the countRevisions ruby script to verify that the
+# filter does not "loose" any pages or revisions.
+#
+#################################################################
+
+
+$(expected)/estimated_total_revision_count.txt: $(fullDump)
+	@echo
+	@echo Estimating the total number of revisions in full dump
+	$(readFullDump) | ruby $(scripts)/count_revisions.rb > $@
+
+pre_filter:  $(fullDump) $(expected)/estimated_total_revision_count.txt
+	@echo
+	@echo Testing the pre-filter
+	$(zawilinski_test) $(test_pkg).TextSizePrefilterTest $(fullDump) 50000 /dev/null | diff -w $(expected)/estimated_total_revision_count.txt - 
+
 #all: $(outputDir)/countRevisions $(outputDir)/countLanguageRevisions_Polish $(outputDir)/countLanguageRevisions_French
 
 # 
