@@ -134,8 +134,9 @@ $(observed)/full_dump_filtered_by_Polish.xml: $(fullDump) $(zawilinski_jar)
 $(expected)/estimated_polish_revision_count.txt: $(fullDump)
 	@echo
 	@echo Estimating number of Polish revisions in full dump
-	$(readFullDump) | ruby $(scripts)/count_language_revisions.rb Polish > $@
+	$(readFullDump) | ruby $(scripts)/count_language_revisions.rb Polish --languageOnly > $@
 
+t3: filter_by_language_selects_expected_num_revisions 
 filter_by_language_selects_expected_num_revisions: $(observed)/full_dump_filtered_by_Polish.xml $(expected)/estimated_polish_revision_count.txt
 	@echo
 	@echo "Running $@"
