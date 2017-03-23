@@ -16,7 +16,8 @@
 
    <!-- build info -->
    <property name="src" location="src"/>
-   <property name="src:test" location="test"/>
+   <property name="src:unit_test" location="unit_tests"/>
+   <property name="src:system_test" location="system_tests/java_src"/>
 
    <property name="build" location="out/antProduction"/>
    <property name="build:test" location="out/antTest"/>
@@ -101,19 +102,26 @@
       </javac>
    </target>
 
+   <target name="compile:system_test" description="compile source" depends="makedirs, compile:schemaClasses">
+      <javac srcdir="${src:system_test}" destdir="${build}" classpathref="classpath:source" debug="on" encoding="${encoding}"
+             includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+      </javac>
+   </target>
 
-   <target name="compile" description="compile" depends="compile:schemaClasses, compile:source"/>
+
+   <target name="compile" description="compile" depends="compile:schemaClasses, compile:source, compile:system_test"/>
 
 
-   <!-- Test ================================================== -->
+   <!-- Unit Test ================================================== -->
    <target name="compile:test" depends="compile">
-      <javac srcdir="${src:test}" destdir="${build:test}" classpathref="classpath:test" debug="on"
+      <javac srcdir="${src:unit_test}" destdir="${build:test}" classpathref="classpath:test" debug="on"
              encoding="${encoding}" includeantruntime="false">
          <compilerarg value="-Xlint:unchecked"/>
       </javac>
    </target>
 
-   <target name="test" depends="compile:test">
+   <target name="unit_test" depends="compile:test">
       <junit fork="yes" haltonfailure="yes">
          <assertions enableSystemAssertions="true"/>
 
@@ -146,16 +154,13 @@
 
    <!-- dist ================================================== -->
 
-   <!--- macro to build a jar file with or without source. -->
-   <macrodef name="buildDist">
-      <attribute name="src" default="NOT SET"/>
-      <element name="addSrc" optional="yes"/>
+   <target name="dist" description="prepare distribution" depends="compile, unit_test,javadoc">
       <sequential>
          <propertyfile file="${build}/edu/gvsu/kurmasz/zawilinski/buildInfo.properties">
             <entry key="builddate" value="now" type="date" pattern="yyyy.MM.dd HH.mm.ss"/>
             <entry key="version" value="${zawilinski_ver}"/>
          </propertyfile>
-         <jar destfile="${dist}/${jarName}-${zawilinski_ver}@{src}.jar">
+         <jar destfile="${dist}/${jarName}-${zawilinski_ver}.jar">
             <manifest>
                <attribute name="Built-By" value="Zachary Kurmas"/>
                <attribute name="Main-Class" value="edu.gvsu.kurmasz.zawilinski.Zawilinski"/>
@@ -163,32 +168,11 @@
             <fileset dir="${dist}" includes="doc/**"/>
             <zipgroupfileset dir="bundled_packages" includes="**/*.jar"/>
             <fileset dir="${build}"/>
-            <addSrc/>
-            <!--- This element adds the source -->
          </jar>
+         <copy todir="${dist}">
+            <fileset dir="doc-files"/>
+         </copy>
       </sequential>
-   </macrodef>
-
-
-   <target name="dist:class" description="Jar file containing class files only."
-           depends="compile,test,javadoc">
-      <buildDist src=""/>
-      <!-- Don't include any source code -->
-   </target>
-
-   <target name="dist:src" description="Jar file containing releasable Zawilisnki class and source."
-           depends="compile,test,javadoc">
-      <buildDist src="-src">  <!-- jar file name ends with src -->
-         <addSrc> <!-- add the following filesets to the .jar file -->
-            <fileset dir="${src}"/>
-         </addSrc>
-      </buildDist>
-   </target>
-
-   <target name="dist" description="Distribution 'public' kurmasUtil packages" depends="dist:class, dist:src">
-      <copy todir="${dist}">
-         <fileset dir="doc-files"/>
-      </copy>
    </target>
 
    <!-- clean ================================================== -->
