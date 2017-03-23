@@ -9,7 +9,7 @@ scripts=scripts
 # to the variable $(fullDump)
 include makefile.local
 
-ifeq ($(suffix $(fullDump)), "bz2")
+ifeq ($(suffix $(fullDump)), .bz2)
 	readFullDump=bunzip2 -c $(fullDump)
 else
 	readFullDump=cat $(fullDump)
