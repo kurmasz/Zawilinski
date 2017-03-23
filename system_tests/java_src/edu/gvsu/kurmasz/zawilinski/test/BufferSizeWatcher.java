@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Create a histogrm of SAX parser buffer lengths
+ * Create a histogram of SAX parser buffer lengths
  */
 public class BufferSizeWatcher {
 

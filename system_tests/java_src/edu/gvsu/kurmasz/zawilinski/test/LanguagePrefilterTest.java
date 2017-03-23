@@ -18,7 +18,8 @@ import java.util.regex.Pattern;
 
 /**
  * Verify that the LanguagePrefilter correctly handles an entire
- * Wiktionary XML dump
+ * Wiktionary XML dump.  Specifically, the custom post-filter verifies that the text
+ * passed by the pre-filter contains only info for the target language1
  */
 public class LanguagePrefilterTest {
 
