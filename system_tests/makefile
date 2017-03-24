@@ -45,7 +45,7 @@ all: filter_by_title filter_by_language
 
 filter_by_title: filter_by_title_saves_correct_articles filter_by_title_preserves_all_page_data
 
-filter_by_langauge: filter_by_language_selects_expected_num_revisions filter_by_language_retains_desired_text
+filter_by_language: filter_by_language_selects_expected_num_revisions filter_by_language_retains_desired_text
 
 
 ######################################################################
