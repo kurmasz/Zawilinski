@@ -6,7 +6,7 @@ import org.xml.sax.SAXException;
 
 /**
  * A {@link TextPrefilter} that limits the number of characters allowed in a given MediaWiki
- * <text> element.
+ * &lt;text&gt; element.
  *
  * @author Zachary Kurmas
  */

@@ -9,7 +9,7 @@ scripts=scripts
 # to the variable $(fullDump)
 include makefile.local
 
-ifeq ($(suffix $(fullDump)), "bz2")
+ifeq ($(suffix $(fullDump)), .bz2)
 	readFullDump=bunzip2 -c $(fullDump)
 else
 	readFullDump=cat $(fullDump)
@@ -39,7 +39,7 @@ data=regression_data
 
 #scripts=scripts
 
-all: filter_by_title filter_by_language
+all: filter_by_title filter_by_language pre_filter
 	@echo "-----"
 	@echo "All tests Pass."
 

@@ -15,15 +15,13 @@ import java.io.InputStream;
 
 /**
  * <p>Generate the DOM for a MediaWiki XML document.  In particular, this class uses JAXB to unmarshall an XML stream
- * into
- * Java objects. This class is written specifically to support MediaWiki XML documents only because it expects the root
- * of the DOM to be a {@link MediaWikiType} object.</p>
+ * into Java objects. This class is written specifically to support MediaWiki XML documents only because it expects the
+ * root of the DOM to be a {@link MediaWikiType} object.</p>
  * <p/>
  * <p>Debug levels used:</p>
  * <ul>
  * <li>{@code PARSE_BEGIN_END}: Announce beginning and end of parsing</li>
  * </ul>
- * <p/>
  *
  * @author Zachary Kurmas
  */
@@ -60,11 +58,11 @@ public class MediaWikiLoader {
   private static Unmarshaller createUnmarshaller(String contextPath) {
     Unmarshaller unmarshaller;
     try {
-	// The XML library has built-in limits to prevent DoS attacks from maliciously large .xml files.
-	// MediaWiki xml files are very large, but not maliciously so.  This turns off the limits so these
-	// large files can be processed.
-      System.setProperty("totalEntitySizeLimit","0");
-      System.setProperty("jdk.xml.totalEntitySizeLimit","0");
+      // The XML library has built-in limits to prevent DoS attacks from maliciously large .xml files.
+      // MediaWiki xml files are very large, but not maliciously so.  This turns off the limits so these
+      // large files can be processed.
+      System.setProperty("totalEntitySizeLimit", "0");
+      System.setProperty("jdk.xml.totalEntitySizeLimit", "0");
       JAXBContext jaxbContext = JAXBContext.newInstance(contextPath);
       unmarshaller = jaxbContext.createUnmarshaller();
     } catch (JAXBException e) {

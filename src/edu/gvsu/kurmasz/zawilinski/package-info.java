@@ -132,7 +132,7 @@
  *  <dl>
  *   <dt><b>Write pre-filter</b>:</dt>
  *   <dd>  The pre-filter can be any implementation of
- *        <a href="http://docs.oracle.com/javase/6/docs/api/org/xml/sax/XMLFilter.html"></code>XMLFilter</code></a>
+ *        <a href="http://docs.oracle.com/javase/6/docs/api/org/xml/sax/XMLFilter.html"><code>XMLFilter</code></a>
  *        and can modify the XML stream any way it likes (it is not limited to filtering text); however,
  *        as explained earlier, writing a filter for a SAX parser can be very difficult.
 
@@ -159,7 +159,7 @@
  *       This interface defines two methods: {@code keepPage} and {@code keepRevision}.  Writing these methods requires
  *       the programmer to know the <a href="doc-files/mediaWikiImportSchema.png">MediaWiki XML Schema</a> and the
  *       Java classes that correspond to each element in the schema.
- *      (See the {@link edu.gvsu.kurmasz.zawilinski.mw.current} package for details.} <p></p>
+ *      (See the {@link edu.gvsu.kurmasz.zawilinski.mw.current} package for details.}
  *    </dd>
  *
  *    <dt><b>Analyze remaining entries</b>:</dt>
@@ -183,7 +183,7 @@
  * <p>You can download these files by simply clicking on the link on the web page; but, we have found it
  * more convenient to use <code>curl</code>:</p>
  *
- * <p><code>curl http://dumps.wikimedia.org/enwiktionary/<em>DATE</em>/enwiktionary-<em>DATE</em>-pages-meta-history.xml.bz2 > <em>LOCAL_NAME</em>.xml.bz2</code></p>
+ * <p><code>curl http://dumps.wikimedia.org/enwiktionary/<em>DATE</em>/enwiktionary-<em>DATE</em>-pages-meta-history.xml.bz2 &lt; <em>LOCAL_NAME</em>.xml.bz2</code></p>
  *
  * <p>Where <em>DATE</em> is the date of the dump in <code>YYYYMMDD</code> format, and <em>LOCAL_NAME</em> is the name
  * you want the file to have locally.</p>
