@@ -34,7 +34,6 @@ public class PostFilterByLanguageTest {
         String language = args[1];
         Pattern languageHeaderPattern = Pattern.compile("^==\\s*(\\[\\[" + language + "\\]\\]|" + language +")\\s*==([^=]|$)");
         String outputFile = args[2];
-        int returnValue = 0;
 
         SimpleLog log;
         if (args.length >= 4) {
@@ -73,7 +72,16 @@ public class PostFilterByLanguageTest {
                             " does not start with language header");
                     returnVal = ERROR_VAL;
                 }
-                Matcher m2 = endPattern.matcher(text);
+
+                // The LanguagePreFilter does not remove the next language header. For example, for
+                // Polish, the pre-filter may leave ==Spanish== at the end of the text.  (See comment in
+                // LanguagePrefilter for the reason behind this.)  The post-filter should remove this second
+                // header.  The code below verifies that it has been remove.   A few articles have a language
+                // header, but no content.  The text for these articles ends with the language header.
+                // To prevent the code from falsely flagging these cases, we begin the search *after* the langauge
+                // header.
+                String content = text.substring(m1.group().length());
+                Matcher m2 = endPattern.matcher(content);
                 if (m2.find()) {
                     System.out.println("ERROR: Bad rev (" + rev.getId() + ") in " + page.getTitle() +
                             " might end with L2 header");
@@ -92,5 +100,6 @@ public class PostFilterByLanguageTest {
             System.err.println("Cannot open \"" + outputFile
                     + "\" for writing.");
         }
+        System.exit(returnVal);
     }
 }

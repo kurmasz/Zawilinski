@@ -5,16 +5,6 @@
 #
 # Notable "interesting" cases:
 #
-# C-cedilla ("C with a tail):  The page whose title is this french 
-# letter has a language header with no content (One line has ==Polish==, 
-# the next has </text>)  This script specifically exlcudes this article.
-# (Because the script only considers one letter at a time, there is no
-# easy way to tell that the Polish subsection has no content.)
-#
-# nastepnego also has a Polish section with no content.  This time, 
-# it looks like this:  ==Polish==</text>, so the script knows not 
-# to count this revision.
-#
 # Some words have ==Polish and Russian== as a language.  Both this 
 # script and Zawilinski correclty ignore it.
 #
@@ -50,11 +40,6 @@ if non_options.length < 1
   exit 1
 end
 
-# The page whose title is this letter causes problems because it has 
-# a valid polish header, but no content.
-problem_letter = 'ç'
-
-
 language = non_options[0]
 
 title = nil
@@ -76,8 +61,7 @@ while line = STDIN.gets
     title = "<no title yet>"
   elsif (line.include?('</page>'))
     in_page = false
-    if ((!language_only || revisions_with_language != 0) && 
-        !title.eql?(problem_letter)) 
+    if ((!language_only || revisions_with_language != 0))
       # only show total revisions when requested.
       total_revisions_format = show_total_revisions ? "%4d " : ""  
       puts "%10d %4d #{total_revisions_format}#{title}" % 
@@ -115,18 +99,12 @@ while line = STDIN.gets
     # are usually condensed into one within a few revisions.
     # (2) the <comment> section occasionally contains ==Polish==
 
-    # Exclude subsections with no content (at the moment, this happens only
-    # with nastepnego
-    next if (line.include?('</text>') &&
-             line =~ /(^|[^=])==\s*(\[\[#{language}\]\]|#{language})\s*==\s*<\/text>/)
-
-
     if (!found_once)
       revisions_with_language += 1
     end
     found_once = true
     if (!in_revision)
-      puts("ERROR! Found langauge header outside revision. #{title}")
+      puts("ERROR! Found language header outside revision. #{title}")
     end
   elsif (debug && !found_once && line.include?(language) && line.include?("==")) 
     puts "#{line_num} Almost:  =>#{line}<="
