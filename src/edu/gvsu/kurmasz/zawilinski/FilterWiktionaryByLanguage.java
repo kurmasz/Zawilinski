@@ -70,12 +70,6 @@ public class FilterWiktionaryByLanguage {
       public Integer textSizeLimit = TextSizePrefilter.UNLIMITED;
    }
 
-   /**
-    * Main
-    *
-    * @param args
-    * @throws JAXBException if there is a problem generating the DOM
-    */
    public static void main(String[] args) throws JAXBException {
 
       // parse the command line.  Command line options are

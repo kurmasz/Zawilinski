@@ -182,4 +182,9 @@ class HeaderSearch {
       }
       return null;
    }
+
+   public boolean possiblyComplete() {
+      return stage == Stage.CLOSE && foundInStage == DESIRED_HEADER_LEVEL && openSize == DESIRED_HEADER_LEVEL;
+   }
+
 }

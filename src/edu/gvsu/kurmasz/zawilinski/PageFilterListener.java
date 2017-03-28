@@ -42,6 +42,7 @@ public class PageFilterListener extends Unmarshaller.Listener {
     * Constructor
     *
     * @param filter filter to apply
+    * @param log the log
     */
    public PageFilterListener(PostFilter filter, SimpleLog log) {
       this.filter = filter;

@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 
 /**
- * Keep only those pages that contain some data for the specified language and
+ * <p>Keep only those pages that contain some data for the specified language and
  * remove the trailing level 2 language header left by the prefilter.
- * <p/>
+ * </p>
  * <p>IMPORTANT! This filter is written specifically to run after the {@link
  * LanguagePrefilter} SAX filter is applied. This SAX filter assures that all
  * text segments <em>begin</em> with the expected language string (e.g.,
