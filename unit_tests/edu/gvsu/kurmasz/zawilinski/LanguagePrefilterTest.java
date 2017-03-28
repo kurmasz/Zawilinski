@@ -215,6 +215,18 @@ public class LanguagePrefilterTest extends TextPrefilterTest {
    }
 
    @Test
+     public void passesDataForLanguage_headerOnly() throws Throwable {
+        TestableLanguagePrefilter pf = make();
+
+        startText(pf);
+        sendCharacters(pf, LANGUAGE_HEADER);
+        endText(pf);
+        assertEquals(LANGUAGE_HEADER,
+              pf.sent());
+     }
+
+
+   @Test
    public void passesDataForLanguage_StartOfText_shortSplitCombined() throws Throwable {
       TestableLanguagePrefilter pf = make();
 

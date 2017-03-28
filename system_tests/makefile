@@ -131,7 +131,7 @@ filter_by_title_preserves_all_page_data: $(observed)/partial_dump_filtered_by_ti
 $(observed)/full_dump_filtered_by_Polish.xml: $(fullDump) $(zawilinski_jar)
 	$(zawilinski) Language Polish $(fullDump) > $@
 
-$(expected)/estimated_polish_revision_count.txt: $(fullDump)
+$(expected)/estimated_polish_revision_count.txt: $(fullDump) $(scripts)/count_language_revisions.rb
 	@echo
 	@echo Estimating number of Polish revisions in full dump
 	$(readFullDump) | ruby $(scripts)/count_language_revisions.rb Polish --languageOnly > $@

@@ -37,12 +37,13 @@ public class PostFilterByLanguage implements PostFilter {
 
     public boolean keepRevision(RevisionType revision, PageType page) {
         String text = Util.getText(revision);
-
+        System.out.printf("Text in: =>%s<=\n", text);
         // If the text contains the next header (e.g., ==Spanish==), then
         // remove it.
         Matcher m = headerPattern.matcher(text);
         if (m.find()) {
             String g1 = m.group(1);
+           // System.out.println("Found =>" + g1 + "<=");
             text = m.replaceFirst(g1);
             Util.setText(revision, text);
         }
@@ -51,7 +52,16 @@ public class PostFilterByLanguage implements PostFilter {
         // only if the LanguagePrefilter SAX filter has been applied (which
         // assures that each <text>segment begins with the requested
         // language headerContent.
-        return text.length() > 0;
+
+        // Trim removes leading and trailing whitespace.  This will remove
+        // entries with a ==Polish== tag that contains no data.  (This can happen either
+        // because the Wiktionary user forgets to add data, or because the user adds a
+        // level 2 heading next instead of a level 3 heading.)
+
+        //System.out.printf("Text: =>%s<=\n", text);
+        //System.out.printf("Trimmed: =>%s<=\n", text.trim());
+
+        return text.trim().length() > 0;
     }
 }
 

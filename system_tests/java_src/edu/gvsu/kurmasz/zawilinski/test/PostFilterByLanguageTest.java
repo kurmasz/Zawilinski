@@ -70,13 +70,13 @@ public class PostFilterByLanguageTest {
                 Matcher m1 = languageHeaderPattern.matcher(text);
                 if (!m1.find()) {
                     System.out.println("ERROR: Bad rev (" + rev.getId() + ") in " + page.getTitle() +
-                            "does not start with language header");
+                            " does not start with language header");
                     returnVal = ERROR_VAL;
                 }
                 Matcher m2 = endPattern.matcher(text);
                 if (m2.find()) {
                     System.out.println("ERROR: Bad rev (" + rev.getId() + ") in " + page.getTitle() +
-                            "might end with L2 headder");
+                            " might end with L2 header");
                     returnVal = ERROR_VAL;
                 }
             }

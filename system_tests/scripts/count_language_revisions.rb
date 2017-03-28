@@ -1,7 +1,30 @@
+# -*- coding: utf-8 -*-
 #
 # Examine the raw XML from a MediaWiki dump and list the
 # number of revisions for each page containing the target langauge.
 #
+# Notable "interesting" cases:
+#
+# C-cedilla ("C with a tail):  The page whose title is this french 
+# letter has a language header with no content (One line has ==Polish==, 
+# the next has </text>)  This script specifically exlcudes this article.
+# (Because the script only considers one letter at a time, there is no
+# easy way to tell that the Polish subsection has no content.)
+#
+# nastepnego also has a Polish section with no content.  This time, 
+# it looks like this:  ==Polish==</text>, so the script knows not 
+# to count this revision.
+#
+# Some words have ==Polish and Russian== as a language.  Both this 
+# script and Zawilinski correclty ignore it.
+#
+# Some words have whitespace between ==Polish== and the newline.
+# Both this script and Zawilinski correctly handle these cases 
+# by including the revision.
+#
+# Some words have ==Polish==&lt; other strange stuff
+# Both this script and Zawilinski correctly handle these cases
+# by including the revision.
 
 
 # Count and display info for only those pages containing 
@@ -9,34 +32,56 @@
 language_only = ARGV.any? {|item| item == "--languageOnly"}
 
 # Show the total number of revisions --- including those that do not 
-# include dtata for the target langauge
+# include dtata for the target langaugex1
 show_total_revisions = ARGV.any? {|item| item == "--showTotalRevs"}
+
+# display debug info
+debug  = ARGV.any? {|item| item == "--debug"}
 
 # Remove any options from the command-line parameters.
 # NOTE:  This only works if all possible parameters take 
 # no options!
 non_options = ARGV.reject {|item| item.start_with?("--")}
 
+
+
+if non_options.length < 1
+  $stderr.puts "Usage:  count_langauge_revisions.rb language"
+  exit 1
+end
+
+# The page whose title is this letter causes problems because it has 
+# a valid polish header, but no content.
+problem_letter = 'ç'
+
+
 language = non_options[0]
 
 title = nil
 total_revisions = 0           # Total number of revisions for this page
-revisions_with_language = 0   # Number of revisions containing the target language
+revisions_with_language = 0   # Number of revisions containing target language
 
-in_page = false
+# The target language has been found at least once in this revision.
+found_once = false            
 
-foundOnce = false
+# The current line is within a <page></page> pair
+in_page = false               
 
-page_count = 0;
+line_num = 0
+page_count = 0
 while line = STDIN.gets
-  if (line =~ /<page>/)
+  line.strip!
+  if (line.include?('<page>'))
     in_page = true;
     title = "<no title yet>"
-  elsif (line =~ /<\/page>/)
+  elsif (line.include?('</page>'))
     in_page = false
-    if (!language_only || revisions_with_language != 0) 
-      total_revisions_format = show_total_revisions ? "%4d " : ""  # only show total revisions when requested.
-      puts "%10d %4d #{total_revisions_format}#{title}" % [page_count, revisions_with_language, total_revisions]
+    if ((!language_only || revisions_with_language != 0) && 
+        !title.eql?(problem_letter)) 
+      # only show total revisions when requested.
+      total_revisions_format = show_total_revisions ? "%4d " : ""  
+      puts "%10d %4d #{total_revisions_format}#{title}" % 
+        [page_count, revisions_with_language, total_revisions]
       page_count += 1
     end
     total_revisions = 0
@@ -51,7 +96,7 @@ while line = STDIN.gets
     total_revisions = 0
   elsif (line.include?('<revision>'))
     in_revision = true
-    foundOnce = false
+    found_once = false
     if (!in_page)
       puts("ERROR! Found revision outside page. #{title}")
     end
@@ -61,18 +106,30 @@ while line = STDIN.gets
     # The full regular expression for a language header is expensive (time-wise)
     # so, we first do a quick check for the bare language before
     # doing the more expensive check for the entire, correctly formatted header
-  elsif (!foundOnce && line.include?(language) && line =~ /(^|[^=])==\s*(\[\[#{language}\]\]|#{language})\s*==([^=]|$)/)
+    #
+    # REMEMBER!  The line was stripped of leading and trailing whitespace!!!
+  elsif (!found_once && line.include?(language) && 
+         line =~ /(^|[^=])==\s*(\[\[#{language}\]\]|#{language})\s*==([^=]|$)/)
     # Some revisions have ==Polish== more than once.  Two leading
     # causes (1) an extra ==Polish== section.  Such extra sections
     # are usually condensed into one within a few revisions.
     # (2) the <comment> section occasionally contains ==Polish==
-    if (!foundOnce)
+
+    # Exclude subsections with no content (at the moment, this happens only
+    # with nastepnego
+    next if (line.include?('</text>') &&
+             line =~ /(^|[^=])==\s*(\[\[#{language}\]\]|#{language})\s*==\s*<\/text>/)
+
+
+    if (!found_once)
       revisions_with_language += 1
     end
-    foundOnce = true
+    found_once = true
     if (!in_revision)
       puts("ERROR! Found langauge header outside revision. #{title}")
     end
+  elsif (debug && !found_once && line.include?(language) && line.include?("==")) 
+    puts "#{line_num} Almost:  =>#{line}<="
   elsif (line.include?('</revision>'))
     if (!in_revision)
       puts("ERROR! Found end_revision header" +
@@ -80,5 +137,6 @@ while line = STDIN.gets
     end
     in_revision = false
   end
+  line_num += 1
 end
 
