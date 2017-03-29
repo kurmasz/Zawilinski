@@ -1,5 +1,5 @@
 
-zawilinski_jar = ../dist/zawilinski-1.0.3.jar
+zawilinski_jar = ../dist/zawilinski-1.1.0.jar
 zawilinski=java -jar $(zawilinski_jar)
 zawilinski_test=java -cp $(zawilinski_jar) 
 test_pkg=edu.gvsu.kurmasz.zawilinski.test
