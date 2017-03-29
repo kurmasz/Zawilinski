@@ -61,11 +61,22 @@ public class FilterWiktionaryByTitle {
             usage_out.println("Usage:  "
                     + FilterWiktionaryByTitle.class.getSimpleName()
                     + " file regexp1 [regexp2] [regexp3] ...");
-            return;
+            System.exit(1);
         }
 
         String inputFile = args[0];
-        Log log = new Log();
+        String logfile = "titlePrefilter.log";
+        Log log;
+
+        log = new Log();
+//        try {
+//            log = new Log(logfile, Zawilinski.PAGE_DUMPED);
+//        } catch (FileNotFoundException e) {
+//            usage_out.println("Could not open logfile \"" + logfile + "\" for writing.");
+//            System.exit(2);
+//            return;
+//        }
+
 
         Pattern[] patterns = new Pattern[args.length - 1];
         for (int i = 0; i < args.length - 1; i++) {
@@ -77,7 +88,7 @@ public class FilterWiktionaryByTitle {
         // Some Wiktionary entries have been vandalized by adding several gigabytes of random
         // text.  This filter prevents these entries from unnecessarily slowing down (or
         // even crashing) the filter.
-        TextSizePrefilter lts = new TextSizePrefilter(10000000);
+        TextSizePrefilter lts = new TextSizePrefilter(1000000, log);
 
         WiktionaryWriter writer = new WiktionaryWriter();
 
@@ -88,9 +99,6 @@ public class FilterWiktionaryByTitle {
         } catch (FileNotFoundException fnfe) {
             error_out.println("Could not open \"" + inputFile
                     + "\".");
-        } catch (IOException e) {
-            error_out.println("Could not open \"" + inputFile
-                    + "\" as a compressed file.");
         }
     } // end main
 

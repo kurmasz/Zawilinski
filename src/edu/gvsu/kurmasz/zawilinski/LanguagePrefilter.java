@@ -10,10 +10,9 @@ import java.util.regex.Pattern;
  * A pre-filter that only allows text through that is in the section for the specified language.   Note:  In addition
  * to the expected headers of the form {@code ==Language==}, this filter also allows (1) spaces around the language
  * (e.g., ({@code == Language ==} and (2) the language to be a link (e.g., {@code "==[[Language]]=="}.
- * <p/>
- * <p/>
+ *
  * <p>This filter also passes through the following language tag.  For example, given this text:
- * <p/>
+ *
  * <pre>
  * ==Polish==
  *
@@ -21,10 +20,11 @@ import java.util.regex.Pattern;
  *
  * ==Spanish==
  * </pre>
- * <p/>
- * The <code>==Spanish==</code> tag would get passed.  (We do this because delaying the passing of
+ *
+ *
+ * <p>The <code>==Spanish==</code> tag would get passed.  (We do this because delaying the passing of
  * partial language tags until we know for sure whether or not they are tags would greatly complicate the code.
- * It is much easier to have the post-filter remove the trailing tag.)
+ * It is much easier to have the post-filter remove the trailing tag.)</p>
  *
  * @author Zachary Kurmas
  */
@@ -54,7 +54,7 @@ public class LanguagePrefilter extends TextPrefilter {
   /**
    * Constructor specifying a regular expression that the header must match.  Thus,
    * passing {@code Pattern.compile("P[ei]g")} will match "==Peg==" and "==Pig==". Note, however:
-   * <p/>
+   *
    * <ul>
    * <li> This filter passes at most one section through the filter.  Thus,
    * if a revision contained both ==Peg== and ==Pig==, only the first one encountered would be passed.</li>

@@ -146,9 +146,6 @@ public class FilterWiktionaryByLanguage {
       } catch (FileNotFoundException fnfe) {
          error_out.println("Could not open \"" + options.inputFile
                + "\".");
-      } catch (IOException e) {
-         error_out.println("Could not open \"" + options.inputFile
-               + "\" as a compressed file.");
       }
    } // end main
 } // end FilterWiktionaryByLanguage

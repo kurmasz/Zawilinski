@@ -255,7 +255,7 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
       pf.characters(myChars3, 0, myText3.length());
       endText(pf);
 
-      verify(log).println(Zawilinski.TRUNCATIONS, "15 9 Mark Twain");
+      verify(log).println(Zawilinski.TRUNCATIONS, "Size truncation: 15 9 Mark Twain");
    }
 
    @Test
@@ -331,10 +331,10 @@ public class TextSizePrefilterTest extends TextPrefilterTest {
       TextSizePrefilter filter = new TextSizePrefilter(19, mlog);
       PreFilteredMediaWikiLoader.load(input, log, filter);
 
-      verify(mlog).println(Zawilinski.TRUNCATIONS, "27 19 Sample page 1");
-      verify(mlog).println(Zawilinski.TRUNCATIONS, "41 19 Sample page 2");
-      verify(mlog).println(Zawilinski.TRUNCATIONS, "27 19 Sample page 2");
-      verify(mlog).println(Zawilinski.TRUNCATIONS, "37 19 Sample page 2");
+      verify(mlog).println(Zawilinski.TRUNCATIONS, "Size truncation: 27 19 Sample page 1");
+      verify(mlog).println(Zawilinski.TRUNCATIONS, "Size truncation: 41 19 Sample page 2");
+      verify(mlog).println(Zawilinski.TRUNCATIONS, "Size truncation: 27 19 Sample page 2");
+      verify(mlog).println(Zawilinski.TRUNCATIONS, "Size truncation: 37 19 Sample page 2");
       verifyNoMoreInteractions(mlog);
    }
 

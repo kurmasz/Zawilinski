@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Load the raw inflection template strings from a filtered MediaWiki dump.  This code handles only one langauge at a
+ * Load the raw inflection template strings from a filtered MediaWiki dump.  This code handles only one language at a
  * time, and assumes that the input has already been filtered to contain data for that language only.
- * <p/>
+ *
  * Created by kurmasz on 3/24/17.
  */
 public class InflectionTemplateLoader {
@@ -81,7 +81,7 @@ public class InflectionTemplateLoader {
   }
 
 
- public interface TemplateCallback {
+  public interface TemplateCallback {
     void callback(String word, RevisionType revision, String template);
   }
 
@@ -94,8 +94,9 @@ public class InflectionTemplateLoader {
    * Examine a Wiktionary dump and extract the inflection template for those
    * {@code &lt;revisions&gt; } containing one
    *
-   * @param mw       The result of unmarshalling a Wiktionary xml dump.
-   * @param callback the function to be called when a tempalte is found
+   * @param mw          The result of unmarshalling a Wiktionary xml dump.
+   * @param callback    the function to be called when a template is found
+   * @param progressLog a log
    **************************************************************************/
   public static void loadTemplates(MediaWikiType mw, TemplateCallback callback, SimpleLog progressLog) {
     for (PageType page : mw.getPage()) {
@@ -121,6 +122,13 @@ public class InflectionTemplateLoader {
     } // end foreach page
   } // end load Templates.
 
+  /**************************************************************************
+   * Examine a Wiktionary dump and extract the inflection template for those
+   * {@code &lt;revisions&gt; } containing one
+   *
+   * @param mw          The result of unmarshalling a Wiktionary xml dump.
+   * @param callback    the function to be called when a template is found
+   **************************************************************************/
   public static void loadTemplates(MediaWikiType mw, TemplateCallback callback) {
     loadTemplates(mw, callback, new SimpleLog());
   }

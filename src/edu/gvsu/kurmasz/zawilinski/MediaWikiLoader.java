@@ -17,7 +17,7 @@ import java.io.InputStream;
  * <p>Generate the DOM for a MediaWiki XML document.  In particular, this class uses JAXB to unmarshall an XML stream
  * into Java objects. This class is written specifically to support MediaWiki XML documents only because it expects the
  * root of the DOM to be a {@link MediaWikiType} object.</p>
- * <p/>
+ * 
  * <p>Debug levels used:</p>
  * <ul>
  * <li>{@code PARSE_BEGIN_END}: Announce beginning and end of parsing</li>
